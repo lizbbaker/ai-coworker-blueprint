@@ -252,10 +252,12 @@ function renderSummaryHtml(){
   const sec1 = answers.slice(0,s1len).join(" ");
   const sec2 = answers.slice(s1len).join(" ");
   return `
-    <h3>Section 1 Results</h3>
+    <h3>About Your AI Coworker: Results</h3>
+    <p>Copy/paste this into ChatGPT under Customization/Personalization to answer the question: What traits should ChatGPT have?</p> 
     <div class="summary" id="sum1">${sec1}</div>
     <button class="copy-btn" onclick="copyToClipboard('sum1',1)">Copy Section 1</button>
-    <h3>Section 2 Results</h3>
+    <h3>About You: Results</h3>
+<p>Copy/paste this into ChatGPT under Customization/Personalization to answer the question: Anything else ChatGPT should know about you?</p>
     <div class="summary" id="sum2">${sec2}</div>
     <button class="copy-btn" onclick="copyToClipboard('sum2',2)">Copy Section 2</button>
     <div style="margin-top:1.5rem;">
