@@ -55,8 +55,14 @@
       <button id="prevBtn" disabled>Back</button>
       <button id="nextBtn">Next</button>
     </div>
-    <div id="footer">Copyright © 2025, Nimbology™  |  All rights reserved.</div>
+   <div id="footer">
+  <div style="font-size:0.875rem; margin-bottom:0.5rem;">
+    This form was custom‑built by Liz B. Baker with privacy in mind.  
+    No results are stored, no results are visible to third parties.  
+    No results are seen or retained by anyone but you.
   </div>
+  Copyright © 2025, Nimbology™ & Liz Barrett Baker, LLC | All rights reserved.
+</div>
 
   <!-- Toast -->
   <div id="toast"></div>
@@ -70,8 +76,9 @@
   </div>
 
   <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-  <script>
+  <script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+</script>
     // ==== CONFIGURE EmailJS ====
     const EMAILJS_USER_ID    = 'SFReYwwY4dQJsG2ap';
     const EMAILJS_SERVICE_ID = 'service_gpqnffd';
