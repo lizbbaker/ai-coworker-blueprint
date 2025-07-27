@@ -5,35 +5,39 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>AI Coworker Blueprint</title>
   <style>
-    body { font-family: sans-serif; margin:0; padding:0; background:#f7f7f7; }
+    body { margin:0; padding:0; background:#deebf1; font-family:sans-serif; }
     #app { max-width:600px; margin:2rem auto; background:#fff; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+    #header { margin-bottom:1rem; }
     .progress { height:8px; background:#eee; margin-bottom:1rem; border-radius:4px; overflow:hidden; }
     .progress-bar { height:8px; background:#3b82f6; width:0%; transition:width .3s;}
     .question { margin-bottom:2rem; }
     label { display:block; margin-bottom:.5rem; font-weight:600; }
-    input[type=text], textarea { width:100%; padding:.5rem; font-size:1rem; border:1px solid #ccc; border-radius:4px; }
+    input[type=text], input[type=email], textarea { width:100%; padding:.5rem; font-size:1rem; border:1px solid #ccc; border-radius:4px; }
     textarea { resize:vertical; min-height:80px; }
-    .controls { display:flex; justify-content:space-between; }
-    button { padding:.6rem 1.2rem; font-size:1rem; border:none; border-radius:4px; cursor:pointer; }
+    .controls { display:flex; justify-content:space-between; margin-top:1rem; }
+    button { padding:.6rem 1.2rem; font-size:1rem; border:none; border-radius:4px; cursor:pointer; background:#3b82f6; color:#fff; }
     button[disabled] { background:#ccc; cursor:default; }
-    .copy-btn { margin-right:.5rem; }
+    .copy-btn { background:#6b7280; margin-right:.5rem; }
     .summary { background:#fafafa; padding:1rem; border:1px solid #ddd; border-radius:4px; white-space:pre-wrap; }
     .modal-backdrop { position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,0.4); display:none; align-items:center; justify-content:center; }
     .modal { background:#fff; padding:1rem; max-width:400px; border-radius:4px; }
     .char-count { font-size:.875rem; color:#555; margin-bottom:1rem; }
+    #footer { background:#0e2029; color:#fff; text-align:center; padding:.5rem; font-size:.875rem; margin-top:1rem; border-radius:0 0 4px 4px; }
   </style>
 </head>
 <body>
   <div id="app">
+    <div id="header"></div>
     <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
     <div id="formContainer"></div>
     <div class="controls">
       <button id="prevBtn" disabled>Back</button>
       <button id="nextBtn">Next</button>
     </div>
+    <div id="footer">Copyright © 2025, Nimbology™</div>
   </div>
 
-  <!-- Modal for instructions (i) icons -->
+  <!-- Modal for info icons -->
   <div class="modal-backdrop" id="modalBackdrop">
     <div class="modal">
       <p id="modalContent"></p>
@@ -44,183 +48,238 @@
   <!-- EmailJS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
   <script>
-    // ==== CONFIGURE EmailJS (replace with your own) ====
-    const EMAILJS_USER_ID   = 'SFReYwwY4dQJsG2ap';
-    const EMAILJS_SERVICE_ID= 'service_gpqnffd';
-    const EMAILJS_TEMPLATE_ID='template_roe9gvx';
+    // ==== CONFIGURE EmailJS ====
+    const EMAILJS_USER_ID    = 'SFReYwwY4dQJsG2ap';
+    const EMAILJS_SERVICE_ID = 'service_gpqnffd';
+    const EMAILJS_TEMPLATE_ID= 'template_roe9gvx';
     emailjs.init(EMAILJS_USER_ID);
 
-    // ==== QUESTION DATA (exact text + placeholders) ====
-    const section1 = [
-      { q:"What would you like your AI coworker's name to be?", placeholder:"You're Javi.", limit:30 },
-      { q:"What traits should your ideal AI coworker have?", placeholder:"You're my hard-hitting, no fluff, no BS life coach. Don't compliment me unless I deserve it...", limit:500 },
-      { q:"What are your role-related goals?", placeholder:"Make me a better leader with every interaction.", limit:500 },
-      { q:"What are your aspirational goals?", placeholder:"Guide me to delegate and to scale multiple organizations.", limit:500 },
-      { q:"Are you ok with Chat sharing its opinions with you?", placeholder:"Share your opinions, just let me know they're your opinions.", limit:300 },
-      { q:"What do you care about that your AI coworker should care about?", placeholder:"I'm a big fan of excellence, hospitality, collaboration, community, and civic-mindedness.", limit:300 },
-      { q:"What do you need Chat to know about your personality?", placeholder:"I'm a balance of fun and formal...professional but not stuffy.", limit:300 },
-      { q:"What do you want Chat to teach you with every interaction?", placeholder:"Teach me how to be a world-class executive and business leader...", limit:500 },
-      { q:"How do you want Chat to prepare you?", placeholder:"Prepare me for challenges, obstacles, detractors, & saboteurs.", limit:300 },
-      { q:"What encouragement or support do you need?", placeholder:"Help me have fun as part of the process. Give me strategies and reminders…", limit:400 },
-      { q:"What challenges do you need to be reminded to overcome?", placeholder:"Help me relax as I lead, have fun, and lower stress.", limit:500 },
-      { q:"What is the desired quality and style of your work?", placeholder:"Everything we create should be world-class, cool, genuine.", limit:300 },
-      { q:"Big picture, what do you want Chat to help you do?", placeholder:"You’re here to help me think beyond self-limitation to achieve truly extraordinary things.", limit:500 }
-    ];
-    const section2 = [
-      { q:"What are the top roles that describe what you're doing and who you are?", placeholder:"Executive advisor, strategist, and holistic AI expert. Executive speaker, coach, visionary, futurist...", limit:500 },
-      { q:"What are the important traits that describe who you are and how you operate?", placeholder:"Visionary. Futurist. Leader. Creative. inquisitive...", limit:500 },
-      { q:"What are your big ambitions?", placeholder:"Lead leaders, workers, and communities to thrive in the AI era. Be an ethical, world-leading thought leader. Inspire, build, give back.", limit:500 },
-      { q:"What education experience or degrees would you like to share?", placeholder:"BFA from VCU.", limit:300 },
-      { q:"Sum up your work experience and what you’ve done.", placeholder:"20+ years of Fortune 500 corporate leadership: proj mgmt, mktg ops, mktg comms, Exec. Dir, board leadership, founder, entrepreneur.", limit:700 },
-      { q:"List your current roles and projects.", placeholder:"Founder, Nimbology strategic advisory: Founder, Global Institute for AI & Humanity", limit:700 },
-      { q:"List any experiences or accomplishments of note.", placeholder:"Host thought leadership cohorts. Authored/piloted curriculum to double a nonprofit. Visited 52 non-profits in 52 weeks.", limit:700 },
-      { q:"What are you naturally passionate about? What drives you?", placeholder:"Human potential, exec leadership, leading leaders, change mgmt, UX/guest exp...", limit:500 },
-      { q:"What world views, moral codes, or ideals appeal to you?", placeholder:"Stoicism. Varied perspectives. Research. Diplomacy. Wisdom. Competence. Bold ideas.", limit:500 },
-      { q:"What's your preferred style of interacting with people?", placeholder:"Motivational. Inspirational. Collaborative.", limit:300 },
-      { q:"What’s your political leaning?", placeholder:"Classical Liberal (Founding Fathers POV)...", limit:300 },
-      { q:"What is your personality type?", placeholder:"DISC: I, D, C; ENFP", limit:300 },
-      { q:"What challenges would you like AI to help you be aware of and change?", placeholder:"Want to say yes without regard to human limitations.", limit:700 }
-    ];
-    const totalPages = section1.length + section2.length + 1;
-    let pageIndex = 0;
-    const answers = Array(section1.length + section2.length).fill("");
-
-    // ==== RENDER LOGIC ====
-    const formContainer = document.getElementById("formContainer");
-    const progressBar = document.getElementById("progressBar");
-    document.getElementById("prevBtn").onclick = () => { if(pageIndex>0) { pageIndex--; renderPage(); } };
-    document.getElementById("nextBtn").onclick = () => {
-      if(pageIndex < section1.length+section2.length) {
-        saveAnswer();
-        pageIndex++;
-        renderPage();
-      } else {
-        renderSummary();
-      }
+    // ==== INTRO SCREEN (pageIndex = 0) ====
+    const intro = {
+      title: "AI Coworker Blueprint™",
+      body: `You're just a few steps away from building your personal AI coworker.
+You'll define its persona, teach it about you, and get a ChatGPT‑ready prompt at the end.
+Click “Start” when you're ready.`
     };
 
+    // ==== SECTION INTRO SCREENS ====
+    const section1Intro = {
+      title: "Section 1: Define Your AI Coworker",
+      body: `Starting with: What traits should ChatGPT have?
+You have up to 1500 characters for this section.`
+    };
+    const section2Intro = {
+      title: "Section 2: Teach ChatGPT About You",
+      body: `Starting with: Anything else ChatGPT should know about you?
+You have up to 1500 characters for this section.`
+    };
+
+    // ==== QUESTION DATA ====
+    const section1 = [
+      { q:"What would you like your AI coworker's name to be?", placeholder:"You're Javi.", limit:30 },
+      { q:"What voice would you like ChatGPT to have when you speak to it in conversation mode?", placeholder:"I use \"Cove.\"", limit:150 },
+      { q:"What traits should your ideal AI coworker have?", placeholder:"You're my hard‑hitting, no fluff, no BS life coach...", limit:500 },
+      { q:"What are your role-related goals?", placeholder:"Make me a better leader with every interaction.", limit:500 },
+      { q:"What are your aspirational goals?", placeholder:"Guide me to delegate and to scale organizations.", limit:500 },
+      { q:"Are you ok with Chat sharing its opinions with you?", placeholder:"Share your opinions, just let me know they're your opinions.", limit:300 },
+      { q:"What do you care about that your AI coworker should care about?", placeholder:"I'm a big fan of amazing customer service.", limit:300 },
+      { q:"What do you need Chat to know about your personality?", placeholder:"I'm a balance of fun and formal...professional but not stuffy.", limit:300 },
+      { q:"What do you want Chat to teach you with every interaction?", placeholder:"Teach me how to be a world‑class executive and business leader...", limit:500 },
+      { q:"How do you want Chat to prepare you?", placeholder:"Prepare me for challenges, obstacles, detractors, & saboteurs.", limit:300 },
+      { q:"What encouragement or support do you need?", placeholder:"Help me have fun as part of the process. Give me strategies and reminders…", limit:400 },
+      { q:"What challenges do you need to be reminded to overcome?", placeholder:"I hate procrastination. Help me relax as I lead, lower stress...", limit:500 },
+      { q:"What is the desired quality and style of your work?", placeholder:"Everything we create should be world‑class, cool, genuine.", limit:300 },
+      { q:"Big picture, what do you want Chat to help you do?", placeholder:"You’re here to help me think beyond self‑limitation...", limit:500 }
+    ];
+    const section2 = [
+      { q:"What are the top roles that describe what you're doing and who you are?", placeholder:"Strategist and holistic AI expert: executive speaker, visionary...", limit:500 },
+      { q:"What are the important traits that describe who you are and how you operate?", placeholder:"Visionary. Futurist. Leader. Creative. inquisitive...", limit:500 },
+      { q:"What are your big ambitions?", placeholder:"Master delegation, scale orgs, philanthropist. Inspire, build...", limit:500 },
+      { q:"What education experience or degrees would you like to share?", placeholder:"BFA from VCU.", limit:300 },
+      { q:"Sum up your work experience and what you’ve done.", placeholder:"20+ yrs Fortune 500 leadership: proj mgmt, mktg ops, TIAA CREF...", limit:700 },
+      { q:"List your current roles and projects.", placeholder:"Founder Nimbology; Exec Dir WAGE; Strategy Consultant at VA Gov Employee Assoc...", limit:700 },
+      { q:"List any experiences or accomplishments of note.", placeholder:"Hosted thought cohorts; authored curriculum to double a nonprofit...", limit:700 },
+      { q:"What are you naturally passionate about? What drives you?", placeholder:"Human potential, exec leadership, change mgmt, UX…", limit:500 },
+      { q:"What world views, moral codes, or ideals appeal to you?", placeholder:"Stoicism. Varied perspectives. Diplomatic. Bold ideas.", limit:500 },
+      { q:"What's your preferred style of interacting with people?", placeholder:"Motivational. Inspirational.", limit:300 },
+      { q:"What is your political leaning?", placeholder:"Classical Liberal (Founding Fathers POV)...", limit:300 },
+      { q:"What is your personality type?", placeholder:"DISC: I, D, C; ENFP", limit:300 },
+      { q:"What challenges would you like AI to help you be aware of and change?", placeholder:"Prone to overcommit. Help me mitigate self-sabotage.", limit:700 }
+    ];
+
+    // ==== PAGINATION SETUP ====
+    const s1len = section1.length;
+    const s2len = section2.length;
+    const totalPages = s1len + s2len + 4;  // intro + s1intro + s2intro + summary
+    let pageIndex = 0;
+    const answers = Array(s1len + s2len).fill("");
+
+    const formContainer = document.getElementById("formContainer");
+    const progressBar   = document.getElementById("progressBar");
+    const headerDiv     = document.getElementById("header");
+    const prevBtn       = document.getElementById("prevBtn");
+    const nextBtn       = document.getElementById("nextBtn");
+
+    prevBtn.onclick = () => { if(pageIndex>0){ pageIndex--; renderPage(); } };
+    nextBtn.onclick = () => {
+      // if on a question, save
+      if(pageIndex>1 && pageIndex < totalPages-1){
+        saveAnswer();
+      }
+      pageIndex++;
+      renderPage();
+    };
+
+    function renderHeader(){
+      if(pageIndex===0){
+        headerDiv.innerHTML = `<h1 style="color:#0e2029; margin:0; font-size:2rem;">${intro.title}</h1>`;
+      } else {
+        headerDiv.innerHTML = `
+          <div style="display:flex; align-items:center;">
+            <img src="https://images.squarespace-cdn.com/content/672bffc68fd9b922d9f34a55/08a58d80-4436-4c37-a3b6-e3bb7e086c45/Strategic+Advisory+%282%29.png?content-type=image%2Fpng"
+                 width="200" alt="Nimbology logo"/>
+            <h1 style="color:#0e2029; margin:0 auto 0 1rem; font-size:1.5rem;">AI Coworker Blueprint™</h1>
+          </div>`;
+      }
+    }
+
     function renderPage(){
+      renderHeader();
       formContainer.innerHTML = "";
       progressBar.style.width = `${(pageIndex)/(totalPages-1)*100}%`;
-      document.getElementById("prevBtn").disabled = pageIndex===0;
-      document.getElementById("nextBtn").innerText = pageIndex < section1.length+section2.length ? "Next" : "Finish";
 
-      if(pageIndex < section1.length){
-        renderQuestion(section1[pageIndex], pageIndex, "Section 1", section1);
+      // Intro
+      if(pageIndex===0){
+        prevBtn.disabled = true;
+        nextBtn.disabled = false;
+        nextBtn.innerText = "Start";
+        formContainer.innerHTML = `<p>${intro.body.replace(/\n/g,'<br/>')}</p>`;
+        return;
       }
-      else if(pageIndex < section1.length+section2.length){
-        const idx = pageIndex - section1.length;
-        renderQuestion(section2[idx], pageIndex, "Section 2", section2);
-      } 
-      else {
-        renderSummary();
+
+      // Section 1 Intro
+      if(pageIndex===1){
+        prevBtn.disabled = false;
+        nextBtn.disabled = false;
+        nextBtn.innerText = "Next";
+        formContainer.innerHTML = `
+          <h2>${section1Intro.title}</h2>
+          <p>${section1Intro.body.replace(/\n/g,'<br/>')}</p>`;
+        return;
       }
+
+      // Section 1 questions
+      if(pageIndex>1 && pageIndex<=1+s1len){
+        prevBtn.disabled = false;
+        nextBtn.disabled = false;
+        nextBtn.innerText = "Next";
+        const idx = pageIndex-2;
+        renderQuestion(section1[idx], idx, "Section 1");
+        return;
+      }
+
+      // Section 2 Intro
+      if(pageIndex===2+s1len){
+        prevBtn.disabled = false;
+        nextBtn.disabled = false;
+        nextBtn.innerText = "Next";
+        formContainer.innerHTML = `
+          <h2>${section2Intro.title}</h2>
+          <p>${section2Intro.body.replace(/\n/g,'<br/>')}</p>`;
+        return;
+      }
+
+      // Section 2 questions
+      if(pageIndex>2+s1len && pageIndex<=2+s1len+s2len){
+        prevBtn.disabled = false;
+        nextBtn.disabled = false;
+        nextBtn.innerText = "Next";
+        const idx = pageIndex-3-s1len;
+        renderQuestion(section2[idx], s1len+idx, "Section 2");
+        return;
+      }
+
+      // Summary
+      prevBtn.disabled = false;
+      nextBtn.style.display = "none";
+      formContainer.innerHTML = renderSummaryHtml();
     }
 
-    function renderQuestion(item, idx, label, sectionArr){
-      const div = document.createElement("div");
-      div.className = "question";
-      div.innerHTML = `
-        <label>${item.q}</label>
-        <textarea id="inputField" placeholder="${item.placeholder}"></textarea>
-        <div class="char-count" id="charCount"></div>
-      `;
-      formContainer.appendChild(div);
-
+    function renderQuestion(item, ansIdx){
+      formContainer.innerHTML = `
+        <div class="question">
+          <label>${item.q}</label>
+          <textarea id="inputField" placeholder="${item.placeholder}"></textarea>
+          <div class="char-count" id="charCount"></div>
+        </div>`;
       const ta = document.getElementById("inputField");
-      ta.value = answers[idx] || "";
+      ta.value = answers[ansIdx]||"";
       ta.maxLength = item.limit;
       ta.oninput = () => {
-        answers[idx] = ta.value;
-        updateCharCount(sectionArr);
+        answers[ansIdx] = ta.value;
+        updateCharCount(ansIdx);
       };
-      updateCharCount(sectionArr);
+      updateCharCount(ansIdx);
     }
 
-    function updateCharCount(sectionArr){
-      const start = pageIndex < section1.length ? 0 : section1.length;
-      const end = pageIndex < section1.length ? section1.length : section1.length+section2.length;
-      let sum=0;
-      for(let i=start; i<pageIndex+1 && i<end; i++){
+    function updateCharCount(ansIdx){
+      // sum for current section
+      let sum=0, start, end;
+      if(pageIndex<=1+s1len){
+        start=0; end=1+ansIdx;
+      } else {
+        start=s1len; end=s1len+ansIdx-(2+s1len);
+      }
+      for(let i=start;i<start+ (pageIndex<=1+s1len ? ansIdx+1 : ansIdx-(2+s1len)+1);i++){
         sum += answers[i]?.length||0;
       }
       const cc = document.getElementById("charCount");
-      cc.innerText = `Section total: ${sum}/${1500}`;
-      if(sum>1500) cc.style.color = "red"; else cc.style.color="#555";
-      document.getElementById("nextBtn").disabled = sum>1500;
+      cc.innerText = `Section total: ${sum}/1500`;
+      cc.style.color = sum>1500?"red":"#555";
+      nextBtn.disabled = sum>1500;
     }
 
     function saveAnswer(){
       const ta = document.getElementById("inputField");
-      if(ta) answers[pageIndex] = ta.value;
+      if(ta) answers[pageIndex<=1+s1len ? pageIndex-2 : pageIndex-3-s1len] = ta.value;
     }
 
-    // ==== SUMMARY & COPY / EMAIL ====
-    function renderSummary(){
-      formContainer.innerHTML = "";
-      progressBar.style.width="100%";
-      document.getElementById("prevBtn").disabled = false;
-      document.getElementById("nextBtn").style.display="none";
-
-      const sec1 = answers.slice(0, section1.length).join(" ");
-      const sec2 = answers.slice(section1.length).join(" ");
-
-      formContainer.innerHTML = `
-        <h3>Section 1 Results</h3>
+    function renderSummaryHtml(){
+      const sec1 = answers.slice(0,s1len).join(" ");
+      const sec2 = answers.slice(s1len).join(" ");
+      return `
+        <h3>Section 1 Results</h3>
         <div class="summary" id="sum1">${sec1}</div>
         <button class="copy-btn" onclick="copyToClipboard('sum1')">Copy Section 1</button>
-        <span class="info" onclick="showModal(1)" style="cursor:pointer;">[i]</span>
         <h3>Section 2 Results</h3>
         <div class="summary" id="sum2">${sec2}</div>
         <button class="copy-btn" onclick="copyToClipboard('sum2')">Copy Section 2</button>
-        <span class="info" onclick="showModal(2)" style="cursor:pointer;">[i]</span>
         <div style="margin-top:1.5rem;">
           <label><input type="checkbox" id="emailOpt"> Send results to my email</label>
           <div id="emailInput" style="display:none; margin-top:.5rem;">
-            <input type="email" id="userEmail" placeholder="you@example.com" style="width:100%;"/>
-            <button style="margin-top:.5rem;" onclick="sendEmail()">Email My Results</button>
+            <input type="email" id="userEmail" placeholder="you@example.com"/>
+            <button onclick="sendEmail()">Email My Results</button>
           </div>
-        </div>
-      `;
-      document.getElementById("emailOpt").onchange = e => {
-        document.getElementById("emailInput").style.display = e.target.checked?"block":"none";
-      };
+        </div>`;
     }
 
     function copyToClipboard(id){
-      const text = document.getElementById(id).innerText;
-      navigator.clipboard.writeText(text).then(_=>alert("Copied!"));
+      navigator.clipboard.writeText(document.getElementById(id).innerText)
+        .then(_=>alert("Copied!"));
     }
 
     function sendEmail(){
-  const userEmail = document.getElementById("userEmail").value.trim();
-  if(!userEmail) return alert("Please enter your email.");
+      const userEmail = document.getElementById("userEmail").value.trim();
+      if(!userEmail) return alert("Please enter your email.");
+      const sec1 = document.getElementById("sum1").innerText;
+      const sec2 = document.getElementById("sum2").innerText;
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID,
+        { to_email:userEmail, section1:sec1, section2:sec2 }
+      ).then(_=>alert("✅ Email sent!"))
+       .catch(err=> alert("❌ Email failed: "+ (err.text||JSON.stringify(err))));
+    }
 
-  // grab the rendered summaries
-  const sec1 = document.getElementById("sum1").innerText;
-  const sec2 = document.getElementById("sum2").innerText;
-
-  emailjs.send(
-    EMAILJS_SERVICE_ID,
-    EMAILJS_TEMPLATE_ID,
-    { to_email: userEmail, section1: sec1, section2: sec2 }
-  )
-  .then(response => {
-    console.log("EmailJS success:", response);
-    alert("✅ Email sent!");
-  })
-  .catch(error => {
-    console.error("EmailJS failure:", error);
-    // show either the .text or the full JSON so you know what went wrong
-    const msg = error && error.text
-                ? error.text
-                : JSON.stringify(error);
-    alert("❌ Email failed: " + msg);
-  });
-}
-
-
-    // ==== INIT ====
+    // init
     renderPage();
   </script>
 </body>
