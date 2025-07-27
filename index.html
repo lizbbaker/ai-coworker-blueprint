@@ -78,22 +78,23 @@
   </div>
 
   <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <!-- App Code -->
-  <script>
-    // ==== CONFIGURE EmailJS ====
-    const EMAILJS_USER_ID    = 'SFReYwwY4dQJsG2ap';
-    const EMAILJS_SERVICE_ID = 'service_gpqnffd';
-    const EMAILJS_TEMPLATE_ID= 'template_roe9gvx';
-    emailjs.init(EMAILJS_USER_ID);
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-    // ==== INTRO & SECTION INTRO SCREENS ====
-    const intro = {
-      title: "Welcome!",
-      body: `You’re just a few steps away from building your personal AI coworker.
+<!-- ALL your app’s JavaScript: -->
+<script>
+// ==== CONFIGURE EmailJS ====
+const EMAILJS_USER_ID    = 'SFReYwwY4dQJsG2ap';
+const EMAILJS_SERVICE_ID = 'service_gpqnffd';
+const EMAILJS_TEMPLATE_ID= 'template_roe9gvx';
+emailjs.init(EMAILJS_USER_ID);
+
+// ==== INTRO & SECTION INTRO SCREENS ====
+const intro = {
+  title: "Welcome!",
+  body: `You’re just a few steps away from building your personal AI coworker.
 Define its persona, teach it about you, and get a ChatGPT‑ready prompt at the end.
 Click “Start” when you’re ready.`
-    };
+};
     const section1Intro = {
       title: "Section 1: Define Your AI Coworker",
       body: `We’ll answer the question: What traits should ChatGPT have?<br>
