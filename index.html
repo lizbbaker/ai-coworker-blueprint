@@ -34,10 +34,21 @@
     }
     #footer div:first-child { margin-bottom:.5rem; }
     #toast {
-      position:fixed; bottom:2rem; left:50%; transform:translateX(-50%);
-      background:rgba(0,0,0,0.8); color:#fff; padding:.75rem 1.5rem;
-      border-radius:4px; display:none; font-size:.95rem;
-    }
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #222;
+  padding: .95rem 1.7rem;
+  border-radius: 8px;
+  display: none;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+  z-index: 9999;
+  border: 2px solid #db4227;
+}
+
     .modal-backdrop {
       position:fixed; top:0; left:0; right:0; bottom:0;
       background:rgba(0,0,0,0.4); display:none; align-items:center; justify-content:center;
@@ -152,7 +163,7 @@ const nextBtn       = document.getElementById("nextBtn");
 prevBtn.onclick = () => { if(pageIndex>0){ pageIndex--; renderPage(); } };
 nextBtn.onclick = () => {
   if(pageIndex>=2 && pageIndex<=1+s1len) saveAnswer(pageIndex-2);
-  if(pageIndex>=3+s1len && pageIndex<=2+s1len+s2len) saveAnswer(pageIndex-3-s1len);
+  if(pageIndex>=3+s1len && pageIndex<=2+s1len+s2len) saveAnswer(s1len + (pageIndex-3-s1len)); // <-- THIS LINE
   pageIndex++;
   renderPage();
 };
