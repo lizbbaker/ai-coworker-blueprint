@@ -188,10 +188,11 @@ function renderPage(){
     nextBtn.innerText = "Next";
     formContainer.innerHTML = `<div class="question"><h2>${section2Intro.title}</h2><p>${section2Intro.body}</p></div>`;
   }
-  else if(pageIndex>=3+s1len && pageIndex<=2+s1len+s2len){
-    nextBtn.innerText = "Next";
-    renderQuestion(section2[pageIndex-3-s1len], pageIndex-3-s1len);
-  }
+ else if(pageIndex>=3+s1len && pageIndex<=2+s1len+s2len){
+  nextBtn.innerText = "Next";
+  // Pass BOTH the section2 question and the CORRECT index in the answers array!
+  renderQuestion(section2[pageIndex-3-s1len], s1len + (pageIndex-3-s1len));
+}
   else if(pageIndex===3+s1len+s2len){
     nextBtn.style.display = "none";
     formContainer.innerHTML = renderSummaryHtml();
