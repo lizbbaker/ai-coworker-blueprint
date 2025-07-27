@@ -5,29 +5,50 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>AI Coworker Blueprint</title>
   <style>
+    * { box-sizing:border-box; }
     body { margin:0; padding:0; background:#deebf1; font-family:sans-serif; }
-    #app { max-width:600px; margin:2rem auto; background:#fff; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
-    #header { margin-bottom:1rem; }
-    .progress { height:8px; background:#eee; margin-bottom:1rem; border-radius:4px; overflow:hidden; }
-    .progress-bar { height:8px; background:#3b82f6; width:0%; transition:width .3s;}
+    #app { max-width:600px; margin:2rem auto; background:#fff; border-radius:4px; overflow:hidden; }
+    #header { background:#fff; padding:1rem; }
+    #header img { vertical-align:middle; }
+    #header h1 { display:inline-block; margin:0 0 0 1rem; color:#0e2029; font-size:1.75rem; vertical-align:middle; }
+    .progress { height:8px; background:#eee; width:100%; }
+    .progress-bar { height:8px; background:#3b82f6; width:0%; transition:width .3s; }
+    #formContainer { padding:1.5rem; }
     .question { margin-bottom:2rem; }
     label { display:block; margin-bottom:.5rem; font-weight:600; }
-    input[type=text], input[type=email], textarea { width:100%; padding:.5rem; font-size:1rem; border:1px solid #ccc; border-radius:4px; }
-    textarea { resize:vertical; min-height:80px; }
-    .controls { display:flex; justify-content:space-between; margin-top:1rem; }
-    button { padding:.6rem 1.2rem; font-size:1rem; border:none; border-radius:4px; cursor:pointer; background:#3b82f6; color:#fff; }
+    input[type=text], input[type=email], textarea {
+      width:100%; padding:.5rem; font-size:1rem; border:1px solid #ccc; border-radius:4px;
+    }
+    textarea { resize:vertical; min-height:100px; }
+    .char-count { font-size:.875rem; color:#555; margin-top:.25rem; }
+    .controls { display:flex; justify-content:space-between; padding:1rem; background:#fff; }
+    button {
+      padding:.6rem 1.2rem; font-size:1rem; border:none; border-radius:4px; cursor:pointer;
+      background:#db4227; color:#fff;
+    }
     button[disabled] { background:#ccc; cursor:default; }
-    .copy-btn { background:#6b7280; margin-right:.5rem; }
+    .copy-btn { margin-right:.5rem; }
     .summary { background:#fafafa; padding:1rem; border:1px solid #ddd; border-radius:4px; white-space:pre-wrap; }
-    .modal-backdrop { position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,0.4); display:none; align-items:center; justify-content:center; }
+    #footer { background:#0e2029; color:#fff; text-align:center; padding:.5rem; font-size:.875rem; }
+    /* Toast */
+    #toast {
+      position:fixed; bottom:2rem; left:50%; transform:translateX(-50%);
+      background:rgba(0,0,0,0.8); color:#fff; padding:.75rem 1.5rem;
+      border-radius:4px; display:none; font-size:.95rem;
+    }
+    /* Modal */
+    .modal-backdrop { position:fixed; top:0;left:0;right:0;bottom:0;
+      background:rgba(0,0,0,0.4); display:none; align-items:center; justify-content:center; }
     .modal { background:#fff; padding:1rem; max-width:400px; border-radius:4px; }
-    .char-count { font-size:.875rem; color:#555; margin-bottom:1rem; }
-    #footer { background:#0e2029; color:#fff; text-align:center; padding:.5rem; font-size:.875rem; margin-top:1rem; border-radius:0 0 4px 4px; }
   </style>
 </head>
 <body>
   <div id="app">
-    <div id="header"></div>
+    <div id="header">
+      <img src="https://images.squarespace-cdn.com/content/672bffc68fd9b922d9f34a55/08a58d80-4436-4c37-a3b6-e3bb7e086c45/Strategic+Advisory+%282%29.png?content-type=image%2Fpng"
+           width="200" alt="Nimbology logo"/>
+      <h1>AI Coworker Blueprint™</h1>
+    </div>
     <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
     <div id="formContainer"></div>
     <div class="controls">
@@ -37,7 +58,10 @@
     <div id="footer">Copyright © 2025, Nimbology™</div>
   </div>
 
-  <!-- Modal for info icons -->
+  <!-- Toast -->
+  <div id="toast"></div>
+
+  <!-- Modal (info icon) -->
   <div class="modal-backdrop" id="modalBackdrop">
     <div class="modal">
       <p id="modalContent"></p>
@@ -54,30 +78,27 @@
     const EMAILJS_TEMPLATE_ID= 'template_roe9gvx';
     emailjs.init(EMAILJS_USER_ID);
 
-    // ==== INTRO SCREEN (pageIndex = 0) ====
+    // ==== INTRO & SECTION INTRO SCREENS ====
     const intro = {
-      title: "AI Coworker Blueprint™",
-      body: `You're just a few steps away from building your personal AI coworker.
-You'll define its persona, teach it about you, and get a ChatGPT‑ready prompt at the end.
-Click “Start” when you're ready.`
+      title: "Welcome!",
+      body: `You’re just a few steps away from building your personal AI coworker.
+Define its persona, teach it about you, and get a ChatGPT‑ready prompt at the end.
+Click “Start” when you’re ready.`
     };
-
-    // ==== SECTION INTRO SCREENS ====
     const section1Intro = {
       title: "Section 1: Define Your AI Coworker",
-      body: `Starting with: What traits should ChatGPT have?
+      body: `First question: What traits should ChatGPT have?
 You have up to 1500 characters for this section.`
     };
     const section2Intro = {
       title: "Section 2: Teach ChatGPT About You",
-      body: `Starting with: Anything else ChatGPT should know about you?
-You have up to 1500 characters for this section.`
+      body: `Next question: Anything else ChatGPT should know about you?
+Again, up to 1500 characters.`
     };
 
-    // ==== QUESTION DATA ====
+    // ==== QUESTIONS ====
     const section1 = [
       { q:"What would you like your AI coworker's name to be?", placeholder:"You're Javi.", limit:30 },
-      { q:"What voice would you like ChatGPT to have when you speak to it in conversation mode?", placeholder:"I use \"Cove.\"", limit:150 },
       { q:"What traits should your ideal AI coworker have?", placeholder:"You're my hard‑hitting, no fluff, no BS life coach...", limit:500 },
       { q:"What are your role-related goals?", placeholder:"Make me a better leader with every interaction.", limit:500 },
       { q:"What are your aspirational goals?", placeholder:"Guide me to delegate and to scale organizations.", limit:500 },
@@ -108,101 +129,89 @@ You have up to 1500 characters for this section.`
     ];
 
     // ==== PAGINATION SETUP ====
-    const s1len = section1.length;
-    const s2len = section2.length;
-    const totalPages = s1len + s2len + 4;  // intro + s1intro + s2intro + summary
+    const s1len = section1.length, s2len = section2.length;
+    const totalPages = s1len + s2len + 5;  // intro + s1intro + s2intro + summary + final
     let pageIndex = 0;
     const answers = Array(s1len + s2len).fill("");
 
     const formContainer = document.getElementById("formContainer");
     const progressBar   = document.getElementById("progressBar");
-    const headerDiv     = document.getElementById("header");
     const prevBtn       = document.getElementById("prevBtn");
     const nextBtn       = document.getElementById("nextBtn");
 
-    prevBtn.onclick = () => { if(pageIndex>0){ pageIndex--; renderPage(); } };
-    nextBtn.onclick = () => {
-      // if on a question, save
-      if(pageIndex>1 && pageIndex < totalPages-1){
-        saveAnswer();
-      }
+    prevBtn.onclick = ()=>{ if(pageIndex>0){ pageIndex--; renderPage(); } };
+    nextBtn.onclick = ()=>{
+      // save if on question
+      if(pageIndex>2 && pageIndex<=1+s1len) saveAnswer(pageIndex-3);
+      if(pageIndex>3+s1len && pageIndex<=2+s1len+s2len) saveAnswer(pageIndex-4-s1len+s1len);
       pageIndex++;
       renderPage();
     };
 
     function renderHeader(){
-      if(pageIndex===0){
-        headerDiv.innerHTML = `<h1 style="color:#0e2029; margin:0; font-size:2rem;">${intro.title}</h1>`;
-      } else {
-        headerDiv.innerHTML = `
-          <div style="display:flex; align-items:center;">
-            <img src="https://images.squarespace-cdn.com/content/672bffc68fd9b922d9f34a55/08a58d80-4436-4c37-a3b6-e3bb7e086c45/Strategic+Advisory+%282%29.png?content-type=image%2Fpng"
-                 width="200" alt="Nimbology logo"/>
-            <h1 style="color:#0e2029; margin:0 auto 0 1rem; font-size:1.5rem;">AI Coworker Blueprint™</h1>
-          </div>`;
-      }
+      // always show logo+title
+      document.getElementById("header").innerHTML = `
+        <img src="https://images.squarespace-cdn.com/content/672bffc68fd9b922d9f34a55/08a58d80-4436-4c37-a3b6-e3bb7e086c45/Strategic+Advisory+%282%29.png?content-type=image%2Fpng" width="200" alt="logo"/>
+        <h1>AI Coworker Blueprint™</h1>`;
     }
 
     function renderPage(){
       renderHeader();
-      formContainer.innerHTML = "";
-      progressBar.style.width = `${(pageIndex)/(totalPages-1)*100}%`;
+      formContainer.innerHTML="";
+      progressBar.style.width = `${pageIndex/(totalPages-1)*100}%`;
 
-      // Intro
+      prevBtn.disabled = pageIndex===0;
+      nextBtn.style.display = "inline-block";
+
+      // 0=Intro
       if(pageIndex===0){
-        prevBtn.disabled = true;
-        nextBtn.disabled = false;
-        nextBtn.innerText = "Start";
-        formContainer.innerHTML = `<p>${intro.body.replace(/\n/g,'<br/>')}</p>`;
+        nextBtn.innerText="Start";
+        formContainer.innerHTML=`<div class="question"><h2>${intro.title}</h2><p>${intro.body.replace(/\n/g,'<br/>')}</p></div>`;
         return;
       }
-
-      // Section 1 Intro
+      // 1=Section1 Intro
       if(pageIndex===1){
-        prevBtn.disabled = false;
-        nextBtn.disabled = false;
-        nextBtn.innerText = "Next";
-        formContainer.innerHTML = `
-          <h2>${section1Intro.title}</h2>
-          <p>${section1Intro.body.replace(/\n/g,'<br/>')}</p>`;
+        nextBtn.innerText="Next";
+        formContainer.innerHTML=`<div class="question"><h2>${section1Intro.title}</h2><p>${section1Intro.body.replace(/\n/g,'<br/>')}</p></div>`;
         return;
       }
-
-      // Section 1 questions
-      if(pageIndex>1 && pageIndex<=1+s1len){
-        prevBtn.disabled = false;
-        nextBtn.disabled = false;
-        nextBtn.innerText = "Next";
+      // 2..s1len+1 = S1 questions
+      if(pageIndex>=2 && pageIndex<=1+s1len){
+        nextBtn.innerText="Next";
         const idx = pageIndex-2;
-        renderQuestion(section1[idx], idx, "Section 1");
+        renderQuestion(section1[idx], idx);
         return;
       }
-
-      // Section 2 Intro
+      // S2 Intro
       if(pageIndex===2+s1len){
-        prevBtn.disabled = false;
-        nextBtn.disabled = false;
-        nextBtn.innerText = "Next";
-        formContainer.innerHTML = `
-          <h2>${section2Intro.title}</h2>
-          <p>${section2Intro.body.replace(/\n/g,'<br/>')}</p>`;
+        nextBtn.innerText="Next";
+        formContainer.innerHTML=`<div class="question"><h2>${section2Intro.title}</h2><p>${section2Intro.body.replace(/\n/g,'<br/>')}</p></div>`;
         return;
       }
-
-      // Section 2 questions
-      if(pageIndex>2+s1len && pageIndex<=2+s1len+s2len){
-        prevBtn.disabled = false;
-        nextBtn.disabled = false;
-        nextBtn.innerText = "Next";
+      // S2 questions
+      if(pageIndex>=3+s1len && pageIndex<=2+s1len+s2len){
+        nextBtn.innerText="Next";
         const idx = pageIndex-3-s1len;
-        renderQuestion(section2[idx], s1len+idx, "Section 2");
+        renderQuestion(section2[idx], s1len+idx);
         return;
       }
-
-      // Summary
-      prevBtn.disabled = false;
-      nextBtn.style.display = "none";
-      formContainer.innerHTML = renderSummaryHtml();
+      // summary
+      if(pageIndex===3+s1len+s2len){
+        nextBtn.style.display="none";
+        formContainer.innerHTML=renderSummaryHtml();
+        attachEmailToggle();
+        return;
+      }
+      // final page
+      if(pageIndex===4+s1len+s2len){
+        nextBtn.style.display="none";
+        formContainer.innerHTML = `
+          <h2>Congratulations!</h2>
+          <p>Your AI Coworker is onboarded and ready to go.
+          Start working together, and if you run into any questions,
+          reach out at <a href="https://nimbology.com/contact" target="_blank">nimbology.com/contact</a>.</p>`;
+        return;
+      }
     }
 
     function renderQuestion(item, ansIdx){
@@ -215,7 +224,7 @@ You have up to 1500 characters for this section.`
       const ta = document.getElementById("inputField");
       ta.value = answers[ansIdx]||"";
       ta.maxLength = item.limit;
-      ta.oninput = () => {
+      ta.oninput = ()=>{
         answers[ansIdx] = ta.value;
         updateCharCount(ansIdx);
       };
@@ -223,37 +232,29 @@ You have up to 1500 characters for this section.`
     }
 
     function updateCharCount(ansIdx){
-      // sum for current section
+      // compute current section sum
       let sum=0, start, end;
-      if(pageIndex<=1+s1len){
-        start=0; end=1+ansIdx;
-      } else {
-        start=s1len; end=s1len+ansIdx-(2+s1len);
-      }
-      for(let i=start;i<start+ (pageIndex<=1+s1len ? ansIdx+1 : ansIdx-(2+s1len)+1);i++){
-        sum += answers[i]?.length||0;
-      }
-      const cc = document.getElementById("charCount");
-      cc.innerText = `Section total: ${sum}/1500`;
+      if(pageIndex<=1+s1len){ start=0; end=ansIdx; }
+      else { start=s1len; end=ansIdx; }
+      for(let i=start;i<=end;i++) sum += answers[i]?.length||0;
+      const cc=document.getElementById("charCount");
+      cc.innerText=`Section total: ${sum}/1500`;
       cc.style.color = sum>1500?"red":"#555";
       nextBtn.disabled = sum>1500;
     }
 
-    function saveAnswer(){
-      const ta = document.getElementById("inputField");
-      if(ta) answers[pageIndex<=1+s1len ? pageIndex-2 : pageIndex-3-s1len] = ta.value;
-    }
+    function saveAnswer(idx){ answers[idx] = document.getElementById("inputField").value; }
 
     function renderSummaryHtml(){
-      const sec1 = answers.slice(0,s1len).join(" ");
-      const sec2 = answers.slice(s1len).join(" ");
+      const sec1=answers.slice(0,s1len).join(" ");
+      const sec2=answers.slice(s1len).join(" ");
       return `
         <h3>Section 1 Results</h3>
         <div class="summary" id="sum1">${sec1}</div>
-        <button class="copy-btn" onclick="copyToClipboard('sum1')">Copy Section 1</button>
+        <button class="copy-btn" onclick="copyToClipboard('sum1',1)">Copy Section 1</button>
         <h3>Section 2 Results</h3>
         <div class="summary" id="sum2">${sec2}</div>
-        <button class="copy-btn" onclick="copyToClipboard('sum2')">Copy Section 2</button>
+        <button class="copy-btn" onclick="copyToClipboard('sum2',2)">Copy Section 2</button>
         <div style="margin-top:1.5rem;">
           <label><input type="checkbox" id="emailOpt"> Send results to my email</label>
           <div id="emailInput" style="display:none; margin-top:.5rem;">
@@ -263,23 +264,48 @@ You have up to 1500 characters for this section.`
         </div>`;
     }
 
-    function copyToClipboard(id){
-      navigator.clipboard.writeText(document.getElementById(id).innerText)
-        .then(_=>alert("Copied!"));
+    function attachEmailToggle(){
+      const opt=document.getElementById("emailOpt");
+      const inp=document.getElementById("emailInput");
+      opt.addEventListener('change',e=>{ inp.style.display=e.target.checked?'block':'none'; });
     }
+
+    function copyToClipboard(id, sectionNum){
+      const txt = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(txt);
+      const msg = sectionNum===1
+        ? 'Copied. Now paste this under "What traits should ChatGPT have?"'
+        : 'Copied. Now paste this under "Anything else ChatGPT should know about you?"';
+      showToast(msg);
+    }
+
+    function showToast(msg){
+      const t=document.getElementById("toast");
+      t.innerText=msg;
+      t.style.display="block";
+      setTimeout(()=>t.style.display="none",3000);
+    }
+
+    function showModal(sec){
+      const content = sec===1
+        ? `Section 1: Paste under "What traits should ChatGPT have?"`
+        : `Section 2: Paste under "Anything else ChatGPT should know about you?"`;
+      document.getElementById("modalContent").innerText=content;
+      document.getElementById("modalBackdrop").style.display="flex";
+    }
+    function closeModal(){ document.getElementById("modalBackdrop").style.display="none"; }
 
     function sendEmail(){
-      const userEmail = document.getElementById("userEmail").value.trim();
-      if(!userEmail) return alert("Please enter your email.");
-      const sec1 = document.getElementById("sum1").innerText;
-      const sec2 = document.getElementById("sum2").innerText;
-      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID,
-        { to_email:userEmail, section1:sec1, section2:sec2 }
-      ).then(_=>alert("✅ Email sent!"))
-       .catch(err=> alert("❌ Email failed: "+ (err.text||JSON.stringify(err))));
+      const userEmail=document.getElementById("userEmail").value.trim();
+      if(!userEmail) return showToast("Please enter your email.");
+      const sec1=document.getElementById("sum1").innerText;
+      const sec2=document.getElementById("sum2").innerText;
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, { to_email:userEmail, section1:sec1, section2:sec2 })
+        .then(_=> showToast("✅ Email sent!"))
+        .catch(err=> showToast("❌ Email failed: "+(err.text||JSON.stringify(err))));
     }
 
-    // init
+    // INIT
     renderPage();
   </script>
 </body>
