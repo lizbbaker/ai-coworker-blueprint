@@ -71,7 +71,6 @@
     </div>
     <div id="footer">
       <div style="font-size:0.875rem;">
-        <br>
 *This form was custom‑built by Liz B. Baker with privacy in mind.<br>
         No results are stored, no results are visible to third parties.<br>
         No results are seen or retained by anyone but you.
@@ -278,8 +277,8 @@ function copyToClipboard(id, section) {
   const text = document.getElementById(id).innerText;
   navigator.clipboard.writeText(text);
   const msg = section===1
-    ? 'Copied. Now paste this under "What traits should ChatGPT have?"'
-    : 'Copied. Now paste this under "Anything else ChatGPT should know about you?"';
+    ? 'Copied! Now paste this into ChatGPT under Customization/Personalization to answer the question: "What traits should ChatGPT have?"'
+    : 'Copied. Now paste this into ChatGPT under Customization/Personalization to answer the question: "Anything else ChatGPT should know about you?"';
   showToast(msg);
 }
 
