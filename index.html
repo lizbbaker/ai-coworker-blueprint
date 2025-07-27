@@ -253,14 +253,14 @@ function renderSummaryHtml(){
   const sec2 = answers.slice(s1len).join(" ");
   return `
     <h2>Congratulations! Welcome to your next level.</h2>
-<p><strong>You’ve just given ChatGPT everything it needs to become a truly valuable partner in your work and life.</strong> If you have questions or want to unlock even more AI superpowers, reach out anytime:
+<p><strong>You’ve just given ChatGPT everything it needs to become a truly valuable partner in your work and life.</strong></p><p>Start working with your AI coworker today, and if you have questions or want to unlock even more AI superpowers, reach out anytime:
 <a href="https://nimbology.com/contact">nimbology.com/contact</a>.</p>
     <h3>About Your AI Coworker: Results</h3>
-    <p>Copy/paste this into ChatGPT under Customization/Personalization to answer the question: What traits should ChatGPT have?</p> 
+    <p><i>Copy/paste this into ChatGPT under Customization/Personalization to answer the question: <strong>What traits should ChatGPT have?</strong></i></p> 
     <div class="summary" id="sum1">${sec1}</div>
     <button class="copy-btn" onclick="copyToClipboard('sum1',1)">Copy - AI Coworker Details</button>
     <h3>About You: Results</h3>
-<p>Copy/paste this into ChatGPT under Customization/Personalization to answer the question: Anything else ChatGPT should know about you?</p>
+<p><i>Copy/paste this into ChatGPT under Customization/Personalization to answer the question: <strong>Anything else ChatGPT should know about you?</strong></i></p>
     <div class="summary" id="sum2">${sec2}</div>
     <button class="copy-btn" onclick="copyToClipboard('sum2',2)">Copy - About Me</button>
     <div style="margin-top:1.5rem;">
