@@ -192,28 +192,33 @@
       navigator.clipboard.writeText(text).then(_=>alert("Copied!"));
     }
 
-    function showModal(sec){
-      const content = sec===1
-        ? `Section 1: Copy and paste into ChatGPT under "What traits should ChatGPT have?"`
-        : `Section 2: Copy and paste under "Anything else ChatGPT should know about you?"`;
-      document.getElementById("modalContent").innerText = content;
-      document.getElementById("modalBackdrop").style.display="flex";
-    }
-    function closeModal(){
-      document.getElementById("modalBackdrop").style.display="none";
-    }
-
     function sendEmail(){
-      const userEmail = document.getElementById("userEmail").value.trim();
-      if(!userEmail) return alert("Please enter your email.");
-      const sec1 = document.getElementById("sum1").innerText;
-      const sec2 = document.getElementById("sum2").innerText;
-      emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        { to_email: userEmail, section1: sec1, section2: sec2 }
-      ).then(_=>alert("Email sent!"), err=>alert("Failed to send: "+err));
-    }
+  const userEmail = document.getElementById("userEmail").value.trim();
+  if(!userEmail) return alert("Please enter your email.");
+
+  // grab the rendered summaries
+  const sec1 = document.getElementById("sum1").innerText;
+  const sec2 = document.getElementById("sum2").innerText;
+
+  emailjs.send(
+    EMAILJS_SERVICE_ID,
+    EMAILJS_TEMPLATE_ID,
+    { to_email: userEmail, section1: sec1, section2: sec2 }
+  )
+  .then(response => {
+    console.log("EmailJS success:", response);
+    alert("✅ Email sent!");
+  })
+  .catch(error => {
+    console.error("EmailJS failure:", error);
+    // show either the .text or the full JSON so you know what went wrong
+    const msg = error && error.text
+                ? error.text
+                : JSON.stringify(error);
+    alert("❌ Email failed: " + msg);
+  });
+}
+
 
     // ==== INIT ====
     renderPage();
