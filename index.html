@@ -112,40 +112,42 @@ You have up to 1,500 characters to paint the picture.<br><br>Think personality, 
 };
 const section2Intro = {
   title: "Section 2: Teach Your AI Coworker About You",
-  body: `Now it’s your turn to share what makes you, well, you!<br><br>
+  body: `Now it’s your turn to share what makes you, well, you! I've shared my personal examples to give you an idea of how I set up ChatGPT. Be bold. Be aspirational. And remember, you can always updated and tweak the information at any time.<br><br>
 We’ll answer the question: <strong>Anything else ChatGPT should know about you?</strong><br><br>From your current role and key challenges to your passions, values, and work style—this is where your AI partner gets the full picture.<br><br>Take up to 1,500 characters to paint a clear portrait of yourself so your coworker can support you perfectly.`
 };
 
 // ==== QUESTIONS ====
 const section1 = [
-  { q:"What would you like your AI coworker's name to be?", placeholder:"Choose a name. You can always change it later.", limit:30 },
-  { q:"What traits should your ideal AI coworker have?", placeholder:"Ex: Hard-hitting, no fluff, no BS biz partner. Professional, cool/fun, level-headed, high EQ, consultative, executive presence. Fun, cheeky, a great partner.", limit:500 },
-  { q:"What are your role-related goals?", placeholder:"Ex: Make me a better person with every interaction. Guide me to delegate and scale organizations. Respond to me like a very cool corporate executive officer overseeing and growing multiple companies. Help me think like the person I want to be.", limit:500 },
-  { q:"What are your aspirational goals?", placeholder:"Ex: I want to knock it out of the park. Move me beyond self-limitation to achieve extraordinary things.", limit:500 },
-  { q:"Are you ok with Chat sharing its opinions with you?", placeholder:" Ex: Share opinions, just let me know they're yours.", limit:300 },
-  { q:"What do you care about that your AI coworker should care about?", placeholder:"Ex: I'm a big fan of wisdom, freedom, resourcefulness, ethics, civic-mindedness, and great customer service.", limit:300 },
-  { q:"What do you need Chat to know about your personality?", placeholder:"Ex: I'm a balance of fun and formal—professional, not stuffy. Creative. Innovative. Solutions-focused. Optimistic. Bold ideas. Humorous.", limit:300 },
-  { q:"What do you want Chat to teach you with every interaction?", placeholder:"Ex: Teach me how to be a world‑class executive and business leader...", limit:500 },
-  { q:"How do you want Chat to prepare you?", placeholder:"Ex: Prepare me for success, challenges, obstacles, detractors, & saboteurs.", limit:300 },
-  { q:"What encouragement or support do you need?", placeholder:"Ex: Give me strategies and reminders that remind me of my worth and my skills. Help me relax as I lead, lower stress by building confidence, and enjoy the steps of the journey. Help me have fun as part of the process and love people.", limit:400 },
-  { q:"What challenges do you need to be reminded to overcome?", placeholder:"Ex: Drive me to excellence vs. wasting time. Help me measure my days use time wisely. I hate procrastination.", limit:500 },
-  { q:"What is the desired quality and style of your work?", placeholder:"Ex: Everything we create should be world‑class, cool, genuine.", limit:300 },
-  { q:"Big picture, what do you want Chat to help you do?", placeholder:"Ex: Move me beyond self-limitation to achieve extraordinary things.", limit:500 }
+  { q:"What would you like your AI coworker's name to be?", placeholder:"Ex: Pick any name.", limit:30 },
+  { q:"What traits should your ideal AI coworker have?", placeholder:"Ex: Direct, no BS. High EQ. Professional, sharp, fun, creative. Challenges me. Witty, consultative, exec presence.", limit:500 },
+  { q:"What are your role-related goals?", placeholder:"Ex: Keep me out of admin. Push delegation. Prioritize growth, revenue, visibility. Protect my focus.", limit:500 },
+  { q:"What are your aspirational goals?", placeholder:"Ex: National impact, productize IP, scale thought leadership, never let me coast.", limit:500 },
+  { q:"Are you ok with Chat sharing its opinions with you?", placeholder:"Ex: Absolutely—challenge me, just flag when it’s your take.", limit:300 },
+  { q:"What do you care about that your AI coworker should care about?", placeholder:"Ex: Ethics, world-class service, authenticity, client impact, freedom, resourcefulness.", limit:300 },
+  { q:"What do you need Chat to know about your personality?", placeholder:"Ex: Visionary, energetic, hates inefficiency, creative, fun, sometimes overcommits.", limit:300 },
+  { q:"What do you want Chat to teach you with every interaction?", placeholder:"Ex: Scaling, executive mindset, sales/pricing, value creation.", limit:500 },
+  { q:"How do you want Chat to prepare you?", placeholder:"Ex: Anticipate blockers, politics, energy drains. Warn on time-wasters.", limit:300 },
+  { q:"What encouragement or support do you need?", placeholder:"Ex: Remind me I’m building legacy. Celebrate wins. Snap me out of stress.", limit:400 },
+  { q:"What challenges do you need to be reminded to overcome?", placeholder:"Ex: Call out procrastination, perfectionism, people-pleasing, not delegating.", limit:500 },
+  { q:"What is the desired quality and style of your work?", placeholder:"Ex: World-class, high impact, original, never generic.", limit:300 },
+  { q:"Big picture, what do you want Chat to help you do?", placeholder:"Ex: Legacy, impact, income, freedom—make the journey fun.", limit:500 }
 ];
+
 const section2 = [
-  { q:"What are the top roles that describe what you're doing and who you are?", placeholder:"Strategist and holistic AI expert: executive speaker, visionary...", limit:500 },
-  { q:"What are the important traits that describe who you are and how you operate?", placeholder:"Visionary. Futurist. Leader. Creative. inquisitive...", limit:500 },
-  { q:"What are your big ambitions?", placeholder:"Master delegation, scale orgs, philanthropist. Inspire, build...", limit:500 },
-  { q:"What education experience or degrees would you like to share?", placeholder:"BFA from VCU.", limit:300 },
-  { q:"Sum up your work experience and what you’ve done.", placeholder:"20+ yrs Fortune 500 leadership: proj mgmt, mktg ops, TIAA CREF...", limit:700 },
-  { q:"List your current roles and projects.", placeholder:"Founder Nimbology; Exec Dir WAGE; Strategy Consultant at VA Gov Employee Assoc...", limit:700 },
-  { q:"List any experiences or accomplishments of note.", placeholder:"Hosted thought cohorts; authored curriculum to double a nonprofit...", limit:700 },
-  { q:"What are you naturally passionate about? What drives you?", placeholder:"Human potential, exec leadership, change mgmt, UX…", limit:500 },
-  { q:"What world views, moral codes, or ideals appeal to you?", placeholder:"Stoicism. Varied perspectives. Diplomatic. Bold ideas.", limit:500 },
-  { q:"What's your preferred style of interacting with people?", placeholder:"Motivational. Inspirational.", limit:300 },
-  { q:"What is your political leaning?", placeholder:"Classical Liberal (Founding Fathers POV)...", limit:300 },
-  { q:"What is your personality type?", placeholder:"DISC: I, D, C; ENFP", limit:300 },
-  { q:"What challenges would you like AI to help you be aware of and change?", placeholder:"Prone to overcommit. Help me mitigate self-sabotage.", limit:700 }
+  { q:"What are the top roles that describe what you're doing and who you are?", placeholder:"Ex: Exec strategist, AI consultant, founder, speaker, brand/org builder.", limit:500 },
+  { q:"What are the important traits that describe who you are and how you operate?", placeholder:"Ex: Creative, visionary, adaptive, bold, pragmatic, empathetic.", limit:500 },
+  { q:"What are your big ambitions?", placeholder:"Ex: Build national practice, scale IP, shape AI ethics, financial freedom.", limit:500 },
+  { q:"What education experience or degrees would you like to share?", placeholder:"Ex: BFA, VCU. Lifelong learner.", limit:300 },
+  { q:"Sum up your work experience and what you’ve done.", placeholder:"Ex: 20+ yrs: Fortune 500 + nonprofit + startup leader. 12+ industries. Consultant, advisor, coach, entrepreneur, mentor.", limit:700 },
+  { q:"List your current roles and projects.", placeholder:"Ex: Nimbology, Double Your Team in One Day, GIAH, VGEA, AI Ready RVA, speaking, coaching, workshops.", limit:700 },
+  { q:"List any experiences or accomplishments of note.", placeholder:"Ex: Scaled orgs, built frameworks, podcasts, doubled teams, national reach.", limit:700 },
+  { q:"What are you naturally passionate about? What drives you?", placeholder:"Ex: Ethical AI, transformation, innovation, coaching, potential.", limit:500 },
+  { q:"What world views, moral codes, or ideals appeal to you?", placeholder:"Ex: Stoicism, classical liberal, integrity, community.", limit:500 },
+  { q:"What's your preferred style of interacting with people?", placeholder:"Ex: Motivational, dynamic, action-oriented, direct, fun.", limit:300 },
+  { q:"What is your political leaning?", placeholder:"Ex: Classical liberal: individual + community.", limit:300 },
+  { q:"How have people described you?", placeholder:"Ex: Dynamic. Connector. Catalyst. Visionary", limit:300 },
+  { q:"What is your personality type?", placeholder:"Ex: ENFP. DISC: I, D, C.", limit:300 },
+  { q:"What challenges would you like AI to help you be aware of and change?", placeholder:"Ex: Focus, employ help, don't sweat the small stuff. Call me out on it.", limit:700 }
 ];
 
 // ==== PAGINATION SETUP ====
