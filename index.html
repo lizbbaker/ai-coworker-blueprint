@@ -320,3 +320,14 @@ function sendEmail(){
 // INIT
 renderPage();
 </script>
+
+  <script>
+function sendHeight() {
+  const height = document.body.scrollHeight;
+  parent.postMessage({ aiBlueprintHeight: height }, "*");
+}
+window.onload = sendHeight;
+window.onresize = sendHeight;
+document.addEventListener('input', sendHeight);
+document.addEventListener('click', sendHeight);
+</script>
