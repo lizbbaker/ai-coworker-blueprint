@@ -110,8 +110,8 @@ emailjs.init(EMAILJS_USER_ID);
 const intro = {
   title: "Welcome!",
   body: `<strong>You’re just a few steps away from building your personal AI coworker.</strong><br><br>
-Define its persona, teach it about you, and get a ChatGPT‑ready prompt at the end.<br><br>
-Click “Start” when you’re ready.`
+Define its persona and teach it about you. At the end, you’ll get your personalized setup ready to copy straight into ChatGPT.<br><br>
+When you’re ready, click “Start.”`
 };
 const section1Intro = {
   title: "Section 1: Define Your AI Coworker",
@@ -120,8 +120,7 @@ You have up to 1,500 characters to paint the picture.<br><br>Think personality, 
 };
 const section2Intro = {
   title: "Section 2: Teach Your AI Coworker About You",
-  body: `Now it’s your turn to share what makes you, well, you! I've shared my personal examples to give you an idea of how I set up ChatGPT. Be bold. Be aspirational. And remember, you can always updated and tweak the information at any time.<br><br>
-We’ll answer the question: <strong>Anything else ChatGPT should know about you?</strong><br><br>From your current role and key challenges to your passions, values, and work style—this is where your AI partner gets the full picture.<br><br>Take up to 1,500 characters to paint a clear portrait of yourself so your coworker can support you perfectly.`
+  body: `Share the essentials: your role, values, goals, and what makes you tick. I've shared personal examples to give you an idea of how I set up ChatGPT. Be bold. Be aspirational. And remember, you can always update and tweak the information at any time.<br><br>Take up to 1,500 characters to paint a clear portrait of yourself so your coworker can support you perfectly.`
 };
 
 // ==== QUESTIONS ====
@@ -130,9 +129,9 @@ const section1 = [
   { q:"What traits should your ideal AI coworker have?", placeholder:"Ex: Direct, no BS. High EQ. Professional, sharp, fun, creative. Challenges me. Witty, consultative, exec presence.", limit:500 },
   { q:"What are your role-related goals?", placeholder:"Ex: Keep me out of admin. Push delegation. Prioritize growth, revenue, visibility. Protect my focus.", limit:500 },
   { q:"What are your aspirational goals?", placeholder:"Ex: National impact, productize IP, scale thought leadership, never let me coast.", limit:500 },
-  { q:"Are you ok with Chat sharing its opinions with you?", placeholder:"Ex: Absolutely—challenge me, just flag when it’s your take.", limit:300 },
+  { q:"Are you ok with Chat sharing its opinions with you?", placeholder:"Ex: Absolutely. Challenge me, just flag when it’s your take.", limit:300 },
   { q:"What do you care about that your AI coworker should care about?", placeholder:"Ex: Ethics, world-class service, authenticity, client impact, freedom, resourcefulness.", limit:300 },
-  { q:"What do you need Chat to know about your personality?", placeholder:"Ex: Visionary, energetic, hates inefficiency, creative, fun, sometimes overcommits.", limit:300 },
+  { q:"What do you need Chat to know about your personality?", placeholder:"Ex: Visionary, energetic, hate inefficiency, creative, fun, sometimes overcommit.", limit:300 },
   { q:"What do you want Chat to teach you with every interaction?", placeholder:"Ex: Scaling, executive mindset, sales/pricing, value creation.", limit:500 },
   { q:"How do you want Chat to prepare you?", placeholder:"Ex: Anticipate blockers, politics, energy drains. Warn on time-wasters.", limit:300 },
   { q:"What encouragement or support do you need?", placeholder:"Ex: Remind me I’m building legacy. Celebrate wins. Snap me out of stress.", limit:400 },
