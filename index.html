@@ -10,7 +10,7 @@
     #app {
   max-width:600px;
   margin:2rem auto;
-  background:#fff;
+  background:#ebf5f6;
   border-radius:4px;
   overflow:hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -83,7 +83,7 @@
         No results are stored, and no results are visible to third parties.<br>
         No results are seen or retained by anyone but you.<br><br>
 
-Please do not share, copy, or distribute this tool without permission.
+This resource was built exclusively for Nimbology clients and workshop participants. If you think someone else should have access, connect them with us directly at <a href="mailto:lizbbaker@nimbology.com">lizbbaker@nimbology.com</a>.”</i>`
      
   </div>
 
@@ -111,7 +111,7 @@ const intro = {
   title: "Welcome!",
   body: `<strong>You’re just a few steps away from building your personal AI coworker.</strong><br><br>
 Define its persona and teach it about you. At the end, you’ll get your personalized setup ready to copy straight into ChatGPT.<br><br>
-When you’re ready, click “Start.”<br><br><i>By using this tool, you agree not to share, copy, or distribute it.</i>`
+When you’re ready, click Start.`
 };
 const section1Intro = {
   title: "Section 1: Define Your AI Coworker",
@@ -259,7 +259,7 @@ function renderSummaryHtml(){
   const sec1 = answers.slice(0,s1len).join(" ");
   const sec2 = answers.slice(s1len).join(" ");
   return `
-    <h2>Congratulations! Welcome to your next level.</h2>
+    <h2>Congratulations!</h2>
 <p><strong>You’ve just given ChatGPT everything it needs to become a truly valuable partner in your work and life.</strong></p><p>Start working with your AI coworker today, and if you have questions or want to unlock even more AI superpowers, reach out anytime:
 <a href="https://nimbology.com/contact">nimbology.com/contact</a>.</p>
     <h3>About Your AI Coworker: Results</h3>
