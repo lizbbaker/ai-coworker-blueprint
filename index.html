@@ -111,17 +111,17 @@ emailjs.init(EMAILJS_USER_ID);
 const intro = {
   title: "Welcome!",
   body: `<strong>You’re just a few steps away from building your personal AI coworker.</strong><br><br>
-Define its persona and teach it about you. At the end, you’ll get your personalized setup ready to copy straight into ChatGPT.<br><br>
+Define its persona and teach it about you. At the end, you’ll get your personalized setup ready to copy straight into ChatGPT, Claude, or Gemini.<br><br>
 When you’re ready, click Start.`
 };
 const section1Intro = {
   title: "Section 1: Define Your AI Coworker",
-  body: `We’ll answer the question: <strong>What traits should ChatGPT have?</strong><br><br>
+  body: `We’ll answer the question: <strong>What traits should your AI Coworker have?</strong><br><br>
 You have up to 1,500 characters to paint the picture.<br><br>Think personality, tone, strengths, and any “no‑go” behaviors.<br><br>When you’re ready, click Next and bring your ideal coworker to life.`
 };
 const section2Intro = {
   title: "Section 2: Teach Your AI Coworker About You",
-  body: `Share the essentials: your role, values, goals, and what makes you tick. I've shared personal examples to give you an idea of how I set up ChatGPT. Be bold. Be aspirational. And remember, you can always update and tweak the information at any time.<br><br>Take up to 1,500 characters to paint a clear portrait of yourself so your coworker can support you perfectly.`
+  body: `Share the essentials: your role, values, goals, and what makes you tick. I've shared personal examples to give you an idea of how I set up my AI Coworker. Be bold. Be aspirational. And remember, you can always update and tweak the information at any time.<br><br>Take up to 1,500 characters to paint a clear portrait of yourself so your coworker can support you perfectly.`
 };
 
 // ==== QUESTIONS ====
@@ -130,14 +130,14 @@ const section1 = [
   { q:"What traits should your ideal AI coworker have?", placeholder:"Ex: High EQ. Professional, sharp, fun, creative. Challenges me. Consultative, exec presence. Direct, no BS.", limit:500 },
   { q:"What are your role-related goals?", placeholder:"Ex: Help me lead with excellence, motivate, delegate, involve. Prioritize growth, revenue, visibility. Protect my focus.", limit:500 },
   { q:"What are your aspirational goals?", placeholder:"Ex: Goals: National impact, productize IP, scale thought leadership, never let me coast.", limit:500 },
-  { q:"Are you ok with Chat sharing its opinions with you?", placeholder:"Ex: Share your opinions and challenge me, just let me know it’s your take.", limit:300 },
+  { q:"Are you ok with your AI Coworker sharing its opinions with you?", placeholder:"Ex: Share your opinions and challenge me, just let me know it’s your take.", limit:300 },
   { q:"What do you care about that your AI coworker should care about?", placeholder:"Ex: Care about Ethics, world-class service, authenticity, client impact, freedom, resourcefulness.", limit:300 },
-  { q:"What do you want Chat to teach you with every interaction?", placeholder:"Ex: Scaling, executive mindset, sales/pricing, value creation.", limit:500 },
-  { q:"How do you want Chat to prepare you?", placeholder:"Ex: Anticipate challenges, politics, energy drains. Warn me on time-wasters.", limit:300 },
+  { q:"What do you want your AI Coworker to teach you with every interaction?", placeholder:"Ex: Scaling, executive mindset, sales/pricing, value creation.", limit:500 },
+  { q:"How do you want your AI Coworker to prepare you?", placeholder:"Ex: Anticipate challenges, politics, energy drains. Warn me on time-wasters.", limit:300 },
   { q:"What encouragement or support do you need?", placeholder:"Ex: Remind me I’m building legacy. Celebrate wins. Snap me out of stress.", limit:400 },
   { q:"What challenges do you need to be reminded to overcome?", placeholder:"Ex: Call out procrastination, perfectionism, people-pleasing, not delegating.", limit:500 },
   { q:"What is the desired quality and style of your work?", placeholder:"Ex: Style of work: World-class, high impact, original, never generic.", limit:300 },
-  { q:"Big picture, what do you want Chat to help you do?", placeholder:"Ex: Help me create legacy, impact, income, and freedom, and make the journey fun.", limit:500 }
+  { q:"Big picture, what do you want your AI Coworker to help you do and acheive?", placeholder:"Ex: Help me create legacy, impact, income, and freedom, and make the journey fun.", limit:500 }
 ];
 
 const section2 = [
@@ -261,14 +261,18 @@ function renderSummaryHtml(){
   const sec2 = answers.slice(s1len).join(" ");
   return `
     <h2>Congratulations!</h2>
-<p><strong>You’ve just given ChatGPT everything it needs to become a truly valuable partner in your work and life.</strong></p><p>Start working with your AI coworker today, and if you have questions or want to unlock even more AI superpowers, reach out anytime:
+<p><strong>You’ve just provided everything your AI Coworker needs to start becoming a truly valuable partner in your work and life.</strong></p><p>Start working with your AI coworker today, and if you have questions or want to unlock even more AI superpowers, reach out anytime:
 <a href="https://nimbology.com/contact">nimbology.com/contact</a>.</p>
     <h3>About Your AI Coworker: Results</h3>
-    <p><i>Copy/paste this into ChatGPT under Customization/Personalization to answer the question: <strong>What traits should ChatGPT have?</strong></i></p> 
+    <p><ul><li><i>Copy/paste this into ChatGPT's settings under Customization/Personalization to answer the question: <strong>What traits should ChatGPT have?</strong></i></li>
+<li>In Gemini, add it in Settings under Saved Info. You may need to break it up into multiple sections.</li>
+<li>In Claude, add it in Settings under <strong>What personal preferences should Claude consider in responses?</strong></li></ul></i></p> 
     <div class="summary" id="sum1">${sec1}</div>
     <button class="copy-btn" onclick="copyToClipboard('sum1',1)">Copy AI Coworker Details Now</button>
     <h3>About You: Results</h3>
-<p><i>Copy/paste this into ChatGPT under Customization/Personalization to answer the question: <strong>Anything else ChatGPT should know about you?</strong></i></p>
+<p><i><ul><li>Copy/paste this into ChatGPT under Customization/Personalization to answer the question: <strong>Anything else ChatGPT should know about you?</strong></i></li>
+<li>In Gemini, add it in Settings under Saved Info. You may need to break it up into multiple sections.</li>
+<li>In Claude, add it in Settings under <strong>What personal preferences should Claude consider in responses?</strong></li></ul></i></p>
     <div class="summary" id="sum2">${sec2}</div>
     <button class="copy-btn" onclick="copyToClipboard('sum2',2)">Copy About Me Details Now</button>
     <div style="margin-top:1.5rem;">
@@ -290,8 +294,8 @@ function copyToClipboard(id, section) {
   const text = document.getElementById(id).innerText;
   navigator.clipboard.writeText(text);
   const msg = section===1
-    ? 'Copied! Now paste this into ChatGPT under Customization/Personalization to answer the question: "What traits should ChatGPT have?"'
-    : 'Copied. Now paste this into ChatGPT under Customization/Personalization to answer the question: "Anything else ChatGPT should know about you?"';
+    ? 'Copied and ready to paste!'
+    : 'Copied and ready to paste!';
   showToast(msg);
 }
 
@@ -304,8 +308,8 @@ function showToast(msg){
 
 function showModal(sec){
   const content = sec===1
-    ? 'Section 1: Paste under "What traits should ChatGPT have?"'
-    : 'Section 2: Paste under "Anything else ChatGPT should know about you?"';
+    ? 'Section 1: Paste!'
+    : 'Section 2: Paste!';
   document.getElementById("modalContent").innerText = content;
   document.getElementById("modalBackdrop").style.display = "flex";
 }
