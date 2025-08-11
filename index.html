@@ -8,13 +8,13 @@
     * { box-sizing:border-box; }
     body { margin:0; padding:0; background:transparent; font-family:sans-serif; }
     #app {
-  max-width:600px;
-  margin:2rem auto;
-  background:#ebf5f6;
-  border-radius:4px;
-  overflow:hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
+      max-width:600px;
+      margin:2rem auto;
+      background:#ebf5f6;
+      border-radius:4px;
+      overflow:hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
 
     #header { background:#fff; padding:1rem; }
     #header img { vertical-align:middle; }
@@ -42,20 +42,20 @@
     }
     #footer div:first-child { margin-bottom:.5rem; }
     #toast {
-  position: fixed;
-  top: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #fff;
-  color: #222;
-  padding: .95rem 1.7rem;
-  border-radius: 8px;
-  display: none;
-  font-size: 1.05rem;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.13);
-  z-index: 9999;
-  border: 2px solid #db4227;
-}
+      position: fixed;
+      top: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      color: #222;
+      padding: .95rem 1.7rem;
+      border-radius: 8px;
+      display: none;
+      font-size: 1.05rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+      z-index: 9999;
+      border: 2px solid #db4227;
+    }
 
     .modal-backdrop {
       position:fixed; top:0; left:0; right:0; bottom:0;
@@ -79,7 +79,7 @@
     </div>
     <div id="footer">
       <div style="font-size:0.875rem;">
-*This form was custom‑built with privacy in mind.<br>
+*This form was custom-built with privacy in mind.<br>
         No results are stored, and no results are visible to third parties.<br>
         No results are seen or retained by anyone but you.<br><br>
 
@@ -115,45 +115,46 @@ Define its persona and teach it about you. At the end, you’ll get your persona
 When you’re ready, click Start.`
 };
 const section1Intro = {
-  title: "Section 1: Define Your AI Coworker",
+  title: "Section 1: Define Your AI Coworker",
   body: `We’ll answer the question: <strong>What traits should your AI Coworker have?</strong><br><br>
-You have up to 1,500 characters to paint the picture.<br><br>Think personality, tone, strengths, and any “no‑go” behaviors.<br><br>When you’re ready, click Next and bring your ideal AI Coworker to life.`
+You have up to 1,500 characters to paint the picture.<br><br>Think personality, tone, strengths, and any “no-go” behaviors.<br><br>When you’re ready, click Next and bring your ideal AI Coworker to life.`
 };
 const section2Intro = {
-  title: "Section 2: Teach Your AI Coworker About You",
+  title: "Section 2: Teach Your AI Coworker About You",
   body: `Share the essentials: your role, values, goals, and what makes you tick. I've shared personal examples to give you an idea of how I set up my AI Coworker. Be bold. Be aspirational. And remember, you can always update and tweak the information at any time.<br><br>Take up to 1,500 characters to paint a clear portrait of yourself so your AI Coworker can support you perfectly.`
 };
 
 // ==== QUESTIONS ====
+// (Switched from placeholders to starter text)
 const section1 = [
-  { q:"What would you like your AI Coworker's name to be?", placeholder:"Ex: Pick any name.", limit:30 },
-  { q:"What traits should your ideal AI Coworker have?", placeholder:"Ex: High EQ. Professional, sharp, fun, creative. Challenges me. Consultative, exec presence. Direct, no BS.", limit:500 },
-  { q:"What are your role-related goals?", placeholder:"Ex: Help me lead with excellence, motivate, delegate, involve. Prioritize growth, revenue, visibility. Protect my focus.", limit:500 },
-  { q:"What are your aspirational goals?", placeholder:"Ex: Goals: National impact, productize IP, scale thought leadership, never let me coast.", limit:500 },
-  { q:"Are you ok with your AI Coworker sharing its opinions with you?", placeholder:"Ex: Share your opinions and challenge me, just let me know it’s your take.", limit:300 },
-  { q:"What do you care about that your AI Coworker should care about?", placeholder:"Ex: Care about Ethics, world-class service, authenticity, client impact, freedom, resourcefulness.", limit:300 },
-  { q:"What do you want your AI Coworker to teach you with every interaction?", placeholder:"Ex: Scaling, executive mindset, sales/pricing, value creation.", limit:500 },
-  { q:"How do you want your AI Coworker to prepare you?", placeholder:"Ex: Anticipate challenges, politics, energy drains. Warn me on time-wasters.", limit:300 },
-  { q:"What encouragement or support do you need?", placeholder:"Ex: Remind me I’m building legacy. Celebrate wins. Snap me out of stress.", limit:400 },
-  { q:"What challenges do you need to be reminded to overcome?", placeholder:"Ex: Call out procrastination, perfectionism, people-pleasing, not delegating.", limit:500 },
-  { q:"What is the desired quality and style of your work?", placeholder:"Ex: Style of work: World-class, high impact, original, never generic.", limit:300 },
-  { q:"Big picture, what do you want your AI Coworker to help you do and acheive?", placeholder:"Ex: Help me create legacy, impact, income, and freedom, and make the journey fun.", limit:500 }
+  { q:"What would you like your AI Coworker's name to be?", starter:"Javi (replace with your coworker’s name).", limit:30 },
+  { q:"What traits should your ideal AI Coworker have?", starter:"High EQ. Professional, sharp, fun, creative. Challenges me with smart questions. Consultative with executive presence. Direct—no BS. Clear, concise, and practical. Adds ideas and pushes my thinking.", limit:500 },
+  { q:"What are your role-related goals?", starter:"Lead with excellence. Delegate well. Grow revenue, impact, and visibility. Protect focus and energy. Keep teams aligned and moving.", limit:500 },
+  { q:"What are your aspirational goals?", starter:"National impact. Productize IP. Scale thought leadership. Build something enduring. Don’t let me coast.", limit:500 },
+  { q:"Are you ok with your AI Coworker sharing its opinions with you?", starter:"Yes—share your opinions and challenge me; note when it’s your take.", limit:300 },
+  { q:"What do you care about that your AI Coworker should care about?", starter:"Ethics. World-class service. Authenticity. Client impact. Freedom. Resourcefulness. Stewardship.", limit:300 },
+  { q:"What do you want your AI Coworker to teach you with every interaction?", starter:"Scaling, executive mindset, pricing and value creation, persuasive communication, strategic focus.", limit:500 },
+  { q:"How do you want your AI Coworker to prepare you?", starter:"Anticipate risks, politics, and detractors. Surface blind spots. Offer pre-reads, briefings, and talking points.", limit:300 },
+  { q:"What encouragement or support do you need?", starter:"Remind me I’m building legacy. Celebrate wins. Ground me in facts. Reduce stress by boosting confidence and clarity.", limit:400 },
+  { q:"What challenges do you need to be reminded to overcome?", starter:"Procrastination. Perfectionism. People-pleasing. Not delegating. Time leakage on low-value work.", limit:500 },
+  { q:"What is the desired quality and style of your work?", starter:"World-class, original, useful, and cool. Never generic. Simple over complicated. Tight, beautiful, and effective.", limit:300 },
+  { q:"Big picture, what do you want your AI Coworker to help you do and acheive?", starter:"Create legacy, impact, income, and freedom—and make the journey fun.", limit:500 }
 ];
 
 const section2 = [
-  { q:"What are the top roles that describe what you're doing and who you are?", placeholder:"Ex: My roles: Exec strategist, AI consultant, founder, speaker, brand/org builder.", limit:500 },
-  { q:"What are the important traits that describe who you are and how you operate?", placeholder:"Ex: My traits: Creative, visionary, adaptive, bold, pragmatic, empathetic.", limit:500 },
-  { q:"What are your big ambitions?", placeholder:"Ex: My ambitions: Build national practice, scale IP, shape AI ethics, financial freedom.", limit:500 },
-  { q:"What education experience or degrees would you like to share?", placeholder:"Ex: Education: BFA, VCU. Lifelong learner.", limit:300 },
-  { q:"Sum up your work experience and what you’ve done.", placeholder:"Ex: Work exp: 20+ yrs: Fortune 500 + nonprofit + startup leader. 12+ industries. Consultant, advisor, coach, entrepreneur, mentor.", limit:700 },
-  { q:"List your current roles and projects.", placeholder:"Ex: Current projects: Nimbology, Double Your Team in One Day, AI Coworker Blueprint, GIAH, VGEA, AI Ready RVA, speaking, coaching, workshops.", limit:700 },
-  { q:"List any experiences or accomplishments of note.", placeholder:"Ex: Accomplishments: Scaled orgs, built frameworks, podcasts, doubled teams, national reach.", limit:700 },
-  { q:"What are you naturally passionate about? What drives you?", placeholder:"Ex: Drivers: Ethical AI, transformation, innovation, coaching, potential.", limit:500 },
-  { q:"What world views, moral codes, or ideals appeal to you?", placeholder:"Ex: Moral code: Stoicism, classical liberal, integrity, community.", limit:500 },
-  { q:"What's your preferred style of interacting with people?", placeholder:"Ex: Motivational, dynamic, action-oriented, direct, fun.", limit:300 },
-  { q:"How have people described you?", placeholder:"Ex: People say I'm: Dynamic. Connector. Catalyst. Visionary.", limit:300 },
-  { q:"What is your personality type?", placeholder:"Ex: ENFP. DISC: I, D, C.", limit:300 },
-  { q:"What challenges would you like AI to help you be aware of and change?", placeholder:"Ex: Help me: Focus, employ help, don't sweat the small stuff. Call me out on it.", limit:700 }
+  { q:"What are the top roles that describe what you're doing and who you are?", starter:"Exec strategist and AI consultant. Founder. Speaker. Builder of brands, products, and orgs.", limit:500 },
+  { q:"What are the important traits that describe who you are and how you operate?", starter:"Creative, visionary, adaptive, bold, pragmatic, empathetic. Connector. Finisher.", limit:500 },
+  { q:"What are your big ambitions?", starter:"Build a national practice, scale IP, shape AI ethics and cognitive sovereignty, achieve financial freedom.", limit:500 },
+  { q:"What education experience or degrees would you like to share?", starter:"BFA, VCU. Lifelong learner.", limit:300 },
+  { q:"Sum up your work experience and what you’ve done.", starter:"20+ years across Fortune 500, nonprofit, startup. Consulting, ops, comms, product, change. Advisor, coach, entrepreneur.", limit:700 },
+  { q:"List your current roles and projects.", starter:"Nimbology. AI Coworker Blueprint. Double Your Team in One Day. Speaking, workshops, advisory. Community leadership.", limit:700 },
+  { q:"List any experiences or accomplishments of note.", starter:"Scaled orgs; built frameworks; launched programs; authored curriculum; ran cohorts; national reach.", limit:700 },
+  { q:"What are you naturally passionate about? What drives you?", starter:"Ethical AI, transformation, human potential, design, strategy, coaching, execution.", limit:500 },
+  { q:"What world views, moral codes, or ideals appeal to you?", starter:"Stoicism. Classical liberal values. Integrity. Responsibility. Community-minded individuality.", limit:500 },
+  { q:"What's your preferred style of interacting with people?", starter:"Motivational, direct, generous, action-oriented—and fun.", limit:300 },
+  { q:"How have people described you?", starter:"Dynamic. Connector. Catalyst. Visionary. Calm under pressure. Resourceful.", limit:300 },
+  { q:"What is your personality type?", starter:"ENFP. DISC: I, D, C.", limit:300 },
+  { q:"What challenges would you like AI to help you be aware of and change?", starter:"Overcommitting, doing too much myself, sweating small stuff—keep me focused on high-leverage work.", limit:700 }
 ];
 
 // ==== PAGINATION SETUP ====
@@ -170,7 +171,7 @@ const nextBtn       = document.getElementById("nextBtn");
 prevBtn.onclick = () => { if(pageIndex>0){ pageIndex--; renderPage(); } };
 nextBtn.onclick = () => {
   if(pageIndex>=2 && pageIndex<=1+s1len) saveAnswer(pageIndex-2);
-  if(pageIndex>=3+s1len && pageIndex<=2+s1len+s2len) saveAnswer(s1len + (pageIndex-3-s1len)); // <-- THIS LINE
+  if(pageIndex>=3+s1len && pageIndex<=2+s1len+s2len) saveAnswer(s1len + (pageIndex-3-s1len)); // <-- unchanged
   pageIndex++;
   renderPage();
 };
@@ -206,11 +207,10 @@ function renderPage(){
     nextBtn.innerText = "Next";
     formContainer.innerHTML = `<div class="question"><h2>${section2Intro.title}</h2><p>${section2Intro.body}</p></div>`;
   }
- else if(pageIndex>=3+s1len && pageIndex<=2+s1len+s2len){
-  nextBtn.innerText = "Next";
-  // Pass BOTH the section2 question and the CORRECT index in the answers array!
-  renderQuestion(section2[pageIndex-3-s1len], s1len + (pageIndex-3-s1len));
-}
+  else if(pageIndex>=3+s1len && pageIndex<=2+s1len+s2len){
+    nextBtn.innerText = "Next";
+    renderQuestion(section2[pageIndex-3-s1len], s1len + (pageIndex-3-s1len));
+  }
   else if(pageIndex===3+s1len+s2len){
     nextBtn.style.display = "none";
     formContainer.innerHTML = renderSummaryHtml();
@@ -230,11 +230,11 @@ function renderQuestion(item, idx){
   formContainer.innerHTML = `
     <div class="question">
       <label>${item.q}</label>
-      <textarea id="inputField" placeholder="${item.placeholder}"></textarea>
+      <textarea id="inputField"></textarea>
       <div class="char-count" id="charCount"></div>
     </div>`;
   const ta = document.getElementById("inputField");
-  ta.value = answers[idx]||"";
+  ta.value = (answers[idx] && answers[idx].length>0) ? answers[idx] : (item.starter || "");
   ta.maxLength = item.limit;
   ta.oninput = () => {
     answers[idx] = ta.value;
@@ -308,8 +308,8 @@ function showToast(msg){
 
 function showModal(sec){
   const content = sec===1
-    ? 'Section 1: Paste!'
-    : 'Section 2: Paste!';
+    ? 'Section 1: Paste!'
+    : 'Section 2: Paste!';
   document.getElementById("modalContent").innerText = content;
   document.getElementById("modalBackdrop").style.display = "flex";
 }
