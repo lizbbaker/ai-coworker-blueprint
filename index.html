@@ -127,34 +127,34 @@ const section2Intro = {
 // ==== QUESTIONS ====
 // (Switched from placeholders to starter text)
 const section1 = [
-  { q:"What would you like your AI Coworker's name to be?", starter:"Javi (replace with your coworker’s name).", limit:30 },
-  { q:"What traits should your ideal AI Coworker have?", starter:"High EQ. Professional, sharp, fun, creative. Challenges me with smart questions. Consultative with executive presence. Direct—no BS. Clear, concise, and practical. Adds ideas and pushes my thinking.", limit:500 },
-  { q:"What are your role-related goals?", starter:"Lead with excellence. Delegate well. Grow revenue, impact, and visibility. Protect focus and energy. Keep teams aligned and moving.", limit:500 },
-  { q:"What are your aspirational goals?", starter:"National impact. Productize IP. Scale thought leadership. Build something enduring. Don’t let me coast.", limit:500 },
-  { q:"Are you ok with your AI Coworker sharing its opinions with you?", starter:"Yes—share your opinions and challenge me; note when it’s your take.", limit:300 },
-  { q:"What do you care about that your AI Coworker should care about?", starter:"Ethics. World-class service. Authenticity. Client impact. Freedom. Resourcefulness. Stewardship.", limit:300 },
-  { q:"What do you want your AI Coworker to teach you with every interaction?", starter:"Scaling, executive mindset, pricing and value creation, persuasive communication, strategic focus.", limit:500 },
-  { q:"How do you want your AI Coworker to prepare you?", starter:"Anticipate risks, politics, and detractors. Surface blind spots. Offer pre-reads, briefings, and talking points.", limit:300 },
-  { q:"What encouragement or support do you need?", starter:"Remind me I’m building legacy. Celebrate wins. Ground me in facts. Reduce stress by boosting confidence and clarity.", limit:400 },
-  { q:"What challenges do you need to be reminded to overcome?", starter:"Procrastination. Perfectionism. People-pleasing. Not delegating. Time leakage on low-value work.", limit:500 },
-  { q:"What is the desired quality and style of your work?", starter:"World-class, original, useful, and cool. Never generic. Simple over complicated. Tight, beautiful, and effective.", limit:300 },
-  { q:"Big picture, what do you want your AI Coworker to help you do and acheive?", starter:"Create legacy, impact, income, and freedom—and make the journey fun.", limit:500 }
+  { q:"What would you like your AI Coworker's name to be?", starter:"Your name is <name>.", limit:30 },
+  { q:"What traits should your ideal AI Coworker have?", starter:"You're (Examples: Consultative with executive presence. Direct—no BS. Clear, concise, and practical. High EQ. Professional, sharp, fun, creative. Challenge me. Don't compliment me unless I deserve it. Push my thinking.)", limit:500 },
+  { q:"What are your role-related goals?", starter:"Help me reach my work goals: (Examples: Lead with excellence. Delegate well. Grow revenue, impact, and visibility. Protect focus and energy. Keep teams aligned and moving.)", limit:500 },
+  { q:"What are your aspirational goals?", starter:"Help me reach my aspirational goals: (Examples: Financial independence. Publish my book. Buy investment properties. Start a company.)", limit:500 },
+  { q:"Are you ok with your AI Coworker sharing its opinions with you?", starter:"Share your opinions and challenge me.", limit:300 },
+  { q:"What do you care about that your AI Coworker should care about?", starter:"Things I care about that you should care about: (Examples: Ethics. World-class service. Authenticity. Client impact. Freedom. Resourcefulness. Optimization. Stewardship.)", limit:300 },
+  { q:"What do you want your AI Coworker to teach you with every interaction?", starter:"With every interaction, teach me: (Examples: Executive mindset. Pricing and value creation. Leadership. Persuasive communication. Strategic focus.)", limit:500 },
+  { q:"How do you want your AI Coworker to prepare you?", starter:"Prepare me for: (Examples: Risks, politics, detractors, blind spots. Offer pre-reads, briefings, and talking points.)", limit:300 },
+  { q:"What encouragement or support do you need?", starter:"Remind me: (Examples: To build a legacy. Celebrate wins. Ground me in facts. Reduce stress by boosting confidence and clarity.)", limit:400 },
+  { q:"What challenges do you need to be reminded to overcome?", starter:"Help me overcome: (Examples: Procrastination. Perfectionism. People-pleasing. Time leakage on low-value work.)", limit:500 },
+  { q:"What is the desired quality and style of your work?", starter:"Our style should be: (Examples: World-class, original, useful, cool, unique, effective.)", limit:300 },
+  { q:"Big picture, what do you want your AI Coworker to help you do and achieve?", starter:"Overall, help me: (Examples: Create impact, build financial freedom, and make the journey fun.)", limit:500 }
 ];
 
 const section2 = [
-  { q:"What are the top roles that describe what you're doing and who you are?", starter:"Exec strategist and AI consultant. Founder. Speaker. Builder of brands, products, and orgs.", limit:500 },
-  { q:"What are the important traits that describe who you are and how you operate?", starter:"Creative, visionary, adaptive, bold, pragmatic, empathetic. Connector. Finisher.", limit:500 },
-  { q:"What are your big ambitions?", starter:"Build a national practice, scale IP, shape AI ethics and cognitive sovereignty, achieve financial freedom.", limit:500 },
-  { q:"What education experience or degrees would you like to share?", starter:"BFA, VCU. Lifelong learner.", limit:300 },
-  { q:"Sum up your work experience and what you’ve done.", starter:"20+ years across Fortune 500, nonprofit, startup. Consulting, ops, comms, product, change. Advisor, coach, entrepreneur.", limit:700 },
-  { q:"List your current roles and projects.", starter:"Nimbology. AI Coworker Blueprint. Double Your Team in One Day. Speaking, workshops, advisory. Community leadership.", limit:700 },
-  { q:"List any experiences or accomplishments of note.", starter:"Scaled orgs; built frameworks; launched programs; authored curriculum; ran cohorts; national reach.", limit:700 },
-  { q:"What are you naturally passionate about? What drives you?", starter:"Ethical AI, transformation, human potential, design, strategy, coaching, execution.", limit:500 },
-  { q:"What world views, moral codes, or ideals appeal to you?", starter:"Stoicism. Classical liberal values. Integrity. Responsibility. Community-minded individuality.", limit:500 },
-  { q:"What's your preferred style of interacting with people?", starter:"Motivational, direct, generous, action-oriented—and fun.", limit:300 },
-  { q:"How have people described you?", starter:"Dynamic. Connector. Catalyst. Visionary. Calm under pressure. Resourceful.", limit:300 },
-  { q:"What is your personality type?", starter:"ENFP. DISC: I, D, C.", limit:300 },
-  { q:"What challenges would you like AI to help you be aware of and change?", starter:"Overcommitting, doing too much myself, sweating small stuff—keep me focused on high-leverage work.", limit:700 }
+  { q:"What are the top roles that describe what you're doing and who you are?", starter:"My current top roles are: (Examples: Founder. Speaker. PM. Sales Manager. Administrator. Board Member. Clerk.)", limit:500 },
+  { q:"What are the important traits that describe who you are and how you operate?", starter:"I am: (Examples: Creative, visionary, adaptive, bold, pragmatic, empathetic, connector, extroverted)", limit:500 },
+  { q:"What are your big ambitions?", starter:"My big ambitions: (Examples: Build a national practice, achieve financial freedom. Be a trusted advisor to governments, companies, and organizations.)", limit:500 },
+  { q:"What education experience or degrees would you like to share?", starter:"Education: )", limit:300 },
+  { q:"Sum up your work experience and what you’ve done.", starter:"Experience: (Examples: Consulting, ops, comms, product development, sales, retail, coach, entrepreneur.)", limit:700 },
+  { q:"List your current or recent projects.", starter:"Current/recent projects: ", limit:700 },
+  { q:"List any experiences or accomplishments of note.", starter:"Accomplishments: (Examples: Scale orgs, build frameworks, launch programs, lead teams, grow communities, run cohorts)", limit:700 },
+  { q:"What are you naturally passionate about? What drives you?", starter:"My drivers: (Examples: Transformation, human potential, design, strategy, coaching, sales, PM, leadership.)", limit:500 },
+  { q:"What world views, moral codes, or ideals appeal to you?", starter:"My codes: (Examples: Stoicism. Classical liberal. Integrity. Responsibility. Community-minded individuality.)", limit:500 },
+  { q:"What's your preferred style of interacting with people?", starter:"My preferred style of communication: (Examples: Motivational, direct, generous, action-oriented, fun.)", limit:300 },
+  { q:"How do people describe you?", starter:"How do people describe you: (Examples: Dynamic. Strong. Steady. Connector. Catalyst. Visionary. Stoic. Leader. Creative. Calm under pressure. Resourceful.)", limit:300 },
+  { q:"What is your personality type?", starter:"My personality: (Examples: Myers-Briggs, DISC, Enneagram)", limit:300 },
+  { q:"What challenges would you like AI to help you be aware of and change?", starter:"Help me overcome: (Examples: Doing too much myself, sweating small stuff, procrastinating.)", limit:700 }
 ];
 
 // ==== PAGINATION SETUP ====
