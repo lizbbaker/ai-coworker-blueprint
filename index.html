@@ -24,6 +24,7 @@
     #formContainer { padding:1.5rem; }
     .question { margin-bottom:2rem; }
     label { display:block; margin-bottom:.5rem; font-weight:600; }
+    .prefix-display { background:#f0f0f0; padding:0.5rem; border-radius:4px; margin-bottom:0.5rem; font-style:italic; color:#333; }
     input[type=text], input[type=email], textarea {
       width:100%; padding:.5rem; font-size:1rem; border:1px solid #ccc; border-radius:4px;
     }
@@ -84,8 +85,8 @@
         No results are seen or retained by anyone but you.<br><br>
 
 This resource was built exclusively for Nimbology clients and workshop participants. If you think someone else should have access, connect them with us directly at <a href="mailto:lizbbaker@nimbology.com" style="color: #ffffff;">lizbbaker@nimbology.com</a>.
-
-     
+      </div>
+    </div>
   </div>
 
   <div id="toast"></div>
@@ -97,8 +98,7 @@ This resource was built exclusively for Nimbology clients and workshop participa
     </div>
   </div>
 
-  <!-- EmailJS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <script>
 // ==== CONFIGURE EmailJS ====
@@ -110,14 +110,14 @@ emailjs.init(EMAILJS_USER_ID);
 // ==== INTRO & SECTION INTRO SCREENS ====
 const intro = {
   title: "Welcome!",
-  body: `<strong>You’re just a few steps away from building your personal AI Coworker.</strong><br><br>
-Define its persona and teach it about you. At the end, you’ll get your personalized setup ready to copy straight into ChatGPT, Claude, or Gemini.<br><br>
-When you’re ready, click Start.`
+  body: `<strong>You're just a few steps away from building your personal AI Coworker.</strong><br><br>
+Define its persona and teach it about you. At the end, you'll get your personalized setup ready to copy straight into ChatGPT, Claude, or Gemini.<br><br>
+When you're ready, click Start.`
 };
 const section1Intro = {
   title: "Section 1: Define Your AI Coworker",
-  body: `We’ll answer the question: <strong>What traits should your AI Coworker have?</strong><br><br>
-You have up to 1,500 characters to paint the picture.<br><br>Think personality, tone, strengths, and any “no-go” behaviors.<br><br>When you’re ready, click Next and bring your ideal AI Coworker to life.`
+  body: `We'll answer the question: <strong>What traits should your AI Coworker have?</strong><br><br>
+You have up to 1,500 characters to paint the picture.<br><br>Think personality, tone, strengths, and any "no-go" behaviors.<br><br>When you're ready, click Next and bring your ideal AI Coworker to life.`
 };
 const section2Intro = {
   title: "Section 2: Teach Your AI Coworker About You",
@@ -125,7 +125,6 @@ const section2Intro = {
 };
 
 // ==== QUESTIONS ====
-// Each question now has a prefix (unchangeable prompt) and placeholder (example answer)
 const section1 = [
   { q:"What would you like your AI Coworker's name to be?", prefix:"Your name is ", placeholder:"[enter name]", limit:30 },
   { q:"What traits should your ideal AI Coworker have?", prefix:"You are: ", placeholder:"Consultative w/exec presence. Direct—no BS. Clear, concise, practical. High EQ. Sharp, fun, creative. Challenge me.", limit:500 },
@@ -160,7 +159,7 @@ const section2 = [
 
 // ==== PAGINATION SETUP ====
 const s1len = section1.length, s2len = section2.length;
-const totalPages = s1len + s2len + 5;  // intro + s1intro + s2intro + summary + final
+const totalPages = s1len + s2len + 5;
 let pageIndex = 0;
 const answers = Array(s1len + s2len).fill("");
 
@@ -172,7 +171,7 @@ const nextBtn       = document.getElementById("nextBtn");
 prevBtn.onclick = () => { if(pageIndex>0){ pageIndex--; renderPage(); } };
 nextBtn.onclick = () => {
   if(pageIndex>=2 && pageIndex<=1+s1len) saveAnswer(pageIndex-2);
-  if(pageIndex>=3+s1len && pageIndex<=2+s1len+s2len) saveAnswer(s1len + (pageIndex-3-s1len)); // <-- unchanged
+  if(pageIndex>=3+s1len && pageIndex<=2+s1len+s2len) saveAnswer(s1len + (pageIndex-3-s1len));
   pageIndex++;
   renderPage();
 };
@@ -228,14 +227,16 @@ function renderPage(){
 }
 
 function renderQuestion(item, idx){
+  const prefixHtml = item.prefix ? `<div class="prefix-display">${item.prefix}</div>` : '';
   formContainer.innerHTML = `
     <div class="question">
       <label>${item.q}</label>
-      <textarea id="inputField"></textarea>
+      ${prefixHtml}
+      <textarea id="inputField" placeholder="${item.placeholder}"></textarea>
       <div class="char-count" id="charCount"></div>
     </div>`;
   const ta = document.getElementById("inputField");
-  ta.value = (answers[idx] && answers[idx].length>0) ? answers[idx] : (item.starter || "");
+  ta.value = answers[idx] || "";
   ta.maxLength = item.limit;
   ta.oninput = () => {
     answers[idx] = ta.value;
@@ -245,24 +246,49 @@ function renderQuestion(item, idx){
 }
 
 function updateCharCount(idx){
-  let sum = 0, start = (pageIndex<=1+s1len?0:s1len), end = idx;
-  for(let i=start;i<=end;i++) sum += answers[i]?.length||0;
+  let sum = 0;
+  const isSection1 = pageIndex <= 1 + s1len;
+  const start = isSection1 ? 0 : s1len;
+  const end = idx;
+  const section = isSection1 ? section1 : section2;
+  
+  for(let i = start; i <= end; i++) {
+    const sectionIndex = isSection1 ? i : i - s1len;
+    const prefix = section[sectionIndex]?.prefix || "";
+    const answer = answers[i] || "";
+    sum += prefix.length + answer.length + 1;
+  }
+  
   const cc = document.getElementById("charCount");
   cc.innerText = `Section total: ${sum}/1500`;
-  cc.style.color = sum>1500?"red":"#555";
-  nextBtn.disabled = sum>1500;
+  cc.style.color = sum > 1500 ? "red" : "#555";
+  nextBtn.disabled = sum > 1500;
 }
 
 function saveAnswer(idx){
   answers[idx] = document.getElementById("inputField").value;
 }
 
+function buildSectionText(startIdx, endIdx, section) {
+  const parts = [];
+  for(let i = startIdx; i < endIdx; i++) {
+    const sectionIdx = i - startIdx;
+    const prefix = section[sectionIdx]?.prefix || "";
+    const answer = answers[i] || "";
+    if (answer.trim()) {
+      parts.push(prefix + answer);
+    }
+  }
+  return parts.join(" ");
+}
+
 function renderSummaryHtml(){
-  const sec1 = answers.slice(0,s1len).join(" ");
-  const sec2 = answers.slice(s1len).join(" ");
+  const sec1 = buildSectionText(0, s1len, section1);
+  const sec2 = buildSectionText(s1len, s1len + s2len, section2);
+  
   return `
     <h2>Congratulations!</h2>
-<p><strong>You’ve just provided everything your AI Coworker needs to start becoming a truly valuable partner in your work and life.</strong></p><p>Start working with your AI Coworker today, and if you have questions or want to unlock even more AI superpowers, reach out anytime:
+<p><strong>You've just provided everything your AI Coworker needs to start becoming a truly valuable partner in your work and life.</strong></p><p>Start working with your AI Coworker today, and if you have questions or want to unlock even more AI superpowers, reach out anytime:
 <a href="https://nimbology.com/contact">nimbology.com/contact</a>.</p>
     <h3>About Your AI Coworker: Results</h3>
     <p><ul><li><i>Copy/paste this into ChatGPT's settings under Customization/Personalization to answer the question: <strong>What traits should ChatGPT have?</strong></i></li>
@@ -321,8 +347,10 @@ function closeModal(){
 function sendEmail(){
   const userEmail = document.getElementById("userEmail").value.trim();
   if(!userEmail) return showToast("Please enter your email.");
-  const sec1 = document.getElementById("sum1").innerText;
-  const sec2 = document.getElementById("sum2").innerText;
+  
+  const sec1 = buildSectionText(0, s1len, section1);
+  const sec2 = buildSectionText(s1len, s1len + s2len, section2);
+  
   emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
     to_email: userEmail, section1: sec1, section2: sec2
   })
@@ -330,7 +358,6 @@ function sendEmail(){
   .catch(err => showToast("❌ Email failed: " + (err.text||JSON.stringify(err))));
 }
 
-// INIT
 renderPage();
 </script>
 
@@ -344,3 +371,5 @@ window.onresize = sendHeight;
 document.addEventListener('input', sendHeight);
 document.addEventListener('click', sendHeight);
 </script>
+</body>
+</html>
