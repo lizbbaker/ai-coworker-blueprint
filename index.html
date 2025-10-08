@@ -279,7 +279,7 @@ function buildSectionText(startIdx, endIdx, section) {
       parts.push(prefix + answer);
     }
   }
-  return parts.join(" ");
+  return parts.join(". ") + (parts.length > 0 ? "." : "");
 }
 
 function renderSummaryHtml(){
