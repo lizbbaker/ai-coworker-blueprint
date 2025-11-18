@@ -121,24 +121,25 @@ You have up to 1,500 characters to paint the picture.<br><br>Think personality, 
 };
 const section2Intro = {
   title: "Section 2: Teach Your AI Coworker About You",
-  body: `Share the essentials: your role, values, goals, and what makes you tick. I've shared personal examples to give you an idea of how I set up my AI Coworker. Be bold. Be aspirational. And remember, you can always update and tweak the information at any time.<br><br>Take up to 1,500 characters to paint a clear portrait of yourself so your AI Coworker can support you perfectly.`
+  body: `Share the essentials: your role, values, goals, and what makes you tick. I've shared personal examples to give you an idea of how I set up my AI Coworker. Be bold. Be aspirational. And remember, you can always update and tweak the information at any time.<br><br>
+Take up to 1,500 characters to paint a clear portrait of yourself so your AI Coworker can support you perfectly.`
 };
 
 // ==== QUESTIONS ====
 const section1 = [
-  { q:"What would you like your AI Coworker's name to be?", prefix:"Your name is ", placeholder:"[enter name]", limit:30 },
-  { q:"What traits should your ideal AI Coworker have?", prefix:"You are: ", placeholder:"Consultative w/exec presence. Direct—no BS. Clear, concise, practical. High EQ. Sharp, fun, creative. Challenge me.", limit:500 },
-   { q:"What should your ideal AI Coworker <i>not</i> do?", prefix:"Don't do this:", placeholder:"Don't compliment me unless I deserve it. Don't be a yes man/woman. Never use em dashes or emojis.", limit:500 },
-  { q:"What are your role-related goals?", prefix:"Help me reach these work goals: ", placeholder:"Lead with excellence. Delegate well. Grow revenue, impact, and visibility. Protect focus and energy. Keep teams moving.", limit:500 },
-  { q:"What are your aspirational goals?", prefix:"Help me reach my aspirational goals: ", placeholder:"Financial independence. Publish my book. Buy investment properties. Start a company.", limit:500 },
-  { q:"Are you ok with your AI Coworker sharing its opinions with you?", prefix:"On sharing your opinion:", placeholder:"Share your opinions and challenge me.", limit:300 },
-  { q:"What do you care about that your AI Coworker should care about?", prefix:"Things I care about that you should care about: ", placeholder:"Ethics. Excellence. Authenticity. Impact. Freedom. Resourcefulness. Optimization. Stewardship.", limit:300 },
-  { q:"What do you want your AI Coworker to teach you with every interaction?", prefix:"With every interaction, teach me: ", placeholder:"Executive mindset. Pricing and value creation. Leadership. Persuasive communication. Strategic focus.", limit:500 },
-  { q:"How do you want your AI Coworker to prepare you?", prefix:"Prepare me for: ", placeholder:"Risks, politics, detractors, blind spots. Success, retirement, my next role.", limit:300 },
-  { q:"What encouragement or support do you need?", prefix:"Remind me: ", placeholder:"To build a legacy. Celebrate wins. Ground me in facts. Reduce stress by boosting confidence and clarity.", limit:400 },
-  { q:"What challenges do you need to be reminded to overcome?", prefix:"Help me overcome: ", placeholder:"Procrastination. Perfectionism. People-pleasing. Time leakage on low-value work.", limit:500 },
-  { q:"What is the desired quality and style of your work?", prefix:"Our work style: ", placeholder:"World-class, original, useful, cool, unique, effective.", limit:300 },
-  { q:"Big picture, what do you want your AI Coworker to help you do and achieve?", prefix:"Overall, help me: ", placeholder:"Create impact. Build financial freedom. Make the journey fun.", limit:500 }
+  { q:"What would you like your AI Coworker's name to be?", prefix:"AI, your name is: ", placeholder:"[enter name]", limit:30 },
+  { q:"What traits should your ideal AI Coworker have?", prefix:"AI, you are: ", placeholder:"Consultative w/exec presence. Direct—no BS. Clear, concise, practical. High EQ. Sharp, fun, creative. Challenge me.", limit:500 },
+   { q:"What should your ideal AI Coworker <i>not</i> do?", prefix:"AI, don't do this:", placeholder:"Don't compliment me unless I deserve it. Don't be a yes man/woman. Never use em dashes or emojis.", limit:500 },
+  { q:"What are your role-related goals?", prefix:"AI, help me reach these work goals: ", placeholder:"Lead with excellence. Delegate well. Grow revenue, impact, and visibility. Protect focus and energy. Keep teams moving.", limit:500 },
+  { q:"What are your aspirational goals?", prefix:"AI, help me reach my aspirational goals: ", placeholder:"Financial independence. Publish my book. Buy investment properties. Start a company.", limit:500 },
+  { q:"Are you ok with your AI Coworker sharing its opinions with you?", prefix:"AI, on sharing your opinion:", placeholder:"Share your opinions and challenge me.", limit:300 },
+  { q:"What do you care about that your AI Coworker should care about?", prefix:"AI, care about these things: ", placeholder:"Ethics. Excellence. Authenticity. Impact. Freedom. Resourcefulness. Optimization. Stewardship.", limit:300 },
+  { q:"What do you want your AI Coworker to teach you with every interaction?", prefix:"AI, with every interaction, teach me: ", placeholder:"Executive mindset. Pricing and value creation. Leadership. Persuasive communication. Strategic focus.", limit:500 },
+  { q:"How do you want your AI Coworker to prepare you?", prefix:"AI, prepare me for: ", placeholder:"Risks, politics, detractors, blind spots. Success, retirement, my next role.", limit:300 },
+  { q:"What encouragement or support do you need?", prefix:"AI, remind me: ", placeholder:"To build a legacy. Celebrate wins. Ground me in facts. Reduce stress by boosting confidence and clarity.", limit:400 },
+  { q:"What challenges do you need to be reminded to overcome?", prefix:"AI, help me overcome: ", placeholder:"Procrastination. Perfectionism. People-pleasing. Time leakage on low-value work.", limit:500 },
+  { q:"What is the desired quality and style of your work?", prefix:"AI, here's our work style: ", placeholder:"World-class, original, useful, cool, unique, effective.", limit:300 },
+  { q:"Big picture, what do you want your AI Coworker to help you do and achieve?", prefix:"AI, overall, help me: ", placeholder:"Create impact. Build financial freedom. Make the journey fun.", limit:500 }
 ];
 
 const section2 = [
@@ -307,6 +308,7 @@ function renderSummaryHtml(){
       <div id="emailInput" style="display:none; margin-top:.5rem;">
         <input type="email" id="userEmail" placeholder="you@example.com"/>
         <button onclick="sendEmail()">Email My Results</button>
+        <button onclick="downloadResults()" style="background:#666; margin-left:.5rem;">Download as File Instead</button>
       </div>
     </div>`;
 }
@@ -354,8 +356,30 @@ function sendEmail(){
   emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
     to_email: userEmail, section1: sec1, section2: sec2
   })
-  .then(_ => showToast("✅ Email sent!"))
-  .catch(err => showToast("❌ Email failed: " + (err.text||JSON.stringify(err))));
+  .then(response => {
+    console.log("SUCCESS:", response);
+    showToast("✅ Email sent!");
+  })
+  .catch(err => {
+    console.error("EMAIL ERROR:", err);
+    console.error("Status:", err.status);
+    console.error("Text:", err.text);
+    showToast("❌ Email failed: " + (err.text || err.status || "Unknown error"));
+  });
+}
+
+function downloadResults() {
+  const sec1 = buildSectionText(0, s1len, section1);
+  const sec2 = buildSectionText(s1len, s1len + s2len, section2);
+  const content = "AI COWORKER BLUEPRINT RESULTS\n\n=== YOUR AI COWORKER ===\n" + sec1 + "\n\n=== ABOUT YOU ===\n" + sec2;
+  
+  const blob = new Blob([content], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "AI-Coworker-Blueprint.txt";
+  a.click();
+  showToast("✅ Download started!");
 }
 
 renderPage();
