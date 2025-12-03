@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -225,6 +224,28 @@
       align-items: center;
       gap: 0.5rem;
     }
+
+    /* Use suggestions link */
+    .use-suggestions {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #3b82f6;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .use-suggestions:hover {
+      color: #2563eb;
+      text-decoration: underline;
+    }
+    .use-suggestions.used {
+      color: #9ca3af;
+      cursor: default;
+    }
+    .use-suggestions.used:hover {
+      text-decoration: none;
+    }
     .email-section input[type="checkbox"] {
       width: 18px;
       height: 18px;
@@ -442,12 +463,18 @@ function renderPage(){
 
 function renderQuestion(item, idx){
   const prefixHtml = item.prefix ? `<div class="prefix-display">${item.prefix}</div>` : '';
+  const hasSuggestion = item.placeholder && item.placeholder !== '[enter name]' && !item.placeholder.startsWith('[');
+  const suggestionHtml = hasSuggestion 
+    ? `<a class="use-suggestions" id="useSuggestions" onclick="useSuggestions()">Need ideas? Use suggestions</a>` 
+    : '';
+  
   formContainer.innerHTML = `
     <div class="question">
       <label>${item.q}</label>
       ${prefixHtml}
-      <textarea id="inputField" placeholder="${item.placeholder}"></textarea>
+      <textarea id="inputField" placeholder="${hasSuggestion ? 'Start typing or use suggestions below...' : item.placeholder}"></textarea>
       <div class="char-count" id="charCount"></div>
+      ${suggestionHtml}
     </div>`;
   const ta = document.getElementById("inputField");
   ta.value = answers[idx] || "";
@@ -456,7 +483,36 @@ function renderQuestion(item, idx){
     answers[idx] = ta.value;
     updateCharCount(idx);
   };
+  
+  // Store current suggestion for this question
+  window.currentSuggestion = item.placeholder;
+  window.currentIdx = idx;
+  
   updateCharCount(idx);
+}
+
+function useSuggestions() {
+  const ta = document.getElementById("inputField");
+  const link = document.getElementById("useSuggestions");
+  
+  if (link.classList.contains('used')) return;
+  
+  // If field is empty, insert suggestion. If not empty, append with separator.
+  if (ta.value.trim() === '') {
+    ta.value = window.currentSuggestion;
+  } else {
+    ta.value = ta.value.trim() + ' ' + window.currentSuggestion;
+  }
+  
+  answers[window.currentIdx] = ta.value;
+  updateCharCount(window.currentIdx);
+  
+  // Update link state
+  link.textContent = '✓ Suggestions added';
+  link.classList.add('used');
+  
+  // Focus the textarea so they can edit
+  ta.focus();
 }
 
 function updateCharCount(idx){
