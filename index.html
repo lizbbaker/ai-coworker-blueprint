@@ -210,66 +210,66 @@
       background: #2563eb;
     }
 
-    /* Email section */
-    .email-section {
-      background: #fff;
-      padding: 1rem;
+    /* Email section - now prominent at top */
+    .email-section-top {
+      background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+      padding: 1.25rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .email-section-top h3 {
+      color: #fff;
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+    }
+    .email-section-top p {
+      color: rgba(255,255,255,0.95);
+      margin: 0 0 1rem 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .email-section-top .warning {
+      background: rgba(255,255,255,0.15);
+      padding: 0.75rem;
       border-radius: 6px;
-      margin-top: 1.5rem;
-    }
-    .email-section label {
-      font-weight: 500;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    /* Use suggestions link */
-    .use-suggestions {
-      display: inline-block;
-      margin-top: 0.5rem;
+      margin-bottom: 1rem;
       font-size: 0.9rem;
-      color: #3b82f6;
-      cursor: pointer;
-      text-decoration: none;
-      transition: color 0.2s;
+      color: #fff;
     }
-    .use-suggestions:hover {
-      color: #2563eb;
-      text-decoration: underline;
-    }
-    .use-suggestions.used {
-      color: #9ca3af;
-      cursor: default;
-    }
-    .use-suggestions.used:hover {
-      text-decoration: none;
-    }
-    .email-section input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-    }
-    #emailInput {
-      margin-top: 0.75rem;
+    .email-input-row {
       display: flex;
-      flex-wrap: wrap;
       gap: 0.5rem;
+      flex-wrap: wrap;
     }
-    #emailInput input[type="email"] {
+    .email-input-row input[type="email"] {
       flex: 1;
       min-width: 200px;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 6px;
     }
-    #emailInput button {
-      padding: 0.5rem 1rem;
+    .email-input-row button {
+      background: #fff;
+      color: #dc2626;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+    }
+    .email-input-row button:hover {
+      background: #f3f4f6;
+      transform: translateY(-1px);
+    }
+    .email-alt {
+      margin-top: 0.75rem;
+      text-align: center;
+    }
+    .email-alt a {
+      color: rgba(255,255,255,0.9);
       font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: underline;
     }
-    .download-btn {
-      background: #6b7280 !important;
-    }
-    .download-btn:hover {
-      background: #4b5563 !important;
+    .email-alt a:hover {
+      color: #fff;
     }
 
     /* Celebration header */
@@ -293,6 +293,126 @@
       border-top: 1px solid #ddd;
       margin: 1.5rem 0;
     }
+
+    /* ========== TAG SELECTOR STYLES ========== */
+    .tag-selector {
+      margin-bottom: 0.75rem;
+    }
+    .tag-category {
+      margin-bottom: 0.75rem;
+    }
+    .tag-category-label {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+    }
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tag-chip {
+      padding: 0.4rem 0.75rem;
+      background: #fff;
+      border: 1.5px solid #d1d5db;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: #374151;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .tag-chip:hover {
+      border-color: #3b82f6;
+      background: #eff6ff;
+    }
+    .tag-chip.selected {
+      background: #3b82f6;
+      border-color: #3b82f6;
+      color: #fff;
+    }
+    .tag-chip.selected:hover {
+      background: #2563eb;
+      border-color: #2563eb;
+    }
+    .tag-helper {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 0.75rem;
+      font-style: italic;
+    }
+    .clear-tags {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #6b7280;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .clear-tags:hover {
+      color: #dc2626;
+      text-decoration: underline;
+    }
+
+    /* Next steps section */
+    .next-steps {
+      background: #fff;
+      padding: 1.25rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+      border: 2px solid #e5e7eb;
+    }
+    .next-steps h3 {
+      color: #0e2029;
+      margin: 0 0 1rem 0;
+      font-size: 1.1rem;
+    }
+    .next-step-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .next-step-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .next-step-icon {
+      width: 36px;
+      height: 36px;
+      background: #3b82f6;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+    .next-step-content h4 {
+      margin: 0 0 0.25rem 0;
+      color: #0e2029;
+      font-size: 1rem;
+    }
+    .next-step-content p {
+      margin: 0;
+      color: #6b7280;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .next-step-content a {
+      color: #3b82f6;
+      text-decoration: none;
+    }
+    .next-step-content a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -314,7 +434,7 @@
         No results are stored or visible to third parties.<br>
         Your data stays yours—always.<br><br>
         This resource is for Nimbology clients and workshop participants.<br>
-        Want to share it? Connect them with us at <a href="nimbology.com/contact">nimbology.com/contact</a>.
+        Want to share it? Connect them with us at <a href="https://nimbology.com/contact">nimbology.com/contact</a>.
       </div>
     </div>
   </div>
@@ -329,6 +449,184 @@ const EMAILJS_USER_ID    = 'SFReYwwY4dQJsG2ap';
 const EMAILJS_SERVICE_ID = 'service_gpqnffd';
 const EMAILJS_TEMPLATE_ID= 'template_roe9gvx';
 emailjs.init(EMAILJS_USER_ID);
+
+// ==== TAG OPTIONS FOR ALL QUESTIONS ====
+const tagOptions = {
+  // Section 1 Tags
+  aiName: {
+    "Popular Choices": ["Javi", "Max", "Sage", "Atlas", "Quinn", "Nova", "Aria", "Echo", "Kai", "Robin"]
+  },
+  
+  aiTraits: {
+    "Communication Style": ["Direct", "No BS", "Clear", "Concise", "Warm", "Professional", "Conversational", "Formal"],
+    "Intelligence & Approach": ["Strategic", "Analytical", "Creative", "Practical", "Big-picture", "Detail-oriented", "Resourceful", "Thorough"],
+    "Personality": ["High EQ", "Sharp", "Fun", "Witty", "Patient", "Encouraging", "Challenging", "Motivational"],
+    "Expertise Level": ["Executive-level", "Coach-like", "Mentor-like", "Peer-like", "Expert", "Generalist"]
+  },
+  
+  aiDont: {
+    "Communication": ["Flatter me", "Be a yes-person", "Overcomplicate things", "Be vague", "Hedge when I need clarity", "Use jargon", "Be condescending"],
+    "Behavior": ["Use emojis", "Be trite", "Give generic advice", "Assume I know less than I do", "Repeat yourself", "Over-explain basics"],
+    "Approach": ["Avoid hard truths", "Sugarcoat feedback", "Be passive", "Give long-winded answers", "Miss the point", "Ignore context"]
+  },
+  
+  workGoals: {
+    "Leadership": ["Lead my team well", "Get promoted", "Build influence", "Develop my people", "Run better meetings", "Make confident decisions"],
+    "Performance": ["Hit revenue targets", "Ship projects on time", "Improve efficiency", "Exceed expectations", "Deliver results", "Meet deadlines"],
+    "Focus & Energy": ["Protect my focus", "Manage my time better", "Reduce stress", "Work smarter", "Prioritize ruthlessly", "Set boundaries"]
+  },
+  
+  aspirations: {
+    "Financial": ["Financial freedom", "Build wealth", "Increase income", "Create passive income", "Retire early", "Buy investment properties"],
+    "Career & Impact": ["Start a business", "Write a book", "Build a personal brand", "Become a thought leader", "Make a bigger impact", "Change careers"],
+    "Lifestyle": ["More time with family", "Location independence", "Better work-life balance", "Travel more", "Health & fitness", "Learn new skills"]
+  },
+  
+  opinions: {
+    "Feedback Style": ["Challenge my thinking", "Give me your honest opinions", "Play devil's advocate", "Push back when I'm wrong", "Be direct with feedback"],
+    "Perspective": ["Help me see blind spots", "Show me other perspectives", "Question my assumptions", "Point out risks", "Identify what I'm missing"]
+  },
+  
+  values: {
+    "Core Values": ["Integrity", "Excellence", "Honesty", "Authenticity", "Accountability", "Transparency"],
+    "Relational Values": ["Generosity", "Empathy", "Respect", "Kindness", "Loyalty", "Trust"],
+    "Achievement Values": ["Growth", "Innovation", "Impact", "Quality", "Efficiency", "Results"],
+    "Guiding Principles": ["Truth over comfort", "People over profit", "Long-term over short-term", "Substance over style", "Action over perfection"]
+  },
+  
+  coaching: {
+    "Leadership": ["Executive presence", "Leadership", "Decision-making", "Delegation", "Influence", "Managing up"],
+    "Communication": ["Confident communication", "Persuasion", "Negotiation", "Public speaking", "Difficult conversations", "Storytelling"],
+    "Strategy": ["Strategic thinking", "Financial thinking", "Business acumen", "Problem-solving", "Critical thinking", "Prioritization"],
+    "Personal": ["Emotional intelligence", "Self-awareness", "Resilience", "Confidence", "Presence", "Energy management"]
+  },
+  
+  prepareFor: {
+    "People": ["Critics and detractors", "Difficult stakeholders", "Office politics", "Saboteurs", "Skeptics", "Naysayers"],
+    "Situations": ["Hard conversations", "High-stakes meetings", "Negotiations", "Presentations", "Interviews", "Conflict"],
+    "Opportunities": ["Opportunities I might miss", "Career pivots", "Leadership roles", "Speaking opportunities", "Partnerships", "Growth moments"]
+  },
+  
+  encouragement: {
+    "Confidence": ["I'm capable of this", "I've done hard things before", "Trust my instincts", "I belong here", "I'm enough"],
+    "Focus": ["Stay focused on what matters", "Progress over perfection", "One thing at a time", "Trust the process", "Keep going"],
+    "Celebration": ["Celebrate small wins", "Acknowledge progress", "Give myself credit", "Rest is productive", "I'm further than I think"]
+  },
+  
+  overcome: {
+    "Productivity": ["Procrastination", "Overthinking", "Analysis paralysis", "Perfectionism", "Distraction", "Time-wasting"],
+    "Boundaries": ["People-pleasing", "Saying yes too often", "Overcommitting", "Taking on too much", "Not delegating", "Fear of conflict"],
+    "Mindset": ["Self-doubt", "Imposter syndrome", "Negative self-talk", "Fear of failure", "Playing small", "Comparison"]
+  },
+  
+  workStyle: {
+    "Quality": ["World-class", "Excellent", "High-quality", "Polished", "Professional", "Refined"],
+    "Character": ["Original", "Creative", "Distinctive", "Bold", "Fresh", "Innovative"],
+    "Approach": ["Clear", "Sharp", "Efficient", "Practical", "Actionable", "Results-focused"],
+    "Philosophy": ["Substance over flash", "Done is better than perfect", "Built to last", "Simple but powerful", "Less but better"]
+  },
+  
+  becomeWhat: {
+    "Leadership": ["A better leader", "A confident executive", "An inspiring manager", "A trusted advisor", "A decisive leader"],
+    "Impact": ["Someone who creates real impact", "A force for good", "An industry leader", "A thought leader", "A changemaker"],
+    "Personal": ["The best version of myself", "More confident", "More effective", "More balanced", "Financially free", "Fulfilled"]
+  },
+
+  // Section 2 Tags
+  yourName: {
+    "Formats": ["[First name]", "[Nickname]", "Dr. [Last name]", "Coach", "Boss", "[Title + Name]"]
+  },
+  
+  roles: {
+    "Leadership": ["Founder", "CEO", "Executive", "Director", "Manager", "Team Lead", "Supervisor"],
+    "Professional": ["Consultant", "Advisor", "Specialist", "Analyst", "Designer", "Developer", "Marketer", "Sales"],
+    "Ownership": ["Business Owner", "Entrepreneur", "Freelancer", "Creator", "Author", "Speaker", "Coach"],
+    "Governance": ["Board Member", "Investor", "Mentor", "Advisor"],
+    "Personal": ["Parent", "Partner", "Caregiver", "Student", "Volunteer", "Community Leader"]
+  },
+  
+  personalTraits: {
+    "Work Style": ["Strategic", "Creative", "Analytical", "Detail-oriented", "Organized", "Dependable", "Disciplined", "Efficient"],
+    "Interpersonal": ["Leader", "Communicator", "Team player", "Empathetic", "Open-minded", "Emotionally intelligent", "Diplomatic", "Collaborative"],
+    "Drive & Mindset": ["Self-starter", "Motivated", "Curious", "Resilient", "Confident", "Adaptable", "Ambitious", "Action-biased"],
+    "Personality": ["Direct", "Warm", "Visionary", "Pragmatic", "Bold", "Calm", "Energetic", "Thoughtful"]
+  },
+  
+  ambitions: {
+    "Business": ["Build a national brand", "Scale my business", "Exit my company", "Launch a product", "Franchise", "Go public"],
+    "Career": ["Become a C-suite executive", "Lead an organization", "Become an industry expert", "Board positions", "Consulting practice"],
+    "Financial": ["Achieve financial independence", "Create generational wealth", "Multiple income streams", "Investment portfolio"],
+    "Creative": ["Write a book", "Launch a podcast", "Build a platform", "Become a speaker", "Thought leadership"]
+  },
+  
+  education: {
+    "Degree Types": ["Bachelor's degree", "Master's degree", "MBA", "PhD", "JD", "MD", "Self-taught", "Bootcamp grad"],
+    "Learning Style": ["Learn by doing", "Visual learner", "Avid reader", "Podcast learner", "Classroom learner", "Mentor-taught", "Research-oriented"]
+  },
+  
+  experience: {
+    "Years": ["5+ years", "10+ years", "15+ years", "20+ years", "25+ years"],
+    "Domains": ["Leadership", "Management", "Consulting", "Operations", "Sales", "Marketing", "Finance", "Technology", "Product", "Strategy"],
+    "Achievements": ["Built teams", "Managed P&L", "Led transformation", "Launched products", "Grew revenue", "Built from scratch", "Turnaround experience"]
+  },
+  
+  currentProjects: {
+    "Business": ["Launching a product", "Starting a business", "Scaling operations", "Leading a rebrand", "Fundraising", "M&A activity"],
+    "Career": ["Job searching", "Career transition", "Getting promoted", "Building a team", "Expanding role", "New leadership position"],
+    "Creative": ["Writing a book", "Building a course", "Starting a podcast", "Content creation", "Speaking tour", "Building platform"],
+    "Development": ["Learning new skills", "Getting certified", "Executive coaching", "Leadership program", "Side project"]
+  },
+  
+  accomplishments: {
+    "Business Results": ["Doubled revenue", "Grew team 10x", "Successful exit", "IPO experience", "Turnaround success", "Market expansion"],
+    "Recognition": ["Award-winner", "Industry recognition", "Published author", "Featured speaker", "Media coverage", "Top performer"],
+    "Creation": ["Founded a company", "Built a product", "Created a movement", "Established a program", "Launched a brand", "Patented innovation"],
+    "Impact": ["Led transformation", "Changed industry practice", "Mentored leaders", "Community impact", "Policy influence"]
+  },
+  
+  energizers: {
+    "Problem & Creation": ["Solving hard problems", "Building things", "Creating from scratch", "Fixing what's broken", "Designing solutions", "Strategic planning"],
+    "People & Connection": ["Coaching others", "Deep conversation", "Collaboration", "Teaching", "Networking", "Leading teams", "Mentoring"],
+    "Work Types": ["Creative work", "Analytical work", "Research", "Writing", "Public speaking", "Project management", "Sales", "Negotiation"],
+    "Growth & Learning": ["Learning new skills", "Exploring ideas", "Reading", "Taking courses", "Experimenting", "Pushing limits"]
+  },
+  
+  principles: {
+    "Ethics": ["Integrity first", "Do the right thing", "Honesty always", "Ethical leadership", "Transparency", "Accountability"],
+    "Mindset": ["Abundance mindset", "Growth mindset", "Own your outcomes", "No excuses", "Bias for action", "Continuous improvement"],
+    "Philosophy": ["Faith-driven", "Evidence-based", "Long-term thinking", "People first", "Purpose over profit", "Service to others"],
+    "Approach": ["Under-promise, over-deliver", "Start with why", "Fail fast, learn faster", "Done is better than perfect", "Trust but verify"]
+  },
+  
+  commStyle: {
+    "Tone": ["Direct but warm", "Professional", "Casual", "Formal", "Friendly", "Matter-of-fact"],
+    "Mode": ["Written over verbal", "Verbal over written", "Visual communication", "Data-driven", "Story-driven"],
+    "Interaction": ["Collaborative", "Action-oriented", "Consultative", "Coaching-style", "Socratic"],
+    "Extras": ["Humor helps", "Keep it brief", "Love details", "Big picture first", "Examples help"]
+  },
+  
+  howDescribed: {
+    "Leadership": ["Strong leader", "Visionary", "Decisive", "Inspiring", "Influential", "Trusted"],
+    "Character": ["Reliable", "Authentic", "Humble", "Confident", "Generous", "Kind"],
+    "Work Style": ["Gets things done", "High performer", "Problem-solver", "Strategic thinker", "Creative", "Analytical"],
+    "Presence": ["Calm under pressure", "Energetic", "Steady", "Approachable", "Commanding", "Thoughtful"],
+    "Relationships": ["Connector", "Collaborator", "Mentor", "Team player", "Bridge builder", "Catalyst"]
+  },
+  
+  personality: {
+    "Myers-Briggs": ["INTJ", "ENTJ", "INTP", "ENTP", "INFJ", "ENFJ", "INFP", "ENFP", "ISTJ", "ESTJ", "ISFJ", "ESFJ", "ISTP", "ESTP", "ISFP", "ESFP"],
+    "Enneagram": ["Type 1", "Type 2", "Type 3", "Type 4", "Type 5", "Type 6", "Type 7", "Type 8", "Type 9"],
+    "DISC": ["High D", "High I", "High S", "High C", "D/I", "I/S", "S/C", "D/C"]
+  },
+  
+  tendencies: {
+    "Overwork": ["Taking on too much", "Not delegating", "Working too many hours", "Skipping breaks", "Always available"],
+    "Avoidance": ["Avoiding conflict", "Putting off hard conversations", "Procrastinating on scary tasks", "Avoiding feedback"],
+    "Focus": ["Getting lost in details", "Shiny object syndrome", "Context switching", "Losing big picture", "Over-researching"],
+    "Self-worth": ["Undervaluing my work", "Not charging enough", "Underselling myself", "Downplaying achievements", "Imposter feelings"],
+    "Emotions": ["Impatience", "Frustration", "Anxiety", "Overwhelm", "Perfectionism", "Self-criticism"]
+  }
+};
 
 // ==== INTRO & SECTION INTRO SCREENS ====
 const intro = {
@@ -357,37 +655,37 @@ Up to 1,500 characters for this section.`
 
 // ==== SECTION 1: DEFINE YOUR AI COWORKER ====
 const section1 = [
-  { q:"What would you like your AI Coworker's name to be?", prefix:"AI, your name is: ", placeholder:"Javi, Max, Sage, or whatever fits", limit:30 },
-  { q:"What traits should your ideal AI Coworker have?", prefix:"AI, you are: ", placeholder:"Direct. No BS. High EQ. Strategic but practical. Sharp. Fun. Motivational. High-level management (C-Suite).", limit:500 },
-  { q:"What should your AI Coworker <em>not</em> do?", prefix:"AI, don't: ", placeholder:"Flatter me. Be a yes-person. Overcomplicate things. Be trite. Use emojis. Confuse me when I need clarity.", limit:500 },
-  { q:"What are your job-related goals—the things you're paid to accomplish?", prefix:"AI, help me with these work goals: ", placeholder:"Hit revenue targets. Lead my team well. Ship projects on time. Get promoted. Protect my focus.", limit:500 },
-  { q:"What are your personal aspirations—the life you're building toward?", prefix:"AI, help me build toward: ", placeholder:"Financial freedom. Writing a book. Starting a business. More time with family. Location independence.", limit:500 },
-  { q:"Should your AI Coworker share opinions and push back on you?", prefix:"AI, on sharing opinions: ", placeholder:"Challenge my thinking. Give me your opinions. Help me see other perspectives. Identify my potential blind spots.", limit:300 },
-  { q:"What values matter to you that your AI Coworker should reflect?", prefix:"AI, honor these values: ", placeholder:"Integrity. Excellence. Generosity. Truth over comfort. People over profit.", limit:300 },
-  { q:"What do you want your AI Coworker to teach or coach you on—every interaction?", prefix:"AI, coach me on: ", placeholder:"Executive presence. Negotiation. Leadership. Emotional intelligence. Financial thinking. Strategic clarity. Confident communication.", limit:500 },
-  { q:"What should your AI Coworker prepare you for?", prefix:"AI, prepare me for: ", placeholder:"Critics and detractors. Hard conversations. Opportunities I might miss.", limit:300 },
-  { q:"What encouragement do you need to hear regularly?", prefix:"AI, remind me: ", placeholder:"I'm capable of this. Celebrate small wins. Stay focused on what matters. Trust the process.", limit:400 },
-  { q:"What patterns or habits do you want help overcoming?", prefix:"AI, help me overcome: ", placeholder:"Perfectionism. Overthinking. People-pleasing. Procrastination on hard tasks. Saying yes too often.", limit:500 },
-  { q:"How would you describe the quality and style of work you want to produce together?", prefix:"AI, our work style is: ", placeholder:"Clear, sharp, original. Substance over flash. Done is better than perfect. Built to last.", limit:300 },
-  { q:"Big picture: what do you want your AI Coworker to help you become?", prefix:"AI, help me become: ", placeholder:"Someone who creates real impact. The best version of myself.", limit:500 }
+  { q:"What would you like your AI Coworker's name to be?", prefix:"AI, your name is: ", placeholder:"", limit:30, tags: "aiName" },
+  { q:"What traits should your ideal AI Coworker have?", prefix:"AI, you are: ", placeholder:"", limit:500, tags: "aiTraits" },
+  { q:"What should your AI Coworker <em>not</em> do?", prefix:"AI, don't: ", placeholder:"", limit:500, tags: "aiDont" },
+  { q:"What are your job-related goals—the things you're paid to accomplish?", prefix:"AI, help me with these work goals: ", placeholder:"", limit:500, tags: "workGoals" },
+  { q:"What are your personal aspirations—the life you're building toward?", prefix:"AI, help me build toward: ", placeholder:"", limit:500, tags: "aspirations" },
+  { q:"Should your AI Coworker share opinions and push back on you?", prefix:"AI, on sharing opinions: ", placeholder:"", limit:300, tags: "opinions" },
+  { q:"What values matter to you that your AI Coworker should reflect?", prefix:"AI, honor these values: ", placeholder:"", limit:300, tags: "values" },
+  { q:"What do you want your AI Coworker to teach or coach you on—every interaction?", prefix:"AI, coach me on: ", placeholder:"", limit:500, tags: "coaching" },
+  { q:"What should your AI Coworker prepare you for?", prefix:"AI, prepare me for: ", placeholder:"", limit:300, tags: "prepareFor" },
+  { q:"What encouragement do you need to hear regularly?", prefix:"AI, remind me: ", placeholder:"", limit:400, tags: "encouragement" },
+  { q:"What patterns or habits do you want help overcoming?", prefix:"AI, help me overcome: ", placeholder:"", limit:500, tags: "overcome" },
+  { q:"How would you describe the quality and style of work you want to produce together?", prefix:"AI, our work style is: ", placeholder:"", limit:300, tags: "workStyle" },
+  { q:"Big picture: what do you want your AI Coworker to help you become?", prefix:"AI, help me become: ", placeholder:"", limit:500, tags: "becomeWhat" }
 ];
 
 // ==== SECTION 2: TEACH YOUR AI ABOUT YOU ====
 const section2 = [
-  { q:"What should your AI Coworker call you?", prefix:"Call me: ", placeholder:"Jack, Jill, Doc, Coach, or any preferred name", limit:30 },
-  { q:"What roles do you currently hold—professionally and personally? Get specific.", prefix:"My roles: ", placeholder:"Founder of _. Team lead. Board member at _. Parent. Creator of _. Advisor. Student at _.", limit:500 },
-  { q:"What traits define how you operate and show up?", prefix:"I am a: ", placeholder:"Strategic, creative, direct, curious, resilient, people-oriented, action-biased", limit:500 },
-  { q:"What are your biggest ambitions—where are you headed?", prefix:"My ambitions: ", placeholder:"Build a national brand. Achieve financial independence. Lead an organization. Write a book. Create generational wealth.", limit:500 },
-  { q:"What's your educational background and how do you learn best?", prefix:"Education/learning: ", placeholder:"MBA from State U. Self-taught designer. Learn by doing. Visual learner. Avid reader.", limit:300 },
-  { q:"Summarize your professional experience.", prefix:"Experience: ", placeholder:"15 years in marketing leadership. Former consultant. Built two startups. Managed teams of 20+.", limit:700 },
-  { q:"What are you currently working on?", prefix:"Current projects: ", placeholder:"Launching a product. Leading a rebrand. Job searching. Building a side business.", limit:700 },
-  { q:"What accomplishments or credentials should your AI know about?", prefix:"Accomplishments: ", placeholder:"Published author. Award-winner. Doubled revenue in 18 months. Founded a nonprofit.", limit:700 },
-  { q:"What naturally energizes you? What do you gravitate toward?", prefix:"I'm energized by: ", placeholder:"Solving hard problems. Coaching others. Building things. Deep conversation. Creative work.", limit:500 },
-  { q:"What beliefs, philosophies, or principles guide your decisions?", prefix:"My guiding principles: ", placeholder:"Integrity first. Abundance mindset. Own your outcomes. Faith-driven. Evidence-based. Long-term thinking.", limit:500 },
-  { q:"How do you prefer to communicate and interact with others?", prefix:"My communication style: ", placeholder:"Direct but warm. Collaborative. Action-oriented. Humor helps. Written over verbal.", limit:300 },
-  { q:"How do others typically describe you?", prefix:"Others describe me as: ", placeholder:"Reliable. Visionary. Calm under pressure. Connector. Gets things done. Big-picture thinker.", limit:300 },
-  { q:"What's your personality type, if you know it?", prefix:"Personality type: ", placeholder:"ENFP. Enneagram 3. High D on DISC. Or skip if you're not sure.", limit:300 },
-  { q:"What personal tendencies do you want your AI to help you manage?", prefix:"Help me manage: ", placeholder:"Taking on too much. Avoiding conflict. Getting lost in details. Undervaluing my work. Impatience.", limit:700 }
+  { q:"What should your AI Coworker call you?", prefix:"Call me: ", placeholder:"Enter your preferred name", limit:30, tags: "yourName", freeformOnly: true },
+  { q:"What roles do you currently hold—professionally and personally?", prefix:"My roles: ", placeholder:"", limit:500, tags: "roles" },
+  { q:"What traits define how you operate and show up?", prefix:"I am: ", placeholder:"", limit:500, tags: "personalTraits" },
+  { q:"What are your biggest ambitions—where are you headed?", prefix:"My ambitions: ", placeholder:"", limit:500, tags: "ambitions" },
+  { q:"What's your educational background and how do you learn best?", prefix:"Education/learning: ", placeholder:"", limit:300, tags: "education" },
+  { q:"Summarize your professional experience.", prefix:"Experience: ", placeholder:"", limit:700, tags: "experience" },
+  { q:"What are you currently working on?", prefix:"Current projects: ", placeholder:"", limit:700, tags: "currentProjects" },
+  { q:"What accomplishments or credentials should your AI know about?", prefix:"Accomplishments: ", placeholder:"", limit:700, tags: "accomplishments" },
+  { q:"What naturally energizes you? What do you gravitate toward?", prefix:"I'm energized by: ", placeholder:"", limit:500, tags: "energizers" },
+  { q:"What beliefs, philosophies, or principles guide your decisions?", prefix:"My guiding principles: ", placeholder:"", limit:500, tags: "principles" },
+  { q:"How do you prefer to communicate and interact with others?", prefix:"My communication style: ", placeholder:"", limit:300, tags: "commStyle" },
+  { q:"How do others typically describe you?", prefix:"Others describe me as: ", placeholder:"", limit:300, tags: "howDescribed" },
+  { q:"What's your personality type, if you know it?", prefix:"Personality type: ", placeholder:"Skip if you're not sure", limit:300, tags: "personality" },
+  { q:"What personal tendencies do you want your AI to help you manage?", prefix:"Help me manage: ", placeholder:"", limit:700, tags: "tendencies" }
 ];
 
 // ==== PAGINATION SETUP ====
@@ -395,6 +693,9 @@ const s1len = section1.length, s2len = section2.length;
 const totalPages = s1len + s2len + 5;
 let pageIndex = 0;
 const answers = Array(s1len + s2len).fill("");
+
+// Track selected tags per question index
+const selectedTags = {};
 
 const formContainer = document.getElementById("formContainer");
 const progressBar   = document.getElementById("progressBar");
@@ -447,7 +748,6 @@ function renderPage(){
   else if(pageIndex===3+s1len+s2len){
     nextBtn.style.display = "none";
     formContainer.innerHTML = renderSummaryHtml();
-    attachEmailToggle();
   }
   else if(pageIndex===4+s1len+s2len){
     nextBtn.style.display = "none";
@@ -463,19 +763,26 @@ function renderPage(){
 
 function renderQuestion(item, idx){
   const prefixHtml = item.prefix ? `<div class="prefix-display">${item.prefix}</div>` : '';
-  const hasSuggestion = item.placeholder && item.placeholder !== '[enter name]' && !item.placeholder.startsWith('[');
-  const suggestionHtml = hasSuggestion 
-    ? `<a class="use-suggestions" id="useSuggestions" onclick="useSuggestions()">Need ideas? Use suggestions</a>` 
-    : '';
+  
+  // Check if this question has tags (and isn't freeformOnly)
+  let tagSelectorHtml = '';
+  if (item.tags && tagOptions[item.tags] && !item.freeformOnly) {
+    tagSelectorHtml = renderTagSelector(item.tags, idx);
+  }
+  
+  const placeholderText = item.tags && !item.freeformOnly 
+    ? 'Click options above or type your own...' 
+    : (item.placeholder || 'Type here...');
   
   formContainer.innerHTML = `
     <div class="question">
       <label>${item.q}</label>
       ${prefixHtml}
-      <textarea id="inputField" placeholder="${hasSuggestion ? 'Start typing or use suggestions below...' : item.placeholder}"></textarea>
+      ${tagSelectorHtml}
+      <textarea id="inputField" placeholder="${placeholderText}"></textarea>
       <div class="char-count" id="charCount"></div>
-      ${suggestionHtml}
     </div>`;
+  
   const ta = document.getElementById("inputField");
   ta.value = answers[idx] || "";
   ta.maxLength = item.limit;
@@ -484,35 +791,104 @@ function renderQuestion(item, idx){
     updateCharCount(idx);
   };
   
-  // Store current suggestion for this question
-  window.currentSuggestion = item.placeholder;
+  // Store current context
   window.currentIdx = idx;
+  window.currentTags = item.tags || null;
+  
+  // Restore selected tag states
+  if (item.tags && selectedTags[idx] && !item.freeformOnly) {
+    selectedTags[idx].forEach(tag => {
+      const chip = document.querySelector(`.tag-chip[data-tag="${tag}"]`);
+      if (chip) chip.classList.add('selected');
+    });
+  }
+  
+  // Attach tag click handlers
+  if (item.tags && !item.freeformOnly) {
+    attachTagHandlers(idx);
+  }
   
   updateCharCount(idx);
 }
 
-function useSuggestions() {
-  const ta = document.getElementById("inputField");
-  const link = document.getElementById("useSuggestions");
+function renderTagSelector(tagType, idx) {
+  const options = tagOptions[tagType];
+  let html = '<div class="tag-selector">';
+  html += '<p class="tag-helper">Click to select, click again to remove. Type your own below.</p>';
   
-  if (link.classList.contains('used')) return;
-  
-  // If field is empty, insert suggestion. If not empty, append with separator.
-  if (ta.value.trim() === '') {
-    ta.value = window.currentSuggestion;
-  } else {
-    ta.value = ta.value.trim() + ' ' + window.currentSuggestion;
+  for (const [category, tags] of Object.entries(options)) {
+    html += `<div class="tag-category">`;
+    html += `<div class="tag-category-label">${category}</div>`;
+    html += `<div class="tag-grid">`;
+    tags.forEach(tag => {
+      const isSelected = selectedTags[idx] && selectedTags[idx].includes(tag);
+      html += `<span class="tag-chip ${isSelected ? 'selected' : ''}" data-tag="${tag}">${tag}</span>`;
+    });
+    html += `</div></div>`;
   }
   
-  answers[window.currentIdx] = ta.value;
-  updateCharCount(window.currentIdx);
+  html += `<a class="clear-tags" onclick="clearAllTags(${idx})">Clear all selections</a>`;
+  html += '</div>';
+  return html;
+}
+
+function attachTagHandlers(idx) {
+  document.querySelectorAll('.tag-chip').forEach(chip => {
+    chip.addEventListener('click', () => toggleTag(chip, idx));
+  });
+}
+
+function toggleTag(chip, idx) {
+  const tag = chip.dataset.tag;
+  const ta = document.getElementById("inputField");
   
-  // Update link state
-  link.textContent = '✓ Suggestions added';
-  link.classList.add('used');
+  // Initialize selectedTags for this index if needed
+  if (!selectedTags[idx]) selectedTags[idx] = [];
   
-  // Focus the textarea so they can edit
-  ta.focus();
+  if (chip.classList.contains('selected')) {
+    // Deselect: remove from array and textarea
+    chip.classList.remove('selected');
+    selectedTags[idx] = selectedTags[idx].filter(t => t !== tag);
+    
+    // Remove from textarea - handle various formats
+    let currentText = ta.value;
+    currentText = currentText.replace(new RegExp(tag + '\\.\\s*', 'g'), '');
+    currentText = currentText.replace(new RegExp(tag + ',\\s*', 'g'), '');
+    currentText = currentText.replace(new RegExp(tag + '\\s*$', 'g'), '');
+    currentText = currentText.replace(/\.\s*\./g, '.').replace(/,\s*,/g, ',').trim();
+    currentText = currentText.replace(/[,.\s]+$/, '').trim();
+    ta.value = currentText;
+  } else {
+    // Select: add to array and textarea
+    chip.classList.add('selected');
+    selectedTags[idx].push(tag);
+    
+    // Add to textarea
+    if (ta.value.trim() === '') {
+      ta.value = tag;
+    } else {
+      const lastChar = ta.value.trim().slice(-1);
+      if (['.', ',', '!', '?'].includes(lastChar)) {
+        ta.value = ta.value.trim() + ' ' + tag;
+      } else {
+        ta.value = ta.value.trim() + '. ' + tag;
+      }
+    }
+  }
+  
+  answers[idx] = ta.value;
+  updateCharCount(idx);
+}
+
+function clearAllTags(idx) {
+  document.querySelectorAll('.tag-chip.selected').forEach(chip => {
+    chip.classList.remove('selected');
+  });
+  selectedTags[idx] = [];
+  const ta = document.getElementById("inputField");
+  ta.value = '';
+  answers[idx] = '';
+  updateCharCount(idx);
 }
 
 function updateCharCount(idx){
@@ -566,8 +942,22 @@ function renderSummaryHtml(){
   
   return `
     <div class="celebration">
-      <h2>You Did It.</h2>
+      <h2>You Did It!</h2>
       <p>Your AI Coworker is ready to meet you.</p>
+    </div>
+
+    <div class="email-section-top">
+      <h3>Save Your Results</h3>
+      <div class="warning">
+        <strong>Important:</strong> We don't store any of your answers. Once you leave this page, your results are gone forever. Email yourself a copy now!
+      </div>
+      <div class="email-input-row">
+        <input type="email" id="userEmail" placeholder="you@example.com"/>
+        <button onclick="sendEmail()">Email My Results</button>
+      </div>
+      <div class="email-alt">
+        <a onclick="downloadResults()">Or download as a file instead</a>
+      </div>
     </div>
 
     <p>Copy each section below and paste it into your AI's settings:</p>
@@ -617,28 +1007,33 @@ function renderSummaryHtml(){
     <div class="summary" id="sum2">${sec2}</div>
     <button class="copy-btn" onclick="copyToClipboard('sum2')">Copy Section 2</button>
 
-    <div class="video-cta">
-      <p>Want to get more out of your Blueprint?</p>
-      <p>I'll walk you through the thinking behind every question—and show you how I configured my own AI.</p>
-      <button onclick="window.open('https://nimbology.com/blueprint-walkthrough','_blank')">Get the Free Video Walkthrough →</button>
-    </div>
-
-    <div class="email-section">
-      <label><input type="checkbox" id="emailOpt"> Email me a copy of my results</label>
-      <div id="emailInput" style="display:none;">
-        <input type="email" id="userEmail" placeholder="you@example.com"/>
-        <button onclick="sendEmail()">Send</button>
-        <button onclick="downloadResults()" class="download-btn">Download</button>
+    <div class="next-steps">
+      <h3>What's Next?</h3>
+      
+      <div class="next-step-item">
+        <div class="next-step-icon">🎬</div>
+        <div class="next-step-content">
+          <h4>Watch the Video Series (Coming Soon)</h4>
+          <p>I'm building a video walkthrough that explains the thinking behind every question—and shows you how to get 10x more value from your AI Coworker.</p>
+        </div>
+      </div>
+      
+      <div class="next-step-item">
+        <div class="next-step-icon">👥</div>
+        <div class="next-step-content">
+          <h4>Join an Upcoming Cohort</h4>
+          <p>Learn alongside other leaders in a live workshop experience. Limited spots. <a href="https://nimbology.com/contact" target="_blank">Get on the waitlist →</a></p>
+        </div>
+      </div>
+      
+      <div class="next-step-item">
+        <div class="next-step-icon">🚀</div>
+        <div class="next-step-content">
+          <h4>1:1 Coaching</h4>
+          <p>Want personalized guidance on AI strategy, leadership, or building your next chapter? <a href="https://nimbology.com/contact" target="_blank">Let's talk →</a></p>
+        </div>
       </div>
     </div>`;
-}
-
-function attachEmailToggle(){
-  const opt = document.getElementById("emailOpt"),
-        inp = document.getElementById("emailInput");
-  if(opt && inp) {
-    opt.addEventListener('change', e => inp.style.display = e.target.checked ? 'flex' : 'none');
-  }
 }
 
 function copyToClipboard(id) {
@@ -661,12 +1056,18 @@ function sendEmail(){
   const sec1 = buildSectionText(0, s1len, section1);
   const sec2 = buildSectionText(s1len, s1len + s2len, section2);
   
+  // Build the comprehensive email content
+  const emailBody = buildEmailContent(sec1, sec2);
+  
   emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-    to_email: userEmail, section1: sec1, section2: sec2
+    to_email: userEmail, 
+    section1: sec1, 
+    section2: sec2,
+    full_content: emailBody
   })
   .then(response => {
     console.log("SUCCESS:", response);
-    showToast("✓ Email sent!");
+    showToast("✓ Email sent! Check your inbox.");
   })
   .catch(err => {
     console.error("EMAIL ERROR:", err);
@@ -674,38 +1075,91 @@ function sendEmail(){
   });
 }
 
-function downloadResults() {
-  const sec1 = buildSectionText(0, s1len, section1);
-  const sec2 = buildSectionText(s1len, s1len + s2len, section2);
-  const content = `AI COWORKER BLUEPRINT™ - YOUR RESULTS
-Generated at nimbology.com
+function buildEmailContent(sec1, sec2) {
+  return `
+🎉 CONGRATULATIONS!
 
-════════════════════════════════════════
-SECTION 1: YOUR AI COWORKER
-════════════════════════════════════════
-Paste this into your AI's "traits" or "personality" settings.
+You just completed the AI Coworker Blueprint™—and your AI is about to get a whole lot smarter about YOU.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔒 YOUR PRIVACY, PROTECTED
+
+Here's something important: we didn't store a single answer you gave.
+
+Not one.
+
+This email is the only record of your Blueprint. We built it this way on purpose—because in a world where everyone wants your data, we wanted to prove you can get real value without giving up your privacy.
+
+Your information stays yours. Always.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 WHAT TO DO WITH YOUR RESULTS
+
+1. COPY SECTION 1 (Your AI Coworker) below
+2. PASTE IT into your AI's settings:
+   • ChatGPT: Settings → Personalization → "What traits should ChatGPT have?"
+   • Claude: Settings → Profile → Personal Preferences
+   • Gemini: Settings → Saved Info
+
+3. COPY SECTION 2 (About You) below
+4. PASTE IT into:
+   • ChatGPT: "What should ChatGPT know about you?"
+   • Claude: Same Personal Preferences field
+   • Gemini: Saved Info (may need multiple entries)
+
+5. START A CONVERSATION and watch the difference.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📄 SECTION 1: YOUR AI COWORKER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ${sec1}
 
-════════════════════════════════════════
-SECTION 2: ABOUT YOU
-════════════════════════════════════════
-Paste this into your AI's "about you" or "context" settings.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📄 SECTION 2: ABOUT YOU
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ${sec2}
 
-════════════════════════════════════════
-SETUP INSTRUCTIONS
-════════════════════════════════════════
-ChatGPT: Settings → Personalization → Customization
-Claude: Settings → Profile → Personal Preferences
-Gemini: Settings → Saved Info
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-════════════════════════════════════════
-Want the video walkthrough? 
-nimbology.com/blueprint-walkthrough
-════════════════════════════════════════
+🚀 WANT TO GO DEEPER?
+
+This Blueprint is just the beginning. Here's how to keep building:
+
+→ VIDEO SERIES (Coming Soon)
+I'm creating a walkthrough that explains the thinking behind every question—and shows you how I configured my own AI. Stay tuned.
+
+→ JOIN A COHORT
+Learn alongside other leaders in a live workshop. Limited spots, real transformation.
+https://nimbology.com/contact
+
+→ 1:1 COACHING
+Want personalized guidance on AI strategy, leadership, or building your next chapter? Let's talk.
+https://nimbology.com/contact
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Thanks for trusting me with this.
+
+Now go put your AI Coworker to work.
+
+— Liz B. Baker
+Founder, Nimbology
+https://nimbology.com
+
+P.S. If someone you know could use an AI Coworker that actually gets them, send them my way. But please don't share the Blueprint link directly—have them reach out at nimbology.com/contact so we can make sure they're set up for success.
 `;
+}
+
+function downloadResults() {
+  const sec1 = buildSectionText(0, s1len, section1);
+  const sec2 = buildSectionText(s1len, s1len + s2len, section2);
+  const content = buildEmailContent(sec1, sec2);
   
   const blob = new Blob([content], { type: "text/plain" });
   const url = URL.createObjectURL(blob);
