@@ -358,30 +358,30 @@ Up to 1,500 characters for this section.`
 // ==== SECTION 1: DEFINE YOUR AI COWORKER ====
 const section1 = [
   { q:"What would you like your AI Coworker's name to be?", prefix:"AI, your name is: ", placeholder:"Javi, Max, Sage, or whatever fits", limit:30 },
-  { q:"What traits should your ideal AI Coworker have?", prefix:"AI, you are: ", placeholder:"Direct, no BS. High EQ. Strategic but practical. Sharp, fun, challenges me. Executive presence.", limit:500 },
-  { q:"What should your AI Coworker <em>not</em> do?", prefix:"AI, don't: ", placeholder:"Flatter me. Be a yes-person. Overcomplicate things. Use emojis. Hedge when I need clarity.", limit:500 },
+  { q:"What traits should your ideal AI Coworker have?", prefix:"AI, you are: ", placeholder:"Direct. No BS. High EQ. Strategic but practical. Sharp. Fun. Motivational. High-level management (C-Suite).", limit:500 },
+  { q:"What should your AI Coworker <em>not</em> do?", prefix:"AI, don't: ", placeholder:"Flatter me. Be a yes-person. Overcomplicate things. Be trite. Use emojis. Confuse me when I need clarity.", limit:500 },
   { q:"What are your job-related goals—the things you're paid to accomplish?", prefix:"AI, help me with these work goals: ", placeholder:"Hit revenue targets. Lead my team well. Ship projects on time. Get promoted. Protect my focus.", limit:500 },
   { q:"What are your personal aspirations—the life you're building toward?", prefix:"AI, help me build toward: ", placeholder:"Financial freedom. Writing a book. Starting a business. More time with family. Location independence.", limit:500 },
-  { q:"Should your AI Coworker share opinions and push back on you?", prefix:"AI, on sharing opinions: ", placeholder:"Yes—challenge my thinking. Give me your take, then let me decide.", limit:300 },
+  { q:"Should your AI Coworker share opinions and push back on you?", prefix:"AI, on sharing opinions: ", placeholder:"Challenge my thinking. Give me your opinions. Help me see other perspectives. Identify my potential blind spots.", limit:300 },
   { q:"What values matter to you that your AI Coworker should reflect?", prefix:"AI, honor these values: ", placeholder:"Integrity. Excellence. Generosity. Truth over comfort. People over profit.", limit:300 },
-  { q:"What do you want your AI Coworker to teach or coach you on—every interaction?", prefix:"AI, coach me on: ", placeholder:"Executive presence. Negotiation. Financial thinking. Strategic clarity. Confident communication.", limit:500 },
-  { q:"What should your AI Coworker prepare you for?", prefix:"AI, prepare me for: ", placeholder:"Critics and detractors. Blind spots. Hard conversations. Opportunities I might miss.", limit:300 },
+  { q:"What do you want your AI Coworker to teach or coach you on—every interaction?", prefix:"AI, coach me on: ", placeholder:"Executive presence. Negotiation. Leadership. Emotional intelligence. Financial thinking. Strategic clarity. Confident communication.", limit:500 },
+  { q:"What should your AI Coworker prepare you for?", prefix:"AI, prepare me for: ", placeholder:"Critics and detractors. Hard conversations. Opportunities I might miss.", limit:300 },
   { q:"What encouragement do you need to hear regularly?", prefix:"AI, remind me: ", placeholder:"I'm capable of this. Celebrate small wins. Stay focused on what matters. Trust the process.", limit:400 },
   { q:"What patterns or habits do you want help overcoming?", prefix:"AI, help me overcome: ", placeholder:"Perfectionism. Overthinking. People-pleasing. Procrastination on hard tasks. Saying yes too often.", limit:500 },
   { q:"How would you describe the quality and style of work you want to produce together?", prefix:"AI, our work style is: ", placeholder:"Clear, sharp, original. Substance over flash. Done is better than perfect. Built to last.", limit:300 },
-  { q:"Big picture: what do you want your AI Coworker to help you become?", prefix:"AI, help me become: ", placeholder:"A better leader. Financially free. Someone who creates real impact. The best version of myself.", limit:500 }
+  { q:"Big picture: what do you want your AI Coworker to help you become?", prefix:"AI, help me become: ", placeholder:"Someone who creates real impact. The best version of myself.", limit:500 }
 ];
 
 // ==== SECTION 2: TEACH YOUR AI ABOUT YOU ====
 const section2 = [
-  { q:"What should your AI Coworker call you?", prefix:"Call me: ", placeholder:"Liz, Dr. Chen, Coach, or your preferred name", limit:30 },
-  { q:"What roles do you currently hold—professionally and personally?", prefix:"My roles: ", placeholder:"Founder. Team lead. Board member. Parent. Creator. Advisor. Student.", limit:500 },
-  { q:"What traits define how you operate and show up?", prefix:"I am: ", placeholder:"Strategic, creative, direct, curious, resilient, people-oriented, action-biased", limit:500 },
+  { q:"What should your AI Coworker call you?", prefix:"Call me: ", placeholder:"Jack, Jill, Doc, Coach, or any preferred name", limit:30 },
+  { q:"What roles do you currently hold—professionally and personally? Get specific.", prefix:"My roles: ", placeholder:"Founder of _. Team lead. Board member at _. Parent. Creator of _. Advisor. Student at _.", limit:500 },
+  { q:"What traits define how you operate and show up?", prefix:"I am a: ", placeholder:"Strategic, creative, direct, curious, resilient, people-oriented, action-biased", limit:500 },
   { q:"What are your biggest ambitions—where are you headed?", prefix:"My ambitions: ", placeholder:"Build a national brand. Achieve financial independence. Lead an organization. Write a book. Create generational wealth.", limit:500 },
-  { q:"What's your educational background or how do you learn best?", prefix:"Education/learning: ", placeholder:"MBA from State U. Self-taught designer. Learn by doing. Visual learner. Avid reader.", limit:300 },
+  { q:"What's your educational background and how do you learn best?", prefix:"Education/learning: ", placeholder:"MBA from State U. Self-taught designer. Learn by doing. Visual learner. Avid reader.", limit:300 },
   { q:"Summarize your professional experience.", prefix:"Experience: ", placeholder:"15 years in marketing leadership. Former consultant. Built two startups. Managed teams of 20+.", limit:700 },
-  { q:"What are you currently working on?", prefix:"Current projects: ", placeholder:"Launching a product. Writing a proposal. Leading a rebrand. Job searching. Building a side business.", limit:700 },
-  { q:"What accomplishments or credentials should your AI know about?", prefix:"Accomplishments: ", placeholder:"Published author. Award-winning campaign. Doubled revenue in 18 months. Founded a nonprofit.", limit:700 },
+  { q:"What are you currently working on?", prefix:"Current projects: ", placeholder:"Launching a product. Leading a rebrand. Job searching. Building a side business.", limit:700 },
+  { q:"What accomplishments or credentials should your AI know about?", prefix:"Accomplishments: ", placeholder:"Published author. Award-winner. Doubled revenue in 18 months. Founded a nonprofit.", limit:700 },
   { q:"What naturally energizes you? What do you gravitate toward?", prefix:"I'm energized by: ", placeholder:"Solving hard problems. Coaching others. Building things. Deep conversation. Creative work.", limit:500 },
   { q:"What beliefs, philosophies, or principles guide your decisions?", prefix:"My guiding principles: ", placeholder:"Integrity first. Abundance mindset. Own your outcomes. Faith-driven. Evidence-based. Long-term thinking.", limit:500 },
   { q:"How do you prefer to communicate and interact with others?", prefix:"My communication style: ", placeholder:"Direct but warm. Collaborative. Action-oriented. Humor helps. Written over verbal.", limit:300 },
