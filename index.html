@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -702,13 +703,35 @@ const progressBar   = document.getElementById("progressBar");
 const prevBtn       = document.getElementById("prevBtn");
 const nextBtn       = document.getElementById("nextBtn");
 
-prevBtn.onclick = () => { if(pageIndex>0){ pageIndex--; renderPage(); } };
+prevBtn.onclick = () => { 
+  if(pageIndex>0){ 
+    pageIndex--; 
+    renderPage(); 
+    scrollToTop();
+  } 
+};
 nextBtn.onclick = () => {
   if(pageIndex>=2 && pageIndex<=1+s1len) saveAnswer(pageIndex-2);
   if(pageIndex>=3+s1len && pageIndex<=2+s1len+s2len) saveAnswer(s1len + (pageIndex-3-s1len));
   pageIndex++;
   renderPage();
+  scrollToTop();
 };
+
+function scrollToTop() {
+  // Try multiple scroll methods for maximum compatibility
+  // 1. Scroll the form container into view
+  const app = document.getElementById('app');
+  if (app) {
+    app.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  
+  // 2. Also post message to parent for iframe embedding
+  parent.postMessage({ scrollToTop: true }, "*");
+  
+  // 3. Fallback: scroll the window/document
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 function renderHeader(){
   document.getElementById("header").innerHTML = `
@@ -947,7 +970,7 @@ function renderSummaryHtml(){
     </div>
 
     <div class="email-section-top">
-      <h3>Save Your Results</h3>
+      <h3>📧 Save Your Results</h3>
       <div class="warning">
         <strong>Important:</strong> We don't store any of your answers. Once you leave this page, your results are gone forever. Email yourself a copy now!
       </div>
@@ -1079,7 +1102,7 @@ function buildEmailContent(sec1, sec2) {
   return `
 CONGRATULATIONS!
 
-You just completed the AI Coworker Blueprint™, and your AI is about to get a whole lot smarter about YOU.
+You just completed the AI Coworker Blueprint™—and your AI is about to get a whole lot smarter about YOU.
 
 YOUR PRIVACY, PROTECTED
 
@@ -1098,38 +1121,33 @@ WHAT TO DO WITH YOUR RESULTS
    • ChatGPT: Settings → Personalization → "What traits should ChatGPT have?"
    • Claude: Settings → Profile → Personal Preferences
    • Gemini: Settings → Saved Info
+
 3. COPY SECTION 2 (About You) below
 4. PASTE IT into:
    • ChatGPT: "What should ChatGPT know about you?"
    • Claude: Same Personal Preferences field
    • Gemini: Saved Info (may need multiple entries)
+
 5. START A CONVERSATION and watch the difference.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📄 SECTION 1: YOUR AI COWORKER
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 1: YOUR AI COWORKER
 
 ${sec1}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-📄 SECTION 2: ABOUT YOU
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 2: ABOUT YOU
 
 ${sec2}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 WANT TO GO DEEPER?
 
 This Blueprint is just the beginning. Here's how to keep building:
 
-→ VIDEO WORKSHOP (Coming Soon)
-I'm filming my Double Your Team in One Day workshop so that as many people as possible can learn to onboard and optimize their AI coworkers. Learn how to get 25% or more of your week back and a 40% boost in work quality for every member of your team!
+→ VIDEO SERIES (Coming Soon)
+I'm filming my Double Your Team in One Day workshop so that as many people as possible can learn how to onboard and optimize their AI coworkers. Learn how to get 25% or more of your week back and a 40% boost in work quality for every member of your team!
 
 → JOIN A COHORT
-Learn alongside other leaders in a live workshop beginning in January 2026. Limited spots, real transformation.
+Learn alongside other leaders in a live workshop. Limited spots, real transformation.
 https://nimbology.com/contact
 
 → 1:1 COACHING
@@ -1144,7 +1162,7 @@ Now go put your AI Coworker to work.
 Founder, Nimbology
 https://nimbology.com
 
-P.S. If someone you know could use an AI Coworker that actually gets them, send them my way. But please don't share the Blueprint link directly—have them reach out at nimbology.com/contact so we can make sure they're set up for success.
+P.S. If someone you know could use an AI Coworker that actually gets them, send them my way. But please don't share the Blueprint link directly. Have them reach out at nimbology.com/contact so we can make sure they're set up for success.
 `;
 }
 
@@ -1174,6 +1192,34 @@ window.onload = sendHeight;
 window.onresize = sendHeight;
 document.addEventListener('input', sendHeight);
 document.addEventListener('click', sendHeight);
+
+// Also send height after a short delay to catch dynamic content
+setInterval(sendHeight, 500);
 </script>
+
+<!--
+SQUARESPACE PARENT PAGE CODE:
+Add this to your Squarespace Code Injection (Settings → Advanced → Code Injection → Footer):
+
+<script>
+window.addEventListener('message', function(e) {
+  // Handle height adjustments
+  if (e.data && e.data.aiBlueprintHeight) {
+    var iframe = document.querySelector('iframe[src*="blueprint"]');
+    if (iframe) {
+      iframe.style.height = e.data.aiBlueprintHeight + 'px';
+    }
+  }
+  
+  // Handle scroll-to-top requests
+  if (e.data && e.data.scrollToTop) {
+    var iframe = document.querySelector('iframe[src*="blueprint"]');
+    if (iframe) {
+      iframe.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+});
+</script>
+-->
 </body>
 </html>
