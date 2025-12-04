@@ -5,115 +5,425 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>AI Coworker Blueprint™ | Nimbology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --navy: #0e2029;
+      --navy-light: #1e3a4c;
+      --teal: #0d9488;
+      --teal-light: #14b8a6;
+      --coral: #db4227;
+      --coral-dark: #c13820;
+      --blue: #3b82f6;
+      --blue-dark: #2563eb;
+      --gold: #f59e0b;
+      --green: #22c55e;
+      --red: #dc2626;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --bg-main: #f0f7f7;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+    }
+    
     * { box-sizing:border-box; }
-    body { margin:0; padding:0; background:transparent; font-family: 'Segoe UI', system-ui, sans-serif; }
+    
+    body { 
+      margin:0; 
+      padding:0; 
+      background: var(--bg-main); 
+      font-family: 'DM Sans', system-ui, sans-serif;
+      color: var(--gray-900);
+      line-height: 1.6;
+    }
+    
     #app {
-      max-width:600px;
-      margin:2rem auto;
-      background:#ebf5f6;
-      border-radius:8px;
-      overflow:hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      max-width: 600px;
+      margin: 1.5rem auto;
+      background: #fff;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
     }
 
-    #header { background:#fff; padding:1.25rem; }
-    #header img { vertical-align:middle; }
-    #header h1 { display:inline-block; margin:0 0 0 1rem; color:#0e2029; font-size:1.6rem; vertical-align:middle; }
-    .progress { height:8px; background:#e0e0e0; width:100%; }
-    .progress-bar { height:8px; background:#3b82f6; width:0%; transition:width .3s ease; }
-    #formContainer { padding:1.5rem; }
-    .question { margin-bottom:1.5rem; }
-    .question h2 { color:#0e2029; margin-bottom:0.75rem; }
-    .question p { line-height:1.6; color:#333; }
-    label { display:block; margin-bottom:.5rem; font-weight:600; color:#0e2029; }
-    .prefix-display { 
-      background:#fff; 
-      padding:0.6rem 0.75rem; 
-      border-radius:4px; 
-      margin-bottom:0.5rem; 
-      font-style:italic; 
-      color:#555;
-      border-left: 3px solid #3b82f6;
+    /* ========== HEADER ========== */
+    #header { 
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      padding: 1.5rem;
+      text-align: center;
     }
+    #header img { 
+      max-width: 160px;
+      height: auto;
+      margin-bottom: 0.5rem;
+    }
+    #header h1 { 
+      margin: 0;
+      color: #fff; 
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    
+    /* ========== PROGRESS BAR ========== */
+    .progress { 
+      height: 4px; 
+      background: var(--gray-200); 
+      width: 100%; 
+    }
+    .progress-bar { 
+      height: 4px; 
+      background: linear-gradient(90deg, var(--teal) 0%, var(--blue) 100%);
+      width: 0%; 
+      transition: width 0.4s ease; 
+    }
+    
+    /* ========== FORM CONTAINER ========== */
+    #formContainer { 
+      padding: 1.75rem 1.5rem; 
+      min-height: 300px;
+    }
+    
+    .question { 
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .question h2 { 
+      color: var(--navy);
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin: 0 0 0.75rem 0;
+      letter-spacing: -0.02em;
+    }
+    
+    .question p { 
+      line-height: 1.7; 
+      color: var(--gray-600);
+      margin: 0 0 1rem 0;
+    }
+    
+    .question label { 
+      display: block; 
+      margin-bottom: 0.75rem; 
+      font-weight: 600; 
+      color: var(--navy);
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+    
+    /* ========== CHARACTER BUDGET BAR ========== */
+    .char-budget {
+      background: var(--gray-100);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+    }
+    .char-budget-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .char-budget-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .char-budget-count {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+    .char-budget-count.warning {
+      color: var(--gold);
+    }
+    .char-budget-count.over {
+      color: var(--red);
+    }
+    .char-budget-bar-bg {
+      height: 8px;
+      background: var(--gray-200);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    .char-budget-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal) 0%, var(--blue) 100%);
+      border-radius: var(--radius-full);
+      transition: width 0.3s ease, background 0.3s ease;
+    }
+    .char-budget-bar-fill.warning {
+      background: linear-gradient(90deg, var(--gold) 0%, #fbbf24 100%);
+    }
+    .char-budget-bar-fill.over {
+      background: linear-gradient(90deg, var(--red) 0%, #ef4444 100%);
+    }
+    .char-budget-message {
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-sm);
+      display: none;
+    }
+    .char-budget-message.warning {
+      display: block;
+      background: #fef3c7;
+      color: #92400e;
+    }
+    .char-budget-message.over {
+      display: block;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+    
+    /* ========== PREFIX DISPLAY ========== */
+    .prefix-display { 
+      background: linear-gradient(135deg, var(--gray-50) 0%, #fff 100%);
+      padding: 0.75rem 1rem; 
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.75rem; 
+      font-style: italic; 
+      color: var(--gray-600);
+      border-left: 3px solid var(--teal);
+      font-size: 0.95rem;
+    }
+    
+    /* ========== FORM INPUTS ========== */
     input[type=text], input[type=email], textarea {
-      width:100%; 
-      padding:.65rem; 
-      font-size:1rem; 
-      border:1px solid #ccc; 
-      border-radius:4px;
+      width: 100%; 
+      padding: 0.85rem 1rem; 
+      font-size: 1rem; 
+      font-family: inherit;
+      border: 2px solid var(--gray-200); 
+      border-radius: var(--radius-md);
       transition: border-color 0.2s, box-shadow 0.2s;
+      background: #fff;
     }
     input[type=text]:focus, input[type=email]:focus, textarea:focus {
       outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1);
     }
-    textarea { resize:vertical; min-height:110px; }
-    .char-count { font-size:.875rem; color:#555; margin-top:.35rem; }
-    .controls { display:flex; justify-content:space-between; padding:1rem 1.5rem; background:#fff; border-top: 1px solid #eee; }
-    button {
-      padding:.65rem 1.4rem; 
-      font-size:1rem; 
-      font-weight: 500;
-      border:none; 
-      border-radius:6px; 
-      cursor:pointer;
-      background:#db4227; 
-      color:#fff;
-      transition: background 0.2s, transform 0.1s;
-    }
-    button:hover:not([disabled]) {
-      background: #c13820;
-      transform: translateY(-1px);
-    }
-    button[disabled] { background:#ccc; cursor:default; transform: none; }
-    .copy-btn { 
-      margin-top: 0.75rem;
-      background: #0e2029;
-    }
-    .copy-btn:hover {
-      background: #1a3040;
-    }
-    .summary { 
-      background:#fff; 
-      padding:1rem; 
-      border:1px solid #ddd; 
-      border-radius:6px; 
-      white-space:pre-wrap; 
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: #333;
-      max-height: 200px;
-      overflow-y: auto;
-    }
-    #footer {
-      background:#0e2029; 
-      color:#fff; 
-      text-align:center; 
-      padding:1rem 1.5rem; 
-      font-size:.85rem;
+    textarea { 
+      resize: vertical; 
+      min-height: 120px; 
       line-height: 1.6;
     }
-    #footer a { color: #7dd3fc; }
+    textarea::placeholder {
+      color: var(--gray-400);
+    }
+    
+    /* ========== TAG SELECTOR ========== */
+    .tag-selector {
+      margin-bottom: 1rem;
+    }
+    .tag-helper {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .tag-helper::before {
+      content: "💡";
+      font-size: 1rem;
+    }
+    .tag-category {
+      margin-bottom: 1rem;
+    }
+    .tag-category-label {
+      font-size: 0.75rem;
+      color: var(--gray-500);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tag-chip {
+      padding: 0.45rem 0.9rem;
+      background: #fff;
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      color: var(--gray-700);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+      font-weight: 500;
+    }
+    .tag-chip:hover {
+      border-color: var(--teal);
+      background: rgba(13, 148, 136, 0.05);
+      transform: translateY(-1px);
+    }
+    .tag-chip.selected {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #fff;
+    }
+    .tag-chip.selected:hover {
+      background: var(--teal-light);
+      border-color: var(--teal-light);
+    }
+    .clear-tags {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+    .clear-tags:hover {
+      color: var(--red);
+    }
+    
+    /* ========== CONTROLS ========== */
+    .controls { 
+      display: flex; 
+      justify-content: space-between; 
+      padding: 1rem 1.5rem; 
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-200);
+    }
+    
+    button {
+      padding: 0.75rem 1.75rem; 
+      font-size: 1rem; 
+      font-weight: 600;
+      font-family: inherit;
+      border: none; 
+      border-radius: var(--radius-md); 
+      cursor: pointer;
+      background: var(--coral); 
+      color: #fff;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    button:hover:not([disabled]) {
+      background: var(--coral-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(219, 66, 39, 0.3);
+    }
+    button[disabled] { 
+      background: var(--gray-300); 
+      cursor: not-allowed; 
+      transform: none;
+      box-shadow: none;
+    }
+    
+    #prevBtn {
+      background: #fff;
+      color: var(--gray-600);
+      border: 2px solid var(--gray-300);
+    }
+    #prevBtn:hover:not([disabled]) {
+      background: var(--gray-50);
+      border-color: var(--gray-400);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    /* ========== COPY BUTTONS ========== */
+    .copy-btn { 
+      margin-top: 0.75rem;
+      background: var(--navy);
+      width: 100%;
+      justify-content: center;
+    }
+    .copy-btn:hover {
+      background: var(--navy-light);
+      box-shadow: 0 4px 12px rgba(14, 32, 41, 0.3);
+    }
+    
+    /* ========== SUMMARY BOX ========== */
+    .summary { 
+      background: var(--gray-50); 
+      padding: 1rem; 
+      border: 2px solid var(--gray-200); 
+      border-radius: var(--radius-md); 
+      white-space: pre-wrap; 
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--gray-700);
+      max-height: 180px;
+      overflow-y: auto;
+    }
+    
+    /* ========== FOOTER ========== */
+    #footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      padding: 1.25rem 1.5rem;
+      font-size: 0.8rem;
+      line-height: 1.7;
+    }
+    #footer a { 
+      color: var(--teal-light); 
+      text-decoration: none;
+    }
+    #footer a:hover {
+      text-decoration: underline;
+    }
+    
+    /* ========== TOAST ========== */
     #toast {
       position: fixed;
-      top: 2rem;
+      top: 1.5rem;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateY(-20px);
       background: #fff;
-      color: #222;
-      padding: 1rem 1.75rem;
-      border-radius: 8px;
+      color: var(--gray-900);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-md);
       display: none;
-      font-size: 1.05rem;
-      font-weight: 500;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      font-size: 0.95rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
       z-index: 9999;
-      border: 2px solid #22c55e;
+      border-left: 4px solid var(--green);
+      animation: slideDown 0.3s ease forwards;
+    }
+    @keyframes slideDown {
+      to { transform: translateX(-50%) translateY(0); }
     }
 
-    /* Platform Tabs */
+    /* ========== PLATFORM TABS ========== */
     .platform-tabs {
       display: flex;
       gap: 0.5rem;
@@ -121,121 +431,96 @@
       flex-wrap: wrap;
     }
     .tab-btn {
-      padding: 0.5rem 1rem;
-      background: #e5e7eb;
-      border: none;
-      border-radius: 6px;
+      padding: 0.6rem 1.25rem;
+      background: #fff;
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius-md);
       cursor: pointer;
       font-size: 0.9rem;
-      font-weight: 500;
-      color: #374151;
+      font-weight: 600;
+      font-family: inherit;
+      color: var(--gray-600);
       transition: all 0.2s;
     }
     .tab-btn:hover {
-      background: #d1d5db;
+      border-color: var(--teal);
+      color: var(--teal);
     }
     .tab-btn.active {
-      background: #3b82f6;
+      background: var(--teal);
+      border-color: var(--teal);
       color: white;
     }
+    
     .platform-instructions {
-      background: #fff;
-      padding: 1rem;
-      border-radius: 6px;
+      background: var(--gray-50);
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-md);
       margin-bottom: 1.25rem;
-      border-left: 3px solid #3b82f6;
+      border-left: 4px solid var(--teal);
     }
     .platform-instructions p {
       margin: 0 0 0.5rem 0;
-      font-weight: 600;
-      color: #0e2029;
+      font-weight: 700;
+      color: var(--navy);
     }
     .platform-instructions ul {
       margin: 0;
       padding-left: 1.25rem;
     }
     .platform-instructions li {
-      margin-bottom: 0.25rem;
-      color: #333;
+      margin-bottom: 0.35rem;
+      color: var(--gray-600);
     }
 
-    /* Section headers on final page */
+    /* ========== RESULT HEADERS ========== */
     .result-section-header {
       display: flex;
       align-items: center;
-      margin: 1.5rem 0 0.75rem 0;
+      margin: 1.75rem 0 0.75rem 0;
     }
     .result-section-header h3 {
       margin: 0;
-      color: #0e2029;
+      color: var(--navy);
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
     }
     .section-number {
-      background: #3b82f6;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--blue) 100%);
       color: white;
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 0.9rem;
       margin-right: 0.75rem;
     }
 
-    /* Video CTA */
-    .video-cta {
-      background: linear-gradient(135deg, #0e2029 0%, #1e3a4c 100%);
-      padding: 1.25rem;
-      border-radius: 8px;
-      margin: 1.5rem 0;
-      text-align: center;
-    }
-    .video-cta p {
-      color: #fff;
-      margin: 0 0 0.75rem 0;
-    }
-    .video-cta p:first-child {
-      font-weight: 600;
-      font-size: 1.05rem;
-    }
-    .video-cta p:last-of-type {
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
-    .video-cta button {
-      background: #3b82f6;
-      margin-top: 0.5rem;
-    }
-    .video-cta button:hover {
-      background: #2563eb;
-    }
-
-    /* Email section - now prominent at top */
+    /* ========== EMAIL SECTION ========== */
     .email-section-top {
-      background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-      padding: 1.25rem;
-      border-radius: 8px;
-      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--coral) 0%, var(--coral-dark) 100%);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 1.75rem;
     }
     .email-section-top h3 {
       color: #fff;
-      margin: 0 0 0.5rem 0;
-      font-size: 1.1rem;
-    }
-    .email-section-top p {
-      color: rgba(255,255,255,0.95);
-      margin: 0 0 1rem 0;
-      font-size: 0.95rem;
-      line-height: 1.5;
+      margin: 0 0 0.75rem 0;
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
     }
     .email-section-top .warning {
       background: rgba(255,255,255,0.15);
-      padding: 0.75rem;
-      border-radius: 6px;
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius-sm);
       margin-bottom: 1rem;
       font-size: 0.9rem;
       color: #fff;
+      line-height: 1.5;
     }
     .email-input-row {
       display: flex;
@@ -245,22 +530,23 @@
     .email-input-row input[type="email"] {
       flex: 1;
       min-width: 200px;
-      padding: 0.75rem;
+      padding: 0.85rem 1rem;
       border: none;
-      border-radius: 6px;
+      border-radius: var(--radius-md);
     }
     .email-input-row button {
       background: #fff;
-      color: #dc2626;
-      font-weight: 600;
-      padding: 0.75rem 1.5rem;
+      color: var(--coral);
+      font-weight: 700;
+      padding: 0.85rem 1.5rem;
     }
     .email-input-row button:hover {
-      background: #f3f4f6;
-      transform: translateY(-1px);
+      background: var(--gray-100);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
     .email-alt {
-      margin-top: 0.75rem;
+      margin-top: 0.85rem;
       text-align: center;
     }
     .email-alt a {
@@ -268,116 +554,52 @@
       font-size: 0.9rem;
       cursor: pointer;
       text-decoration: underline;
+      font-weight: 500;
     }
     .email-alt a:hover {
       color: #fff;
     }
 
-    /* Celebration header */
+    /* ========== CELEBRATION ========== */
     .celebration {
       text-align: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
     }
     .celebration h2 {
-      color: #0e2029;
-      font-size: 1.75rem;
+      color: var(--navy);
+      font-family: 'Fraunces', serif;
+      font-size: 2rem;
+      font-weight: 700;
       margin: 0 0 0.5rem 0;
+      letter-spacing: -0.02em;
     }
     .celebration p {
-      color: #333;
-      font-size: 1.05rem;
+      color: var(--gray-600);
+      font-size: 1.1rem;
       margin: 0;
     }
 
-    hr {
-      border: none;
-      border-top: 1px solid #ddd;
-      margin: 1.5rem 0;
-    }
-
-    /* ========== TAG SELECTOR STYLES ========== */
-    .tag-selector {
-      margin-bottom: 0.75rem;
-    }
-    .tag-category {
-      margin-bottom: 0.75rem;
-    }
-    .tag-category-label {
-      font-size: 0.8rem;
-      color: #6b7280;
-      margin-bottom: 0.4rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.025em;
-    }
-    .tag-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .tag-chip {
-      padding: 0.4rem 0.75rem;
-      background: #fff;
-      border: 1.5px solid #d1d5db;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      color: #374151;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      user-select: none;
-    }
-    .tag-chip:hover {
-      border-color: #3b82f6;
-      background: #eff6ff;
-    }
-    .tag-chip.selected {
-      background: #3b82f6;
-      border-color: #3b82f6;
-      color: #fff;
-    }
-    .tag-chip.selected:hover {
-      background: #2563eb;
-      border-color: #2563eb;
-    }
-    .tag-helper {
-      font-size: 0.85rem;
-      color: #6b7280;
-      margin-bottom: 0.75rem;
-      font-style: italic;
-    }
-    .clear-tags {
-      display: inline-block;
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      color: #6b7280;
-      cursor: pointer;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .clear-tags:hover {
-      color: #dc2626;
-      text-decoration: underline;
-    }
-
-    /* Next steps section */
+    /* ========== NEXT STEPS ========== */
     .next-steps {
       background: #fff;
-      padding: 1.25rem;
-      border-radius: 8px;
-      margin-top: 1.5rem;
-      border: 2px solid #e5e7eb;
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      margin-top: 1.75rem;
+      border: 2px solid var(--gray-200);
     }
     .next-steps h3 {
-      color: #0e2029;
-      margin: 0 0 1rem 0;
-      font-size: 1.1rem;
+      color: var(--navy);
+      margin: 0 0 1.25rem 0;
+      font-family: 'Fraunces', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
     }
     .next-step-item {
       display: flex;
       align-items: flex-start;
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #e5e7eb;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--gray-200);
     }
     .next-step-item:last-child {
       margin-bottom: 0;
@@ -385,34 +607,51 @@
       border-bottom: none;
     }
     .next-step-icon {
-      width: 36px;
-      height: 36px;
-      background: #3b82f6;
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--blue) 100%);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-right: 1rem;
       flex-shrink: 0;
-      font-size: 1rem;
+      font-size: 1.25rem;
     }
     .next-step-content h4 {
-      margin: 0 0 0.25rem 0;
-      color: #0e2029;
+      margin: 0 0 0.35rem 0;
+      color: var(--navy);
       font-size: 1rem;
+      font-weight: 600;
     }
     .next-step-content p {
       margin: 0;
-      color: #6b7280;
+      color: var(--gray-500);
       font-size: 0.9rem;
-      line-height: 1.4;
+      line-height: 1.5;
     }
     .next-step-content a {
-      color: #3b82f6;
+      color: var(--teal);
       text-decoration: none;
+      font-weight: 600;
     }
     .next-step-content a:hover {
       text-decoration: underline;
+    }
+
+    /* ========== INTRO SCREENS ========== */
+    .intro-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .intro-list {
+      text-align: left;
+      max-width: 400px;
+      margin: 1rem auto;
+    }
+    .intro-list li {
+      margin-bottom: 0.5rem;
+      color: var(--gray-600);
     }
   </style>
 </head>
@@ -420,22 +659,20 @@
   <div id="app">
     <div id="header">
       <img src="https://images.squarespace-cdn.com/content/672bffc68fd9b922d9f34a55/08a58d80-4436-4c37-a3b6-e3bb7e086c45/Strategic+Advisory+%282%29.png?content-type=image%2Fpng"
-           width="200" alt="Nimbology logo"/>
+           alt="Nimbology logo"/>
       <h1>AI Coworker Blueprint™</h1>
     </div>
     <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
     <div id="formContainer"></div>
     <div class="controls">
-      <button id="prevBtn" disabled>Back</button>
-      <button id="nextBtn">Next</button>
+      <button id="prevBtn" disabled>← Back</button>
+      <button id="nextBtn">Next →</button>
     </div>
     <div id="footer">
       <div>
-        *This form was custom-built with privacy in mind.<br>
-        No results are stored or visible to third parties.<br>
-        Your data stays yours—always.<br><br>
-        This resource is for Nimbology clients and workshop participants.<br>
-        Want to share it? Connect them with us at <a href="https://nimbology.com/contact">nimbology.com/contact</a>.
+        Built with privacy in mind. No data stored. No third-party access.<br>
+        Your information stays yours—always.<br><br>
+        Questions? <a href="https://nimbology.com/contact">nimbology.com/contact</a>
       </div>
     </div>
   </div>
@@ -451,9 +688,12 @@ const EMAILJS_SERVICE_ID = 'service_gpqnffd';
 const EMAILJS_TEMPLATE_ID= 'template_roe9gvx';
 emailjs.init(EMAILJS_USER_ID);
 
+// ==== CONSTANTS ====
+const CHAR_LIMIT = 1500;
+const WARNING_THRESHOLD = 0.8; // 80%
+
 // ==== TAG OPTIONS FOR ALL QUESTIONS ====
 const tagOptions = {
-  // Section 1 Tags
   aiName: {
     "Popular Choices": ["Javi", "Max", "Sage", "Atlas", "Quinn", "Nova", "Aria", "Echo", "Kai", "Robin"]
   },
@@ -533,7 +773,6 @@ const tagOptions = {
     "Personal": ["The best version of myself", "More confident", "More effective", "More balanced", "Financially free", "Fulfilled"]
   },
 
-  // Section 2 Tags
   yourName: {
     "Formats": ["[First name]", "[Nickname]", "Dr. [Last name]", "Coach", "Boss", "[Title + Name]"]
   },
@@ -632,26 +871,31 @@ const tagOptions = {
 // ==== INTRO & SECTION INTRO SCREENS ====
 const intro = {
   title: "Welcome!",
-  body: `<strong>You're a few steps away from building your personal AI Coworker.</strong><br><br>
-You'll define its personality and teach it about you. At the end, you'll get your personalized setup ready to paste into ChatGPT, Claude, or Gemini.<br><br>
-Takes about 15 minutes. Worth every one of them.<br><br>
-When you're ready, click <strong>Start</strong>.`
+  body: `<div class="intro-icon">🤖</div>
+<strong>You're about to build your personal AI Coworker.</strong><br><br>
+In the next 15 minutes, you'll:<br>
+<ul class="intro-list">
+<li>Define your AI's personality & strengths</li>
+<li>Teach it about you, your goals & values</li>
+<li>Get a personalized setup for ChatGPT, Claude, or Gemini</li>
+</ul>
+Ready? Let's go.`
 };
 
 const section1Intro = {
-  title: "Section 1: Define Your AI Coworker",
-  body: `<strong>What kind of partner do you need?</strong><br><br>
-Think about personality, tone, strengths, values—and what you <em>don't</em> want.<br><br>
-You have up to 1,500 characters total for this section. Be specific. Be bold.<br><br>
-Click <strong>Next</strong> when you're ready.`
+  title: "Section 1 of 2",
+  body: `<div class="intro-icon">🎯</div>
+<strong>Define Your AI Coworker</strong><br><br>
+What kind of partner do you need? Think about personality, tone, values—and what you <em>don't</em> want.<br><br>
+<strong>Budget: 1,500 characters</strong> for this section. Choose wisely—or go over and trim later. Note that you can unselect options at any time and you can go back.`
 };
 
 const section2Intro = {
-  title: "Section 2: Teach Your AI About You",
-  body: `<strong>Now it's your turn.</strong><br><br>
+  title: "Section 2 of 2",
+  body: `<div class="intro-icon">👤</div>
+<strong>Teach Your AI About You</strong><br><br>
 Share your roles, goals, values, and how you operate. The more your AI knows, the better it can support you.<br><br>
-Be honest. Be aspirational. You can always update this later.<br><br>
-Up to 1,500 characters for this section.`
+<strong>Budget: 1,500 characters</strong> for this section.`
 };
 
 // ==== SECTION 1: DEFINE YOUR AI COWORKER ====
@@ -694,8 +938,6 @@ const s1len = section1.length, s2len = section2.length;
 const totalPages = s1len + s2len + 5;
 let pageIndex = 0;
 const answers = Array(s1len + s2len).fill("");
-
-// Track selected tags per question index
 const selectedTags = {};
 
 const formContainer = document.getElementById("formContainer");
@@ -719,24 +961,18 @@ nextBtn.onclick = () => {
 };
 
 function scrollToTop() {
-  // Try multiple scroll methods for maximum compatibility
-  // 1. Scroll the form container into view
   const app = document.getElementById('app');
   if (app) {
     app.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-  
-  // 2. Also post message to parent for iframe embedding
   parent.postMessage({ scrollToTop: true }, "*");
-  
-  // 3. Fallback: scroll the window/document
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function renderHeader(){
   document.getElementById("header").innerHTML = `
     <img src="https://images.squarespace-cdn.com/content/672bffc68fd9b922d9f34a55/08a58d80-4436-4c37-a3b6-e3bb7e086c45/Strategic+Advisory+%282%29.png?content-type=image%2Fpng"
-         width="200" alt="Nimbology logo"/>
+         alt="Nimbology logo"/>
     <h1>AI Coworker Blueprint™</h1>`;
 }
 
@@ -747,26 +983,27 @@ function renderPage(){
 
   prevBtn.disabled = pageIndex===0;
   nextBtn.style.display = "inline-block";
+  nextBtn.disabled = false;
 
   if(pageIndex===0){
-    nextBtn.innerText = "Start";
-    formContainer.innerHTML = `<div class="question"><h2>${intro.title}</h2><p>${intro.body}</p></div>`;
+    nextBtn.innerText = "Let's Go →";
+    formContainer.innerHTML = `<div class="question" style="text-align:center;"><h2>${intro.title}</h2><p>${intro.body}</p></div>`;
   }
   else if(pageIndex===1){
-    nextBtn.innerText = "Next";
-    formContainer.innerHTML = `<div class="question"><h2>${section1Intro.title}</h2><p>${section1Intro.body}</p></div>`;
+    nextBtn.innerText = "Next →";
+    formContainer.innerHTML = `<div class="question" style="text-align:center;"><h2>${section1Intro.title}</h2><p>${section1Intro.body}</p></div>`;
   }
   else if(pageIndex>=2 && pageIndex<=1+s1len){
-    nextBtn.innerText = "Next";
-    renderQuestion(section1[pageIndex-2], pageIndex-2);
+    nextBtn.innerText = "Next →";
+    renderQuestion(section1[pageIndex-2], pageIndex-2, 1);
   }
   else if(pageIndex===2+s1len){
-    nextBtn.innerText = "Next";
-    formContainer.innerHTML = `<div class="question"><h2>${section2Intro.title}</h2><p>${section2Intro.body}</p></div>`;
+    nextBtn.innerText = "Next →";
+    formContainer.innerHTML = `<div class="question" style="text-align:center;"><h2>${section2Intro.title}</h2><p>${section2Intro.body}</p></div>`;
   }
   else if(pageIndex>=3+s1len && pageIndex<=2+s1len+s2len){
-    nextBtn.innerText = "Next";
-    renderQuestion(section2[pageIndex-3-s1len], s1len + (pageIndex-3-s1len));
+    nextBtn.innerText = "Next →";
+    renderQuestion(section2[pageIndex-3-s1len], s1len + (pageIndex-3-s1len), 2);
   }
   else if(pageIndex===3+s1len+s2len){
     nextBtn.style.display = "none";
@@ -776,18 +1013,57 @@ function renderPage(){
     nextBtn.style.display = "none";
     formContainer.innerHTML = `
       <div class="celebration">
-        <h2>You're All Set!</h2>
-        <p>Your AI Coworker is configured and ready to work.</p>
+        <h2>You're All Set! 🎉</h2>
+        <p>Your AI Coworker is ready to work.</p>
       </div>
-      <p>Start a conversation with your AI and see the difference. If you have questions or want to unlock more, reach out anytime:</p>
-      <p><a href="https://nimbology.com/contact" target="_blank">nimbology.com/contact</a></p>`;
+      <p style="text-align:center;">Start a conversation with your AI and see the difference.<br><br>
+      Questions? <a href="https://nimbology.com/contact" target="_blank">nimbology.com/contact</a></p>`;
   }
 }
 
-function renderQuestion(item, idx){
+function calculateSectionTotal(sectionNum) {
+  let sum = 0;
+  const start = sectionNum === 1 ? 0 : s1len;
+  const end = sectionNum === 1 ? s1len : s1len + s2len;
+  const section = sectionNum === 1 ? section1 : section2;
+  
+  for(let i = start; i < end; i++) {
+    const sectionIdx = sectionNum === 1 ? i : i - s1len;
+    const prefix = section[sectionIdx]?.prefix || "";
+    const answer = answers[i] || "";
+    if (answer.trim()) {
+      sum += prefix.length + answer.length + 2; // +2 for ". " separator
+    }
+  }
+  return sum;
+}
+
+function renderQuestion(item, idx, sectionNum){
   const prefixHtml = item.prefix ? `<div class="prefix-display">${item.prefix}</div>` : '';
   
-  // Check if this question has tags (and isn't freeformOnly)
+  // Calculate section total
+  const sectionTotal = calculateSectionTotal(sectionNum);
+  const percentage = Math.min((sectionTotal / CHAR_LIMIT) * 100, 100);
+  const isWarning = percentage >= WARNING_THRESHOLD * 100 && percentage < 100;
+  const isOver = sectionTotal > CHAR_LIMIT;
+  
+  // Budget bar HTML
+  const budgetHtml = `
+    <div class="char-budget">
+      <div class="char-budget-header">
+        <span class="char-budget-label">Section ${sectionNum} Budget</span>
+        <span class="char-budget-count ${isWarning ? 'warning' : ''} ${isOver ? 'over' : ''}">${sectionTotal} / ${CHAR_LIMIT}</span>
+      </div>
+      <div class="char-budget-bar-bg">
+        <div class="char-budget-bar-fill ${isWarning ? 'warning' : ''} ${isOver ? 'over' : ''}" style="width: ${percentage}%"></div>
+      </div>
+      <div class="char-budget-message ${isWarning && !isOver ? 'warning' : ''} ${isOver ? 'over' : ''}">
+        ${isOver ? "⚠️ You're over budget. You can still continue, but you may need to trim later." : ""}
+        ${isWarning && !isOver ? "Getting close! Choose your remaining options carefully." : ""}
+      </div>
+    </div>`;
+  
+  // Tag selector HTML
   let tagSelectorHtml = '';
   if (item.tags && tagOptions[item.tags] && !item.freeformOnly) {
     tagSelectorHtml = renderTagSelector(item.tags, idx);
@@ -799,23 +1075,22 @@ function renderQuestion(item, idx){
   
   formContainer.innerHTML = `
     <div class="question">
+      ${budgetHtml}
       <label>${item.q}</label>
       ${prefixHtml}
       ${tagSelectorHtml}
       <textarea id="inputField" placeholder="${placeholderText}"></textarea>
-      <div class="char-count" id="charCount"></div>
     </div>`;
   
   const ta = document.getElementById("inputField");
   ta.value = answers[idx] || "";
-  ta.maxLength = item.limit;
   ta.oninput = () => {
     answers[idx] = ta.value;
-    updateCharCount(idx);
+    updateBudgetDisplay(sectionNum);
   };
   
-  // Store current context
   window.currentIdx = idx;
+  window.currentSectionNum = sectionNum;
   window.currentTags = item.tags || null;
   
   // Restore selected tag states
@@ -826,12 +1101,43 @@ function renderQuestion(item, idx){
     });
   }
   
-  // Attach tag click handlers
   if (item.tags && !item.freeformOnly) {
     attachTagHandlers(idx);
   }
+}
+
+function updateBudgetDisplay(sectionNum) {
+  const sectionTotal = calculateSectionTotal(sectionNum);
+  const percentage = Math.min((sectionTotal / CHAR_LIMIT) * 100, 100);
+  const isWarning = percentage >= WARNING_THRESHOLD * 100 && percentage < 100;
+  const isOver = sectionTotal > CHAR_LIMIT;
   
-  updateCharCount(idx);
+  const countEl = document.querySelector('.char-budget-count');
+  const barEl = document.querySelector('.char-budget-bar-fill');
+  const msgEl = document.querySelector('.char-budget-message');
+  
+  if (countEl) {
+    countEl.textContent = `${sectionTotal} / ${CHAR_LIMIT}`;
+    countEl.className = 'char-budget-count' + (isWarning ? ' warning' : '') + (isOver ? ' over' : '');
+  }
+  
+  if (barEl) {
+    barEl.style.width = `${percentage}%`;
+    barEl.className = 'char-budget-bar-fill' + (isWarning ? ' warning' : '') + (isOver ? ' over' : '');
+  }
+  
+  if (msgEl) {
+    msgEl.className = 'char-budget-message' + (isWarning && !isOver ? ' warning' : '') + (isOver ? ' over' : '');
+    if (isOver) {
+      msgEl.innerHTML = "⚠️ You're over budget. You can still continue, but you may need to trim later.";
+    } else if (isWarning) {
+      msgEl.innerHTML = "Getting close! Choose your remaining options carefully.";
+    } else {
+      msgEl.innerHTML = "";
+    }
+  }
+  
+  // No longer disabling the Next button - soft warning only
 }
 
 function renderTagSelector(tagType, idx) {
@@ -850,7 +1156,7 @@ function renderTagSelector(tagType, idx) {
     html += `</div></div>`;
   }
   
-  html += `<a class="clear-tags" onclick="clearAllTags(${idx})">Clear all selections</a>`;
+  html += `<a class="clear-tags" onclick="clearAllTags(${idx})">✕ Clear selections</a>`;
   html += '</div>';
   return html;
 }
@@ -865,15 +1171,12 @@ function toggleTag(chip, idx) {
   const tag = chip.dataset.tag;
   const ta = document.getElementById("inputField");
   
-  // Initialize selectedTags for this index if needed
   if (!selectedTags[idx]) selectedTags[idx] = [];
   
   if (chip.classList.contains('selected')) {
-    // Deselect: remove from array and textarea
     chip.classList.remove('selected');
     selectedTags[idx] = selectedTags[idx].filter(t => t !== tag);
     
-    // Remove from textarea - handle various formats
     let currentText = ta.value;
     currentText = currentText.replace(new RegExp(tag + '\\.\\s*', 'g'), '');
     currentText = currentText.replace(new RegExp(tag + ',\\s*', 'g'), '');
@@ -882,11 +1185,9 @@ function toggleTag(chip, idx) {
     currentText = currentText.replace(/[,.\s]+$/, '').trim();
     ta.value = currentText;
   } else {
-    // Select: add to array and textarea
     chip.classList.add('selected');
     selectedTags[idx].push(tag);
     
-    // Add to textarea
     if (ta.value.trim() === '') {
       ta.value = tag;
     } else {
@@ -900,7 +1201,7 @@ function toggleTag(chip, idx) {
   }
   
   answers[idx] = ta.value;
-  updateCharCount(idx);
+  updateBudgetDisplay(window.currentSectionNum);
 }
 
 function clearAllTags(idx) {
@@ -911,27 +1212,7 @@ function clearAllTags(idx) {
   const ta = document.getElementById("inputField");
   ta.value = '';
   answers[idx] = '';
-  updateCharCount(idx);
-}
-
-function updateCharCount(idx){
-  let sum = 0;
-  const isSection1 = pageIndex <= 1 + s1len;
-  const start = isSection1 ? 0 : s1len;
-  const end = idx;
-  const section = isSection1 ? section1 : section2;
-  
-  for(let i = start; i <= end; i++) {
-    const sectionIndex = isSection1 ? i : i - s1len;
-    const prefix = section[sectionIndex]?.prefix || "";
-    const answer = answers[i] || "";
-    sum += prefix.length + answer.length + 1;
-  }
-  
-  const cc = document.getElementById("charCount");
-  cc.innerText = `Section total: ${sum}/1500`;
-  cc.style.color = sum > 1500 ? "#dc2626" : "#555";
-  nextBtn.disabled = sum > 1500;
+  updateBudgetDisplay(window.currentSectionNum);
 }
 
 function saveAnswer(idx){
@@ -962,10 +1243,15 @@ function showInstructions(platform) {
 function renderSummaryHtml(){
   const sec1 = buildSectionText(0, s1len, section1);
   const sec2 = buildSectionText(s1len, s1len + s2len, section2);
+  const sec1Len = sec1.length;
+  const sec2Len = sec2.length;
+  
+  const sec1Status = sec1Len > CHAR_LIMIT ? `<span style="color:var(--red);">(${sec1Len} chars - over limit, may need trimming)</span>` : `<span style="color:var(--green);">(${sec1Len} chars ✓)</span>`;
+  const sec2Status = sec2Len > CHAR_LIMIT ? `<span style="color:var(--red);">(${sec2Len} chars - over limit, may need trimming)</span>` : `<span style="color:var(--green);">(${sec2Len} chars ✓)</span>`;
   
   return `
     <div class="celebration">
-      <h2>You Did It!</h2>
+      <h2>You Did It! 🎉</h2>
       <p>Your AI Coworker is ready to meet you.</p>
     </div>
 
@@ -1018,17 +1304,17 @@ function renderSummaryHtml(){
 
     <div class="result-section-header">
       <div class="section-number">1</div>
-      <h3>Your AI Coworker</h3>
+      <h3>Your AI Coworker ${sec1Status}</h3>
     </div>
     <div class="summary" id="sum1">${sec1}</div>
-    <button class="copy-btn" onclick="copyToClipboard('sum1')">Copy Section 1</button>
+    <button class="copy-btn" onclick="copyToClipboard('sum1')">📋 Copy Section 1</button>
 
     <div class="result-section-header">
       <div class="section-number">2</div>
-      <h3>About You</h3>
+      <h3>About You ${sec2Status}</h3>
     </div>
     <div class="summary" id="sum2">${sec2}</div>
-    <button class="copy-btn" onclick="copyToClipboard('sum2')">Copy Section 2</button>
+    <button class="copy-btn" onclick="copyToClipboard('sum2')">📋 Copy Section 2</button>
 
     <div class="next-steps">
       <h3>What's Next?</h3>
@@ -1037,7 +1323,7 @@ function renderSummaryHtml(){
         <div class="next-step-icon">🎬</div>
         <div class="next-step-content">
           <h4>Watch the Video Series (Coming Soon)</h4>
-          <p>I'm building a video walkthrough that explains the thinking behind every question—and shows you how to get 10x more value from your AI Coworker.</p>
+          <p>Learn the thinking behind every question—and see how I configured my own AI.</p>
         </div>
       </div>
       
@@ -1045,7 +1331,7 @@ function renderSummaryHtml(){
         <div class="next-step-icon">👥</div>
         <div class="next-step-content">
           <h4>Join an Upcoming Cohort</h4>
-          <p>Learn alongside other leaders in a live workshop experience. Limited spots. <a href="https://nimbology.com/contact" target="_blank">Get on the waitlist →</a></p>
+          <p>Learn alongside other leaders in a live workshop. <a href="https://nimbology.com/contact" target="_blank">Get on the waitlist →</a></p>
         </div>
       </div>
       
@@ -1053,7 +1339,7 @@ function renderSummaryHtml(){
         <div class="next-step-icon">🚀</div>
         <div class="next-step-content">
           <h4>1:1 Coaching</h4>
-          <p>Want personalized guidance on AI strategy, leadership, or building your next chapter? <a href="https://nimbology.com/contact" target="_blank">Let's talk →</a></p>
+          <p>Personalized guidance on AI strategy, leadership, or your next chapter. <a href="https://nimbology.com/contact" target="_blank">Let's talk →</a></p>
         </div>
       </div>
     </div>`;
@@ -1078,8 +1364,6 @@ function sendEmail(){
   
   const sec1 = buildSectionText(0, s1len, section1);
   const sec2 = buildSectionText(s1len, s1len + s2len, section2);
-  
-  // Build the comprehensive email content
   const emailBody = buildEmailContent(sec1, sec2);
   
   emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
@@ -1100,11 +1384,13 @@ function sendEmail(){
 
 function buildEmailContent(sec1, sec2) {
   return `
-CONGRATULATIONS!
+🎉 CONGRATULATIONS!
 
 You just completed the AI Coworker Blueprint™—and your AI is about to get a whole lot smarter about YOU.
 
-YOUR PRIVACY, PROTECTED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔒 YOUR PRIVACY, PROTECTED
 
 Here's something important: we didn't store a single answer you gave.
 
@@ -1114,7 +1400,9 @@ This email is the only record of your Blueprint. We built it this way on purpose
 
 Your information stays yours. Always.
 
-WHAT TO DO WITH YOUR RESULTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 WHAT TO DO WITH YOUR RESULTS
 
 1. COPY SECTION 1 (Your AI Coworker) below
 2. PASTE IT into your AI's settings:
@@ -1130,21 +1418,28 @@ WHAT TO DO WITH YOUR RESULTS
 
 5. START A CONVERSATION and watch the difference.
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-SECTION 1: YOUR AI COWORKER
+📄 SECTION 1: YOUR AI COWORKER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ${sec1}
 
-SECTION 2: ABOUT YOU
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📄 SECTION 2: ABOUT YOU
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ${sec2}
 
-WANT TO GO DEEPER?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 WANT TO GO DEEPER?
 
 This Blueprint is just the beginning. Here's how to keep building:
 
 → VIDEO SERIES (Coming Soon)
-I'm filming my Double Your Team in One Day workshop so that as many people as possible can learn how to onboard and optimize their AI coworkers. Learn how to get 25% or more of your week back and a 40% boost in work quality for every member of your team!
+I'm creating a walkthrough that explains the thinking behind every question—and shows you how I configured my own AI. Stay tuned.
 
 → JOIN A COHORT
 Learn alongside other leaders in a live workshop. Limited spots, real transformation.
@@ -1154,6 +1449,8 @@ https://nimbology.com/contact
 Want personalized guidance on AI strategy, leadership, or building your next chapter? Let's talk.
 https://nimbology.com/contact
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 Thanks for trusting me with this.
 
 Now go put your AI Coworker to work.
@@ -1162,7 +1459,7 @@ Now go put your AI Coworker to work.
 Founder, Nimbology
 https://nimbology.com
 
-P.S. If someone you know could use an AI Coworker that actually gets them, send them my way. But please don't share the Blueprint link directly. Have them reach out at nimbology.com/contact so we can make sure they're set up for success.
+P.S. If someone you know could use an AI Coworker that actually gets them, send them my way. But please don't share the Blueprint link directly—have them reach out at nimbology.com/contact so we can make sure they're set up for success.
 `;
 }
 
@@ -1192,34 +1489,7 @@ window.onload = sendHeight;
 window.onresize = sendHeight;
 document.addEventListener('input', sendHeight);
 document.addEventListener('click', sendHeight);
-
-// Also send height after a short delay to catch dynamic content
 setInterval(sendHeight, 500);
 </script>
-
-<!--
-SQUARESPACE PARENT PAGE CODE:
-Add this to your Squarespace Code Injection (Settings → Advanced → Code Injection → Footer):
-
-<script>
-window.addEventListener('message', function(e) {
-  // Handle height adjustments
-  if (e.data && e.data.aiBlueprintHeight) {
-    var iframe = document.querySelector('iframe[src*="blueprint"]');
-    if (iframe) {
-      iframe.style.height = e.data.aiBlueprintHeight + 'px';
-    }
-  }
-  
-  // Handle scroll-to-top requests
-  if (e.data && e.data.scrollToTop) {
-    var iframe = document.querySelector('iframe[src*="blueprint"]');
-    if (iframe) {
-      iframe.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
-});
-</script>
--->
 </body>
 </html>
