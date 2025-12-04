@@ -95,7 +95,7 @@
     
     /* ========== FORM CONTAINER ========== */
     #formContainer { 
-      padding: 1.75rem 1.5rem; 
+      padding: 1.75rem 1.5rem 2.5rem 1.5rem; 
       min-height: 300px;
     }
     
@@ -887,7 +887,7 @@ const section1Intro = {
   body: `<div class="intro-icon">🎯</div>
 <strong>Define Your AI Coworker</strong><br><br>
 What kind of partner do you need? Think about personality, tone, values—and what you <em>don't</em> want.<br><br>
-<strong>Budget: 1,500 characters</strong> for this section. Choose wisely—or go over and trim later. Note that you can unselect options at any time and you can go back.`
+<strong>Budget: 1,500 characters</strong> for this section. Choose wisely—or go over and trim later.`
 };
 
 const section2Intro = {
@@ -1482,7 +1482,7 @@ renderPage();
 
 <script>
 function sendHeight() {
-  const height = document.body.scrollHeight;
+  const height = document.body.scrollHeight + 40; // Extra buffer for padding
   parent.postMessage({ aiBlueprintHeight: height }, "*");
 }
 window.onload = sendHeight;
