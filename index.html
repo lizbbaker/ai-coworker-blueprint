@@ -653,6 +653,48 @@
       margin-bottom: 0.5rem;
       color: var(--gray-600);
     }
+    
+    /* Character Limit Callout */
+    .limit-callout {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 2px solid #f59e0b;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+      text-align: left;
+    }
+    .limit-callout-header {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #92400e;
+      margin-bottom: 0.75rem;
+    }
+    .limit-callout-body {
+      font-size: 0.95rem;
+      color: #78350f;
+      line-height: 1.6;
+    }
+    .limit-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(245, 158, 11, 0.3);
+      cursor: pointer;
+      font-weight: 600;
+      color: #92400e;
+    }
+    .limit-checkbox input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      accent-color: #f59e0b;
+    }
+    .limit-checkbox span {
+      font-size: 0.95rem;
+    }
   </style>
 </head>
 <body>
@@ -887,7 +929,17 @@ const section1Intro = {
   body: `<div class="intro-icon">🎯</div>
 <strong>Define Your AI Coworker</strong><br><br>
 What kind of partner do you need? Think about personality, tone, values—and what you <em>don't</em> want.<br><br>
-<strong>Budget: 1,500 characters</strong> for this section. Choose wisely—or go over and trim later.`
+<div class="limit-callout">
+  <div class="limit-callout-header">⚠️ Character Limit: 1,500</div>
+  <div class="limit-callout-body">
+    ChatGPT, Claude, and Gemini have limited space in their settings fields. You have <strong>1,500 characters</strong> for this entire section—that's roughly 250 words.<br><br>
+    Be selective. You can always go over and trim later, but choosing wisely now saves time.
+  </div>
+  <label class="limit-checkbox">
+    <input type="checkbox" id="section1Acknowledge" onchange="toggleNextButton()">
+    <span>Got it—I'll choose carefully</span>
+  </label>
+</div>`
 };
 
 const section2Intro = {
@@ -895,7 +947,16 @@ const section2Intro = {
   body: `<div class="intro-icon">👤</div>
 <strong>Teach Your AI About You</strong><br><br>
 Share your roles, goals, values, and how you operate. The more your AI knows, the better it can support you.<br><br>
-<strong>Budget: 1,500 characters</strong> for this section.`
+<div class="limit-callout">
+  <div class="limit-callout-header">⚠️ Character Limit: 1,500</div>
+  <div class="limit-callout-body">
+    Same deal—you have <strong>1,500 characters</strong> for this section. Prioritize what matters most. You can always update your AI settings later.
+  </div>
+  <label class="limit-checkbox">
+    <input type="checkbox" id="section2Acknowledge" onchange="toggleNextButton()">
+    <span>Got it—I'll be selective</span>
+  </label>
+</div>`
 };
 
 // ==== SECTION 1: DEFINE YOUR AI COWORKER ====
@@ -969,6 +1030,13 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function toggleNextButton() {
+  const checkbox = document.querySelector('.limit-checkbox input[type="checkbox"]');
+  if (checkbox) {
+    nextBtn.disabled = !checkbox.checked;
+  }
+}
+
 function renderHeader(){
   document.getElementById("header").innerHTML = `
     <img src="https://images.squarespace-cdn.com/content/672bffc68fd9b922d9f34a55/08a58d80-4436-4c37-a3b6-e3bb7e086c45/Strategic+Advisory+%282%29.png?content-type=image%2Fpng"
@@ -991,6 +1059,7 @@ function renderPage(){
   }
   else if(pageIndex===1){
     nextBtn.innerText = "Next →";
+    nextBtn.disabled = true; // Disabled until checkbox checked
     formContainer.innerHTML = `<div class="question" style="text-align:center;"><h2>${section1Intro.title}</h2><p>${section1Intro.body}</p></div>`;
   }
   else if(pageIndex>=2 && pageIndex<=1+s1len){
@@ -999,6 +1068,7 @@ function renderPage(){
   }
   else if(pageIndex===2+s1len){
     nextBtn.innerText = "Next →";
+    nextBtn.disabled = true; // Disabled until checkbox checked
     formContainer.innerHTML = `<div class="question" style="text-align:center;"><h2>${section2Intro.title}</h2><p>${section2Intro.body}</p></div>`;
   }
   else if(pageIndex>=3+s1len && pageIndex<=2+s1len+s2len){
@@ -1051,14 +1121,14 @@ function renderQuestion(item, idx, sectionNum){
   const budgetHtml = `
     <div class="char-budget">
       <div class="char-budget-header">
-        <span class="char-budget-label">Section ${sectionNum} Budget</span>
+        <span class="char-budget-label">Section ${sectionNum} Character Count</span>
         <span class="char-budget-count ${isWarning ? 'warning' : ''} ${isOver ? 'over' : ''}">${sectionTotal} / ${CHAR_LIMIT}</span>
       </div>
       <div class="char-budget-bar-bg">
         <div class="char-budget-bar-fill ${isWarning ? 'warning' : ''} ${isOver ? 'over' : ''}" style="width: ${percentage}%"></div>
       </div>
       <div class="char-budget-message ${isWarning && !isOver ? 'warning' : ''} ${isOver ? 'over' : ''}">
-        ${isOver ? "⚠️ You're over budget. You can still continue, but you may need to trim later." : ""}
+        ${isOver ? "⚠️ You're over the limit. You can still continue, but you'll need to trim before pasting into your AI." : ""}
         ${isWarning && !isOver ? "Getting close! Choose your remaining options carefully." : ""}
       </div>
     </div>`;
